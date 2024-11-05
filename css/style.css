@@ -1,0 +1,92 @@
+/* Page Container */
+.page {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    background-color: #110D26; /* Background color matching your design */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Logo */
+.icon {
+    position: absolute; 
+    top: 184px; 
+    left: 158px; 
+    width: 78px; 
+    height: 78px; 
+    fill: #F8F9FAFF; /* neutral-150 */
+}
+
+/* Title Text */
+/* Title Text */
+.text {
+    position: absolute; 
+    top: 306px; 
+    left: 99px; 
+    font-family: Poppins, sans-serif; /* Heading */
+    font-size: 32px; 
+    line-height: 48px; 
+    font-weight: 700; 
+    color: #FFFFFFFF; /* white for "It’s" */
+}
+
+/* Different Color for "Threads" */
+.highlight {
+    color: #5D5AACFF; /* primary-350 */
+}
+
+
+/* Button Styles */
+.button {
+    width: 158px; 
+    height: 36px; 
+    padding: 0 12px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-family: Open Sans, sans-serif; 
+    font-size: 14px; 
+    line-height: 22px; 
+    font-weight: 400; 
+    color: #FFFFFFFF; /* white */
+    background: transparent;
+    opacity: 1; 
+    border-radius: 18px; /* border-xl */
+    border-width: 1px; 
+    border-color: #584F7EFF; /* tertiary1-500 */
+    border-style: solid; 
+    box-shadow: 0px 28.5px 59px #171a1f, 0px 0px 2px #171a1f; /* shadow-xl */
+}
+
+/* Hover */
+.button:hover {
+    color: #DEE1E6FF; /* neutral-300 */
+    background: transparent;
+}
+
+/* Pressed */
+.button:active {
+    color: #BDC1CAFF; /* neutral-400 */
+    background: transparent;
+}
+
+/* Disabled */
+.button:disabled {
+    opacity: 0.4; 
+}
+
+/* Individual Button Positions */
+.sign-up {
+    position: absolute;
+    top: 398px;
+    left: 118px;
+}
+
+.sign-in {
+    position: absolute;
+    top: 478px;
+    left: 118px;
+}
