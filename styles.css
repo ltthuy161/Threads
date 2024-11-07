@@ -1,0 +1,94 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Body */
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #110D26; /* Background color for the whole page */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #ffffff;
+  }
+  
+  /* Page Container */
+  .page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+  }
+  
+  /* Logo Icon */
+  .icon {
+      width: 78px;
+      height: 78px;
+      margin-bottom: 20px;
+      fill: #F8F9FAFF; /* neutral-150 */
+  }
+  
+  /* Title Text */
+  .text {
+      font-size: 32px;
+      line-height: 48px;
+      font-weight: 700;
+      color: #ffffff; /* White color for "It’s" */
+      margin-bottom: 30px;
+  }
+  
+  /* Highlighted part of title */
+  .highlight {
+      color: #5D5AACFF; /* primary-350 color for "Threads" */
+  }
+  
+  /* Button Base Style */
+  .button {
+      width: 160px;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      font-weight: bold;
+      color: #ffffff;
+      background-color: transparent;
+      border: 2px solid #584F7EFF; /* tertiary1-500 */
+      border-radius: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease; /* Smooth transition */
+      text-align: center;
+  }
+  
+  /* Sign-Up Button Style */
+  .sign-up {
+      border-color: #5D5AACFF; /* Primary color border */
+  }
+  
+  /* Sign-In Button Style */
+  .sign-in {
+      border-color: #6C63FF; /* Different color for sign-in */
+  }
+  
+  /* Hover Effects */
+  .button:hover {
+      background-color: #5D5AACFF;
+      color: #FFFFFF;
+      transform: scale(1.05); /* Slightly enlarges on hover */
+  }
+  
+  /* Active State */
+  .button:active {
+      background-color: #4D4A8A; /* Darkened on press */
+      border-color: #4D4A8A;
+  }
+  
+  /* Disabled State */
+  .button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+  }
+  
