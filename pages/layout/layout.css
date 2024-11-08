@@ -1,5 +1,5 @@
 /* Reset */
-*   {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -9,38 +9,38 @@ body {
   display: flex;
   font-family: Arial, sans-serif;
   color: #ffffff;
-  background-color: #0F0B28;
+  background-color: #0f0b28;
 }
 
 .sidebar {
   width: 5%;
   height: 100vh;
   min-width: 3rem;
-  background-color: #0F0B28;
+  background-color: #0f0b28;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding: 20px 0;
-  border-right: 2px solid #8E69DAFF;
+  border-right: 2px solid #8e69daff;
   position: fixed;
 }
 
 .user-photo-container {
   width: 35px;
-  border-radius: 50%; 
+  border-radius: 50%;
   justify-content: center;
   position: absolute;
   top: 15%;
 }
 .user-photo {
-  width:100%;
-  border-radius: 50%; 
+  width: 100%;
+  border-radius: 50%;
 }
 
 .logo {
-  top: 21px; 
-  left: 13px; 
+  top: 21px;
+  left: 13px;
   justify-content: center;
 }
 
@@ -54,26 +54,27 @@ body {
   transform: translate(-50%, -50%);
 }
 
-
-.navigation-button, .footer-icon {
+.navigation-button,
+.footer-icon {
   width: 40px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%; 
-  background-color: #0F0B28;
+  border-radius: 50%;
+  background-color: #0f0b28;
   transition: background-color 0.3s ease;
 }
 
-.navigation-button:hover, .footer-icon:hover {
+.navigation-button:hover,
+.footer-icon:hover {
   background-color: #cccccc;
 }
 
-.navigation-button:hover .icon, .footer-icon:hover .icon {
-  filter: invert(100%)
+.navigation-button:hover .icon,
+.footer-icon:hover .icon {
+  filter: invert(100%);
 }
-
 
 .main-content {
   flex-grow: 1;
@@ -82,21 +83,20 @@ body {
   align-items: center;
   flex-direction: column;
   padding: 20px;
-  background-color: #0F0B28;
+  background-color: #0f0b28;
 }
-
 
 .header {
   width: 50%;
   height: 4rem;
-  background-color: #0F0B28;
+  background-color: #0f0b28;
   padding: 10px 20px;
   border-radius: 12px;
   display: flex;
   justify-content: center;
   position: fixed;
   top: 0;
-  z-index: 9999; 
+  z-index: 9999;
 }
 
 .tabs {
@@ -106,7 +106,7 @@ body {
 
 .tab {
   width: 50%;
-  background-color: #0F0B28;
+  background-color: #0f0b28;
   border: none;
   outline: none;
   cursor: pointer;
@@ -123,16 +123,16 @@ body {
 
 .tab span {
   font-size: 16px;
-  color: #9A97B0;
+  color: #9a97b0;
   transition: color 0.3s;
 }
 
 .tab.active {
-  border-bottom: 2px solid #FFFFFF;
+  border-bottom: 2px solid #ffffff;
 }
 
 .tab.active span {
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: bold;
 }
 
@@ -141,7 +141,7 @@ body {
   margin-top: 4rem;
   width: 50%;
   height: 100vh;
-  background-color: #1B1430; /* Darker container color */
+  background-color: #1b1430; /* Darker container color */
   border-radius: 20px 20px 0 0;
   padding: 20px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
@@ -153,10 +153,10 @@ body {
   right: 1rem;
   width: 3rem;
   height: 3rem;
-  background-color: #5D5AAC;
-  border: 1px solid #8E69DAFF; /* Gộp tất cả các thuộc tính border */
+  background-color: #5d5aac;
+  border: 1px solid #8e69daff; /* Gộp tất cả các thuộc tính border */
   border-radius: 12px;
-  opacity: 0.9; 
+  opacity: 0.9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -165,6 +165,5 @@ body {
 }
 
 .floating-btn:hover {
-  background-color: #110D26FF;
+  background-color: #110d26ff;
 }
-

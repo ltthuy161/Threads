@@ -1,0 +1,173 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* Body */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #0f0b28; /* Dark background */
+  display: flex;
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #0f0b28;
+}
+
+/* Page Container */
+.search-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 550px;
+  padding: 20px;
+}
+
+/* Title */
+.search-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Search Container */
+.search-container {
+  position: relative;
+  width: 100%;
+  background-color: #1b1430; /* Darker container color */
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Textbox Container */
+.textbox {
+  position: relative;
+  width: 100%;
+  opacity: 1;
+}
+
+.textbox input {
+  width: 100%;
+  height: 50px;
+  padding-left: 34px;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+  color: #dee1e6ff;
+  background: #120e28ff;
+  border-radius: 12px;
+  border-width: 1px;
+  border-color: #8e69daff;
+  border-style: solid;
+  outline: none;
+}
+
+.textbox .left {
+  position: absolute;
+  top: 18px;
+  left: 12px;
+  width: 16px;
+  height: 16px;
+  fill: #dee1e6ff;
+}
+
+/* Suggestions Title */
+.suggestions-title {
+  font-family: "Open Sans", sans-serif;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-size: 18px;
+  color: #9a97b0;
+  margin-bottom: 10px;
+}
+
+/* Suggestions List */
+.suggestions {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Individual Suggestion Item */
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid #2a2140;
+}
+
+.suggestion-item:first-child {
+  border-top: none; /* Remove top border for the first item */
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info {
+  flex-grow: 1;
+}
+
+.username {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.user-details {
+  padding-top: 3px;
+  font-size: 14px;
+  color: #9a97b0; /* Follower count color */
+}
+
+/* Follow Button (Absolute Position in Search Container) */
+.button {
+  top: 3px;
+  left: 498px;
+  height: 36px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #dee1e6ff; /* neutral-300 */
+  background: #110d26ff; /* secondary-500 */
+  opacity: 1;
+  border-radius: 12px; /* border-m */
+  border-width: 1px;
+  border-color: #8e69daff; /* tertiary3-500 */
+  border-style: solid;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover State */
+.button:hover {
+  background: #110d26ff; /* secondary-500 */
+  color: #dee1e6ff; /* neutral-300 */
+}
+
+/* Pressed State */
+.button:active {
+  background: #110d26ff; /* secondary-500 */
+  color: #dee1e6ff; /* neutral-300 */
+}
+
+/* Disabled State */
+.button:disabled {
+  opacity: 0.4;
+}

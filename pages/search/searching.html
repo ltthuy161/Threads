@@ -1,102 +1,125 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search - Threads</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <!-- Page Container -->
-  <div class="search-page">
-    
-    <!-- Title -->
-    <h1 class="search-title">Searching</h1>
-
-    <!-- Search Container -->
-    <div class="search-container">
-      
-      <!-- Search Bar with Icons -->
-      <div class="textbox">
-        <!-- Left Icon (Search Icon) -->
-        <!-- <svg class="left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M10 2a8 8 0 0 1 6.32 12.9l4.39 4.4-1.42 1.4-4.4-4.39A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"/>
-        </svg> -->
-
-        <img src="../../assets/vendor/icons/search.svg" alt="Search Icon" class="left"></i>
-        
-        <!-- Search Input Field -->
-        <input type="text" placeholder="Search">
-        
-      </div>
-
-      <!-- Suggestions List -->
-      <div class="suggestions">
-        <p class="suggestions-title">Suggestions</p>
-
-        <!-- Suggestion Item Template -->
-        <div class="suggestion-item">
-            <img src="../../assets/img/avatar/ava1.png" alt="Avatar" class="avatar">
-          <div class="user-info">
-            <p class="username">genfest_official</p>
-            <p class="user-details">GENfest • 6,722 followers</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Searching</title>
+    <link rel="stylesheet" href="./searching.css" />
+    <link rel="stylesheet" href="../base/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="../base/floating-btn/floating-btn.css" />
+    <script defer src="../base/loadComponents.js"></script>
+    <script>
+      // Fix the path of html file
+      document.addEventListener("DOMContentLoaded", () => {
+        loadComponent("sidebar", "../base/sidebar/sidebar.html");
+        loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
+      });
+    </script>
+  </head>
+  <body>
+    <div id="sidebar"></div>
+    <div class="main-content">
+      <!-- Page Container -->
+      <div class="search-page">
+        <!-- Title -->
+        <h1 class="search-title">Searching</h1>
+        <!-- Search Container -->
+        <div class="search-container">
+          <!-- Search Bar with Icons -->
+          <div class="textbox">
+            <img
+              src="../../assets/vendor/icons/search.svg"
+              alt="Search Icon"
+              class="left"
+            />
+            <input type="text" placeholder="Search" />
           </div>
-          <button class="button">Follow</button>
-        </div>
+          <div class="suggestions">
+            <p class="suggestions-title">Suggestions</p>
 
-        <div class="suggestion-item">
-          <img src="../../assets/img/avatar/ava2.png" alt="Avatar" class="avatar">
-        <div class="user-info">
-          <p class="username">hoangdung.music</p>
-          <p class="user-details">Hoàng Dũng • 38,4K followers</p>
-        </div>
-        <button class="button">Follow back</button>
-        </div>
+            <div class="suggestion-item">
+              <img
+                src="../../assets/img/avatar/ava1.png"
+                alt="Avatar"
+                class="avatar"
+              />
+              <div class="user-info">
+                <p class="username">genfest_official</p>
+                <p class="user-details">GENfest • 6,722 followers</p>
+              </div>
+              <button class="button">Follow</button>
+            </div>
 
-        <div class="suggestion-item">
-          <img src="../../assets/img/avatar/ava3.png" alt="Avatar" class="avatar">
-        <div class="user-info">
-          <p class="username">david_beckham</p>
-          <p class="user-details">David Beckham • 65.7M followers</p>
-        </div>
-          <button class="button">Follow</button>
-        </div>
+            <div class="suggestion-item">
+              <img
+                src="../../assets/img/avatar/ava2.png"
+                alt="Avatar"
+                class="avatar"
+              />
+              <div class="user-info">
+                <p class="username">hoangdung.music</p>
+                <p class="user-details">Hoàng Dũng • 38,4K followers</p>
+              </div>
+              <button class="button">Follow back</button>
+            </div>
 
-        <div class="suggestion-item">
-          <img src="../../assets/img/avatar/ava4.png" alt="Avatar" class="avatar">
-        <div class="user-info">
-          <p class="username">thach_trang</p>
-          <p class="user-details">thachtrang 🐝 • 158K followers</p>
-        </div>
-          <button class="button">Follow</button>
-        </div>
+            <div class="suggestion-item">
+              <img
+                src="../../assets/img/avatar/ava3.png"
+                alt="Avatar"
+                class="avatar"
+              />
+              <div class="user-info">
+                <p class="username">david_beckham</p>
+                <p class="user-details">David Beckham • 65.7M followers</p>
+              </div>
+              <button class="button">Follow</button>
+            </div>
 
-        <div class="suggestion-item">
-          <img src="../../assets/img/avatar/ava5.png" alt="Avatar" class="avatar">
-        <div class="user-info">
-          <p class="username">moingay1trangsach.vn</p>
-          <p class="user-details">Mỗi ngày một trang sách • 271K followers</p>
-        </div>
-          <button class="button">Follow</button>
-        </div>
+            <div class="suggestion-item">
+              <img
+                src="../../assets/img/avatar/ava4.png"
+                alt="Avatar"
+                class="avatar"
+              />
+              <div class="user-info">
+                <p class="username">thach_trang</p>
+                <p class="user-details">thachtrang 🐝 • 158K followers</p>
+              </div>
+              <button class="button">Follow</button>
+            </div>
 
-        <div class="suggestion-item">
-          <img src="../../assets/img/avatar/ava6.png" alt="Avatar" class="avatar">
-        <div class="user-info">
-          <p class="username">hafthi</p>
-          <p class="user-details">Hà Thi • 86.8K followers</p>
-        </div>
-          <button class="button">Follow back</button>
-        </div>
-        
+            <div class="suggestion-item">
+              <img
+                src="../../assets/img/avatar/ava5.png"
+                alt="Avatar"
+                class="avatar"
+              />
+              <div class="user-info">
+                <p class="username">moingay1trangsach.vn</p>
+                <p class="user-details">
+                  Mỗi ngày một trang sách • 271K followers
+                </p>
+              </div>
+              <button class="button">Follow</button>
+            </div>
 
-      </div>
-        
+            <div class="suggestion-item">
+              <img
+                src="../../assets/img/avatar/ava1.png"
+                alt="Avatar"
+                class="avatar"
+              />
+              <div class="user-info">
+                <p class="username">hafthi</p>
+                <p class="user-details">Hà Thi • 86.8K followers</p>
+              </div>
+              <button class="button">Follow back</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-  </div>
-
-</body>
+    <div id="floating-btn"></div>
+  </body>
 </html>
