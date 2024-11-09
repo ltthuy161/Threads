@@ -12,3 +12,16 @@ function loadComponent(componentId, filePath) {
     })
     .catch((error) => console.error(error));
 }
+
+function setActiveIcon(activeIconId) {
+  const icons = document.querySelectorAll('.icon'); // Lấy tất cả các icon
+  icons.forEach((icon) => {
+    if (icon.id === activeIconId) {
+      icon.classList.add('active');
+      icon.classList.remove('inactive');
+    } else {
+      icon.classList.add('inactive');
+      icon.classList.remove('active');
+    }
+  });
+}

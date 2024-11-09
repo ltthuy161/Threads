@@ -4,92 +4,177 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home / Threads</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <aside class="sidebar">
-      <a class="logo-container" href="">
-        <img
-          src="../../assets/vendor/icons/logo.svg"
-          alt="Threads Logo"
-          class="logo"
-        />
-      </a>
-      <a class="user-photo-container" href="">
-        <img
-          class="user-photo"
-          src="../../assets/img/avatar/avt6.png"
-          alt="photo"
-        />
-      </a>
-      <nav class="nav">
-        <div class="navigation-button">
-          <a href="">
-            <img
-              src="../../assets/vendor/icons/home.svg"
-              alt="Icon description"
-              class="icon"
-            />
-          </a>
-        </div>
-        <div class="navigation-button">
-          <a href="">
-            <img
-              src="../../assets/vendor/icons/search.svg"
-              alt="Icon description"
-              class="icon"
-            />
-          </a>
-        </div>
-        <div class="navigation-button">
-          <a href="">
-            <img
-              src="../../assets/vendor/icons/add.svg"
-              alt="Icon description"
-              class="icon"
-            />
-          </a>
-        </div>
-        <div class="navigation-button">
-          <a href="">
-            <img
-              src="../../assets/vendor/icons/noti.svg"
-              alt="Icon description"
-              class="icon"
-            />
-          </a>
-        </div>
-      </nav>
-      <div class="footer-icon">
-        <a href="#"
-          ><img
-            src="../../assets/vendor/icons/menu.svg"
-            alt="Menu Icon"
-            class="icon"
-        /></a>
-      </div>
-    </aside>
+    <link rel="stylesheet" href="./style.css" />
 
-    <div class="main-content">
-      <header class="header">
-        <div class="tabs">
-          <button class="tab active"><span>For you</span></button>
-          <button class="tab"><span>Following</span></button>
-        </div>
-      </header>
+    <link rel="stylesheet" href="../base/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="../base/floating-btn/floating-btn.css" />
+    <script defer src="../base/loadComponents.js"></script>
+    <script>
+        // Fix the path of html file
+        document.addEventListener("DOMContentLoaded", () => {
+            loadComponent("sidebar", "../base/sidebar/sidebar.html");
+            setTimeout(() => {
+                setActiveIcon("home-icon");
+            }, 10);
+            loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
+        });
+    </script>
+    </head>
+    <body>
+        <div id="sidebar"></div>
 
-      <div class="container">
-        <!-- Fill content in this div -->
-      </div>
+        <div class="main-content">
+            <header class="header">
+                <div class="tabs">
+                    <button class="tab active"><span>For you</span></button>
+                    <button class="tab"><span>Following</span></button>
+                </div>
+            </header>
+
+        <div class="container">
+            <ul id="post-container">
+                <div class="post">
+                    <a class="avt-container" href=""><img class="avt-photo" src="../../assets/img/avatar/avt7.png" alt="photo"></a>
+                    <div class="content">
+                        <header>
+                            <a class="username" href=""><span>Hitoriii</span></a>
+                            <a class="email" href=""><span>@bocchi_theRock</span></a>
+                            <time class="timestamp">3h</time>
+                        </header>
+                        <p class="text">TextLorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="image"><img src="../../assets/img/posts/post1.jpg" alt="Attached Image" /></div>
+                        
+                        <div class="interaction">
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/reload.svg" alt="Repost Icon" class="icon"></button>
+                                <span class="interaction-count">5</span>
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/edit.svg" alt="Quote Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="post">
+                    <a class="avt-container" href=""><img class="avt-photo" src="../../assets/img/avatar/avt8.png" alt="photo"></a>
+                    <div class="content">
+                        <header>
+                            <a class="username" href=""><span>Hitoriii</span></a>
+                            <a class="email" href=""><span>@bocchi_theRock</span></a>
+                            <time class="timestamp">3h</time>
+                        </header>
+                        <p class="text">TextLorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="image"><img src="../../assets/img/posts/post2.jpg" alt="Attached Image" /></div>
+                        <div class="interaction">
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/reload.svg" alt="Repost Icon" class="icon"></button>
+                                <span class="interaction-count">5</span>
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/edit.svg" alt="Quote Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post">
+                    <a class="avt-container" href=""><img class="avt-photo" src="../../assets/img/avatar/avt9.png" alt="photo"></a>
+                    <div class="content">
+                        <header>
+                            <a class="username" href=""><span>Hitoriii</span></a>
+                            <a class="email" href=""><span>@bocchi_theRock</span></a>
+                            <time class="timestamp">3h</time>
+                        </header>
+                        <p class="text">TextLorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                  
+                        <div class="interaction">
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/reload.svg" alt="Repost Icon" class="icon"></button>
+                                <span class="interaction-count">5</span>
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/edit.svg" alt="Quote Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="post">
+                    <a class="avt-container" href=""><img class="avt-photo" src="../../assets/img/avatar/ava1.png" alt="photo"></a>
+                    <div class="content">
+                        <header>
+                            <a class="username" href=""><span>Hitoriii</span></a>
+                            <a class="email" href=""><span>@bocchi_theRock</span></a>
+                            <time class="timestamp">3h</time>
+                        </header>
+                        <p class="text">TextLorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <div class="image"><img src="../../assets/img/posts/post3.jpg" alt="Attached Image" /></div>
+                        <div class="interaction">
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/reload.svg" alt="Repost Icon" class="icon"></button>
+                                <span class="interaction-count">5</span>
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/edit.svg" alt="Quote Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
     </div>
-    <div class="floating-btn">
-      <a href="">
-        <img
-          src="../../assets/vendor/icons/add.svg"
-          alt="Icon description"
-          class="icon"
-        />
-      </a>
-    </div>
-  </body>
+
+    <div id="floating-btn"></div>
+
+    <script>
+        function changeIcon(button) {
+            const img = button.querySelector("img"); 
+            
+            if (img.src.includes("-2.svg")) {
+                img.src = img.src.replace("-2.svg", ".svg");
+            } else {
+                img.src = img.src.replace(".svg", "-2.svg");
+            }
+        }
+    </script>
+    </body>
 </html>

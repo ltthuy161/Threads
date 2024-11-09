@@ -2,10 +2,10 @@
   position: fixed;
   bottom: 1rem;
   right: 1rem;
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   background-color: #5d5aac;
-  border: 1px solid #8e69daff; /* Gộp tất cả các thuộc tính border */
+  border: 1px solid #8e69daff; 
   border-radius: 12px;
   opacity: 0.9;
   display: flex;
