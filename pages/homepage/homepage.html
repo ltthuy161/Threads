@@ -10,12 +10,11 @@
     <link rel="stylesheet" href="../base/floating-btn/floating-btn.css" />
     <script defer src="../base/loadComponents.js"></script>
     <script>
-        // Fix the path of html file
         document.addEventListener("DOMContentLoaded", () => {
-            loadComponent("sidebar", "../base/sidebar/sidebar.html");
-            setTimeout(() => {
+            loadComponent("sidebar", "../base/sidebar/sidebar.html").then(() => {
                 setActiveIcon("home-icon");
-            }, 10);
+            });
+            
             loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
         });
     </script>

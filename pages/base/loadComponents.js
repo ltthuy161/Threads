@@ -1,20 +1,26 @@
 function loadComponent(componentId, filePath) {
-  fetch(filePath)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Failed to load ${filePath}`);
-        console.error(`Failed to load ${filePath}`);
-      }
-      return response.text();
-    })
-    .then((data) => {
-      document.getElementById(componentId).innerHTML = data;
-    })
-    .catch((error) => console.error(error));
+  return new Promise((resolve, reject) => {
+    fetch(filePath)
+      .then((response) => {
+        if (!response.ok) {
+          reject(new Error(`Failed to load ${filePath}`)); 
+        }
+        return response.text();
+      })
+      .then((data) => {
+        document.getElementById(componentId).innerHTML = data;
+        resolve(); 
+      })
+      .catch((error) => {
+        console.error(error);
+        reject(error); 
+      });
+  });
 }
 
+
 function setActiveIcon(activeIconId) {
-  const icons = document.querySelectorAll('.icon'); // Lấy tất cả các icon
+  const icons = document.querySelectorAll('.icon'); 
   icons.forEach((icon) => {
     if (icon.id === activeIconId) {
       icon.classList.add('active');

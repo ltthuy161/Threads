@@ -11,7 +11,9 @@
     <script>
       // Fix the path of html file
       document.addEventListener("DOMContentLoaded", () => {
-        loadComponent("sidebar", "../base/sidebar/sidebar.html");
+        loadComponent("sidebar", "../base/sidebar/sidebar.html").then(() => {
+          setActiveIcon("search-icon");
+        });
         loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
       });
     </script>
