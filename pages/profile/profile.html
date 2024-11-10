@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <a class="logo-container" href="">
+            <img src="../../assets/vendor/icons/logo.svg" alt="Threads Logo" class="logo">
+        </a>
+        <a class="user-photo-container" href="">
+            <img class="user-photo" src="../../assets/img/avatar/ava4.png" alt="photo">
+        </a>
+        <nav class="nav">
+            <div class="navigation-button">
+                <a href="">
+                    <img src="../../assets/vendor/icons/home.svg" alt="Icon description" class="icon">
+                </a>
+            </div>
+            <div class="navigation-button">
+                <a href="">
+                    <img src="../../assets/vendor/icons/search.svg" alt="Icon description" class="icon">
+                </a>
+            </div>
+            <div class="navigation-button">
+                <a href="">
+                    <img src="../../assets/vendor/icons/add.svg" alt="Icon description" class="icon">
+                </a>
+            </div>
+            <div class="navigation-button">
+                <a href="">
+                    <img src="../../assets/vendor/icons/noti.svg" alt="Icon description" class="icon">
+                </a>
+            </div>
+        </nav>
+        <div class="footer-icon">
+            <a href="#"><img src="../../assets/vendor/icons/menu.svg" alt="Menu Icon" class="icon"></a>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <h2>Profile</h2>
+        </header>
+
+        <div class="container">
+            <!-- Profile Section -->
+            <div class="profile-section">
+                <!-- Profile Header -->
+                <div class="profile-header">
+                    <div class="profile-info">
+                        <h2>Angel Babyboo</h2>
+                        <p>@lovetothread</p>
+                        <p class="profile-bio">Your bio is here: 🌟❤️<br>I love threads 💬🌍</p>
+                        <div class="profile-stats">
+                            <span>800 Followers</span>
+                            <span>967 Following</span>
+                        </div>
+                    </div>
+                    <div class="profile-picture">
+                        <img class="user-photo" src="../../assets/img/avatar/ava4.png" alt="photo">
+                    </div>
+                </div>
+                <!-- Edit profile button -->
+                <div class="edit-profile">
+                    <button class="edit-button">Edit profile</button>
+                </div>
+            </div>
+            <!-- Posts Section -->
+            <ul id="post-container">
+                <!-- Individual Post -->
+                <div class="post">
+                    <a class="avt-container" href=""><img class="avt-photo" src="../../assets/img/avatar/ava4.png" alt="photo"></a>
+                    <div class="content">
+                        <header>
+                            <a class="username" href=""><span>Angel Babyboo</span></a>
+                            <a class="email" href=""><span>@lovetothread</span></a>
+                            <time class="timestamp">3h</time>
+                        </header>
+                        <p class="text">Love you to the moon and back. Please love me back!!!</p>
+                        <div class="image"><img src="../../assets/img/posts/post2.jpg" alt="Attached Image" /></div>
+                        
+                        <div class="interaction">
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/reload.svg" alt="Repost Icon" class="icon"></button>
+                                <span class="interaction-count">5</span>
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/edit.svg" alt="Quote Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="post">
+                    <a class="avt-container" href=""><img class="avt-photo" src="../../assets/img/avatar/ava4.png" alt="photo"></a>
+                    <div class="content">
+                        <header>
+                            <a class="username" href=""><span>Angel Babyboo</span></a>
+                            <a class="email" href=""><span>@lovetothread</span></a>
+                            <time class="timestamp">5h</time>
+                        </header>
+                        <p class="text">And I could still see it all in your eyes. Back and forward from NY.</p>
+                        <div class="image"><img src="../../assets/img/posts/post3.jpg" alt="Attached Image" /></div>
+                        
+                        <div class="interaction">
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/reload.svg" alt="Repost Icon" class="icon"></button>
+                                <span class="interaction-count">5</span>
+                            </div>
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/edit.svg" alt="Quote Icon" class="icon"></button>
+                                <span class="interaction-count">5</span> 
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <div class="floating-btn">
+        <a href="">
+            <img src="../../assets/vendor/icons/add.svg" alt="Icon description" class="icon">
+        </a>
+    </div>
+
+
+</body>
+</html>
