@@ -7,28 +7,34 @@
     <link rel="stylesheet" href="base.css" />
     <link rel="stylesheet" href="./sidebar/sidebar.css" />
     <link rel="stylesheet" href="./floating-btn/floating-btn.css" />
+    <link rel="stylesheet" href="../posting/posting.css" />
     <script defer src="loadComponents.js"></script>
+    <script type="module" src="applyTheme.js"></script>
+    <script src="showPopup.js"></script>
     <script>
       // Fix the path of html file
       document.addEventListener("DOMContentLoaded", () => {
         loadComponent("sidebar", "./sidebar/sidebar.html");
         loadComponent("floating-btn", "./floating-btn/floating-btn.html");
+        loadComponent("posting", "../posting/posting.html");
       });
     </script>
   </head>
   <body>
     <div id="sidebar"></div>
     <div class="main-content">
-      <header class="header">
+      <div class="header">
         <div class="tabs">
           <button class="tab active"><span>For You</span></button>
           <button class="tab"><span>Following</span></button>
         </div>
-      </header>
+      </div>
       <div class="container">
         <!-- Main content goes here -->
-      </div>
+      </div>    
       <div id="floating-btn"></div>
     </div>
+    <div id="posting" style="display: none"></div>
   </body>
+  
 </html>

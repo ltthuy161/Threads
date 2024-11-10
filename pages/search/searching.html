@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="./searching.css" />
     <link rel="stylesheet" href="../base/sidebar/sidebar.css" />
     <link rel="stylesheet" href="../base/floating-btn/floating-btn.css" />
+    <link rel="stylesheet" href="../posting/posting.css" />
     <script defer src="../base/loadComponents.js"></script>
+    <script type="module" src="../base/applyTheme.js"></script>
+    <script src="../base/showPopup.js"></script>
     <script>
       // Fix the path of html file
       document.addEventListener("DOMContentLoaded", () => {
@@ -15,6 +18,7 @@
           setActiveIcon("search-icon");
         });
         loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
+        loadComponent("posting", "../posting/posting.html");
       });
     </script>
   </head>
@@ -23,12 +27,13 @@
     <div class="main-content">
       <!-- Page Container -->
       <div class="search-page">
-        <!-- Title -->
-        <h1 class="search-title">Searching</h1>
         <!-- Search Container -->
         <div class="search-container">
+          <!-- Title -->
+          <h1 class="search-title">Searching</h1>
+
           <!-- Search Bar with Icons -->
-          <div class="textbox">
+          <div class="search-textbox">
             <img
               src="../../assets/vendor/icons/search.svg"
               alt="Search Icon"
@@ -49,7 +54,7 @@
                 <p class="username">genfest_official</p>
                 <p class="user-details">GENfest • 6,722 followers</p>
               </div>
-              <button class="button">Follow</button>
+              <button class="fl-button">Follow</button>
             </div>
 
             <div class="suggestion-item">
@@ -62,7 +67,7 @@
                 <p class="username">hoangdung.music</p>
                 <p class="user-details">Hoàng Dũng • 38,4K followers</p>
               </div>
-              <button class="button">Follow back</button>
+              <button class="fl-button">Follow back</button>
             </div>
 
             <div class="suggestion-item">
@@ -75,7 +80,7 @@
                 <p class="username">david_beckham</p>
                 <p class="user-details">David Beckham • 65.7M followers</p>
               </div>
-              <button class="button">Follow</button>
+              <button class="fl-button">Follow</button>
             </div>
 
             <div class="suggestion-item">
@@ -88,7 +93,7 @@
                 <p class="username">thach_trang</p>
                 <p class="user-details">thachtrang 🐝 • 158K followers</p>
               </div>
-              <button class="button">Follow</button>
+              <button class="fl-button">Follow</button>
             </div>
 
             <div class="suggestion-item">
@@ -103,7 +108,7 @@
                   Mỗi ngày một trang sách • 271K followers
                 </p>
               </div>
-              <button class="button">Follow</button>
+              <button class="fl-button">Follow</button>
             </div>
 
             <div class="suggestion-item">
@@ -116,12 +121,13 @@
                 <p class="username">hafthi</p>
                 <p class="user-details">Hà Thi • 86.8K followers</p>
               </div>
-              <button class="button">Follow back</button>
+              <button class="fl-button">Follow back</button>
             </div>
           </div>
         </div>
       </div>
+      <div id="floating-btn"></div>
     </div>
-    <div id="floating-btn"></div>
+    <div id="posting" style="display: none"></div>
   </body>
 </html>

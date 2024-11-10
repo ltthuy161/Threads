@@ -7,13 +7,15 @@
 
 /* Body */
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: #110d26; /* Background color for the whole page */
+  font-family: var(--font-family-heading), sans-serif;
+  background-color: var(
+    --primary-900
+  ); /* Background color for the whole page */
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  color: #ffffff;
+  color: var(--primary-100);
 }
 
 /* Page Container */
@@ -30,7 +32,7 @@ body {
   font-size: 32px;
   line-height: 48px;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--primary-100);
   margin-bottom: 30px;
   margin-top: 20px;
 }
@@ -47,9 +49,9 @@ body {
   margin: 10px 0;
   font-size: 16px;
   font-weight: bold;
-  color: #ffffff;
+  color: var(--primary-100);
   background-color: transparent;
-  border: 2px solid #584f7eff; /* tertiary1-500 */
+  border: 2px solid var(--primary-600); /* tertiary1-500 */
   border-radius: 18px;
   cursor: pointer;
   transition: all 0.3s ease; /* Smooth transition */
@@ -58,20 +60,20 @@ body {
 
 .sign-up,
 .sign-in {
-  border-color: #5d5aacff;
+  border-color: var(--primary-300);
 }
 
 /* Hover Effects */
 .button:hover {
-  background-color: #5d5aacff;
-  color: #ffffff;
+  background-color: var(--primary-400);
+  color: var(--primary-200);
   transform: scale(1.05); /* Slightly enlarges on hover */
 }
 
 /* Active State */
 .button:active {
-  background-color: #4d4a8a; /* Darkened on press */
-  border-color: #4d4a8a;
+  background-color: var(--primary-600);
+  border-color: var(--primary-600);
 }
 
 /* Disabled State */

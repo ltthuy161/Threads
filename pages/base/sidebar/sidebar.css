@@ -1,14 +1,15 @@
 .sidebar {
+  top: 0;
   width: 5%;
   height: 100vh;
   min-width: 3rem;
-  background-color: #0f0b28;
+  background-color: var(--primary-900);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding: 20px 0;
-  border-right: 2px solid #8e69daff;
+  border-right: 2px solid #8e69da;
   position: fixed;
 }
 
@@ -48,13 +49,13 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: #0f0b28;
+  background-color: var(--primary-900);
   transition: background-color 0.3s ease;
 }
 
 .navigation-button:hover,
 .footer-icon:hover {
-  background-color: #cccccc;
+  background-color: var(--primary-100);
 }
 
 .navigation-button:hover .icon,

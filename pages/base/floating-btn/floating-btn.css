@@ -1,11 +1,11 @@
 .floating-btn {
   position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  width: 4rem;
-  height: 4rem;
-  background-color: #5d5aac;
-  border: 1px solid #8e69daff; 
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 5rem;
+  height: 3.5rem;
+  background-color: var(--primary-500);
+  border: 1px solid var(--color-5-500); /* Gộp tất cả các thuộc tính border */
   border-radius: 12px;
   opacity: 0.9;
   display: flex;
@@ -16,5 +16,5 @@
 }
 
 .floating-btn:hover {
-  background-color: #110d26ff;
+  background-color: var(--primary-300);
 }

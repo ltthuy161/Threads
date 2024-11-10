@@ -4,13 +4,12 @@
   padding: 0;
   box-sizing: border-box;
 }
-/* Body */
+
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: #0f0b28; /* Dark background */
+  font-family: var(--font-family-heading), sans-serif;
   display: flex;
   min-height: 100vh;
-  color: #ffffff;
+  color: var(--primary-100);
 }
 
 .main-content {
@@ -20,7 +19,7 @@ body {
   align-items: center;
   flex-direction: column;
   padding: 20px;
-  background-color: #0f0b28;
+  background-color: var(--primary-900);
 }
 
 /* Page Container */
@@ -37,48 +36,51 @@ body {
 .search-title {
   font-size: 24px;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5px;
 }
 
 /* Search Container */
 .search-container {
   position: relative;
   width: 100%;
-  background-color: #1b1430; /* Darker container color */
+  background-color: var(--primary-700); /* Darker container color */
   border-radius: 20px;
   padding: 20px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Textbox Container */
-.textbox {
+.search-textbox {
   position: relative;
   width: 100%;
   opacity: 1;
 }
 
-.textbox input {
+.search-textbox input {
   width: 100%;
   height: 50px;
   padding-left: 34px;
   font-size: 16px;
   line-height: 26px;
   font-weight: 400;
-  color: #dee1e6ff;
-  background: #120e28ff;
+  color: var(--primary-100);
+  background: var(--primary-850);
   border-radius: 12px;
   border-width: 1px;
-  border-color: #8e69daff;
+  border-color: var(--color-5-500);
   border-style: solid;
   outline: none;
 }
 
-.textbox .left {
+.search-textbox .left {
   position: absolute;
   top: 18px;
   left: 12px;
   width: 16px;
   height: 16px;
-  fill: #dee1e6ff;
+  fill: var(--primary-100);
 }
 
 /* Suggestions Title */
@@ -87,7 +89,7 @@ body {
   padding-top: 20px;
   padding-bottom: 10px;
   font-size: 18px;
-  color: #9a97b0;
+  color: var(--primary-250);
   margin-bottom: 10px;
 }
 
@@ -102,7 +104,7 @@ body {
   display: flex;
   align-items: center;
   padding: 10px 0;
-  border-top: 1px solid #2a2140;
+  border-top: 1px solid var(--primary-450);
 }
 
 .suggestion-item:first-child {
@@ -123,17 +125,16 @@ body {
 .username {
   font-size: 16px;
   font-weight: bold;
-  color: #ffffff;
+  color: var(--primary-100);
 }
 
 .user-details {
   padding-top: 3px;
   font-size: 14px;
-  color: #9a97b0; /* Follower count color */
+  color: var(--primary-250);
 }
 
-/* Follow Button (Absolute Position in Search Container) */
-.button {
+.fl-button {
   top: 3px;
   left: 498px;
   height: 36px;
@@ -144,30 +145,30 @@ body {
   font-size: 14px;
   line-height: 22px;
   font-weight: 400;
-  color: #dee1e6ff; /* neutral-300 */
-  background: #110d26ff; /* secondary-500 */
+  color: var(--neutral-300); /* neutral-300 */
+  background: var(--secondary-500); /* secondary-500 */
   opacity: 1;
   border-radius: 12px; /* border-m */
   border-width: 1px;
-  border-color: #8e69daff; /* tertiary3-500 */
+  border-color: var(--color-5-500); /* tertiary3-500 */
   border-style: solid;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 /* Hover State */
-.button:hover {
-  background: #110d26ff; /* secondary-500 */
-  color: #dee1e6ff; /* neutral-300 */
+.fl-button:hover {
+  background: var(--secondary-400); /* secondary-500 */
+  color: var(--primary-200); /* neutral-300 */
 }
 
 /* Pressed State */
-.button:active {
-  background: #110d26ff; /* secondary-500 */
-  color: #dee1e6ff; /* neutral-300 */
+.fl-button:active {
+  background: var(--secondary-500); /* secondary-500 */
+  color: var(--primary-200); /* neutral-300 */
 }
 
 /* Disabled State */
-.button:disabled {
+.fl-button:disabled {
   opacity: 0.4;
 }

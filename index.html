@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Threads - Welcome</title>
     <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="./pages/base/applyTheme.js"></script>
   </head>
   <body>
     <!-- Page Container -->
@@ -22,8 +23,12 @@
       <h1 class="text">It’s <span class="highlight">Threads!</span></h1>
 
       <!-- Buttons -->
-      <button class="button sign-up" onclick="location.href='pages/signup/signup.html'">Sign up</button>
-      <button class="button sign-in" onclick="location.href='pages/signin/signin.html'">Sign in</button>
+      <a href="./pages/signup/signup.html">
+        <button class="button sign-up">Sign up</button>
+      </a>
+      <a href="./pages/signin/signin.html">
+      <button class="button sign-in">Sign in</button>
+      </a>
     </div>
   </body>
 </html>

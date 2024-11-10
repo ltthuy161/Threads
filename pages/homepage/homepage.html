@@ -8,7 +8,10 @@
 
     <link rel="stylesheet" href="../base/sidebar/sidebar.css" />
     <link rel="stylesheet" href="../base/floating-btn/floating-btn.css" />
+    <link rel="stylesheet" href="../posting/posting.css" />
     <script defer src="../base/loadComponents.js"></script>
+    <script type="module" src="../base/applyTheme.js"></script>
+    <script src="../base/showPopup.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             loadComponent("sidebar", "../base/sidebar/sidebar.html").then(() => {
@@ -16,6 +19,7 @@
             });
             
             loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
+            loadComponent("posting", "../posting/posting.html");
         });
     </script>
     </head>
@@ -175,5 +179,6 @@
             }
         }
     </script>
+    <div id="posting" style="display: none"></div>
     </body>
 </html>
