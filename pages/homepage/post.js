@@ -129,7 +129,7 @@ const posts = [
 
 
 function loadHomepage() {
-    const postContainer = document.querySelector(".post-container");
+    const postContainer = document.querySelector(".post-container-homepage");
     postContainer.innerHTML = "";
 
     document.querySelector('.homepage-header').style.display = 'flex';
@@ -165,7 +165,7 @@ function handlePostClick(event, postElement) {
 
 function goToHomepage() {
     document.querySelector('.post-detail-header').style.display = 'none';
-    document.querySelector('.post-container').innerHTML = "";
+    document.querySelector('.post-container-homepage').innerHTML = "";
     document.querySelector('.homepage-header').style.display = 'flex';
     document.title = "Home / Threads";
     const newUrl = window.location.pathname.replace(/\/[^\/]*$/, "/homepage.html");
@@ -178,7 +178,7 @@ function goToHomepage() {
 }
 
 function renderPostDetail(postId, detail = 1) {
-    const postDetailContainer = document.querySelector(".post-container");
+    const postDetailContainer = document.querySelector(".post-container-homepage");
     if (detail === 1) {
         postDetailContainer.innerHTML = ""; 
     }
@@ -223,7 +223,7 @@ function renderPostDetail(postId, detail = 1) {
 }
 
 function renderReplies(excludeId) {
-    const postDetailContainer = document.querySelector(".post-container");
+    const postDetailContainer = document.querySelector(".post-container-homepage");
 
     const replies = posts.filter(p => p.replyTo === parseInt(excludeId));
 
