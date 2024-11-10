@@ -5,42 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Following</title>
     <link rel="stylesheet" href="following.css">
+    <link rel="stylesheet" href="../base/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="../base/floating-btn/floating-btn.css" />
+    <link rel="stylesheet" href="../posting/posting.css" />
+    <script defer src="../base/loadComponents.js"></script>
+    <script type="module" src="../base/applyTheme.js"></script>
+    <script src="../base/showPopup.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            loadComponent("sidebar", "../base/sidebar/sidebar.html");
+            loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
+            loadComponent("posting", "../posting/posting.html");
+        });
+    </script>
 </head>
 <body>
-    <aside class="sidebar">
-        <a class="logo-container" href="">
-            <img src="../../assets/vendor/icons/logo.svg" alt="Threads Logo" class="logo">
-        </a>
-        <a class="user-photo-container" href="">
-            <img class="user-photo" src="../../assets/img/avatar/ava4.png" alt="photo">
-        </a>
-        <nav class="nav">
-            <div class="navigation-button">
-                <a href="">
-                    <img src="../../assets/vendor/icons/home.svg" alt="Icon description" class="icon">
-                </a>
-            </div>
-            <div class="navigation-button">
-                <a href="">
-                    <img src="../../assets/vendor/icons/search.svg" alt="Icon description" class="icon">
-                </a>
-            </div>
-            <div class="navigation-button">
-                <a href="">
-                    <img src="../../assets/vendor/icons/add.svg" alt="Icon description" class="icon">
-                </a>
-            </div>
-            <div class="navigation-button">
-                <a href="">
-                    <img src="../../assets/vendor/icons/noti.svg" alt="Icon description" class="icon">
-                </a>
-            </div>
-        </nav>
-        <div class="footer-icon">
-            <a href="#"><img src="../../assets/vendor/icons/menu.svg" alt="Menu Icon" class="icon"></a>
-        </div>
-    </aside>
-
+    
+    <div id="sidebar"></div>
     <div class="main-content">
         <!-- Header -->
         <header class="header">
@@ -91,12 +72,7 @@
           </div>
         </div>
     </div>
-    <div class="floating-btn">
-        <a href="">
-            <img src="../../assets/vendor/icons/add.svg" alt="Icon description" class="icon">
-        </a>
-    </div>
-
-
+    <div id="floating-btn"></div>
+    <div id="posting" style="display: none"></div>
 </body>
 </html>
