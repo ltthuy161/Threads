@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit profile</title>
+    <link rel="stylesheet" href="edit-profile.css">
+
+    <link rel="stylesheet" href="../base/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="../base/floating-btn/floating-btn.css" />
+    <script defer src="../base/loadComponents.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            loadComponent("sidebar", "../base/sidebar/sidebar.html").then(() => {
+                setActiveIcon("");
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div id="sidebar"></div>
+    <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <h2>Profile</h2>
+        </header>
+
+        <div class="container">
+            <div class="container-header">
+                <div class="x-button">
+                    <a href="">
+                        <img src="../../assets/vendor/icons/close.svg" alt="Icon description" class="icon">
+                    </a>
+                </div>
+                <h3>Edit profile</h3>
+                <button class="btn-save">Save</button>
+            </div>
+
+            <div class="profile-edit">
+                <form>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Angel Babyboo" />
+        
+                    <label for="bio">Bio</label>
+                    <textarea id="bio" rows="3" placeholder="Your bio is here ✨❤️&#10;I love threads 👌😘"></textarea>
+        
+                    <label for="location">Location</label>
+                    <input type="text" id="location" placeholder="Your location" />
+        
+                    <label for="link">Link</label>
+                    <input type="text" id="link" placeholder="Add link" />
+                </form>
+                <div class="avatar-edit">
+                    <a href="">
+                        <img class="picture" src="../../assets/img/avatar/ava4.png" alt="photo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
