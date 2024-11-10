@@ -1,0 +1,212 @@
+/* Reset */
+*   {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  background-color: #0F0B28;
+}
+
+.sidebar {
+  width: 5%;
+  height: 100vh;
+  min-width: 3rem;
+  background-color: #0F0B28;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-right: 2px solid #8E69DAFF;
+  position: fixed;
+}
+
+.user-photo-container {
+  width: 35px;
+  border-radius: 50%; 
+  justify-content: center;
+  position: absolute;
+  top: 15%;
+}
+.user-photo {
+  width:100%;
+  border-radius: 50%; 
+}
+
+.logo {
+  top: 21px; 
+  left: 13px; 
+  justify-content: center;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.navigation-button, .footer-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%; 
+  background-color: #0F0B28;
+  transition: background-color 0.3s ease;
+}
+
+.navigation-button:hover, .footer-icon:hover {
+  background-color: #cccccc;
+}
+
+.navigation-button:hover .icon, .footer-icon:hover .icon {
+  filter: invert(100%)
+}
+
+
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #0F0B28;
+}
+
+
+.header {
+  width: 50%;
+  height: 4rem;
+  background-color: #0F0B28;
+  padding: 20px 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  z-index: 9999; 
+}
+
+.tabs {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.tab {
+  width: 50%;
+  background-color: #1B1430;
+  border: none;
+  padding-bottom: 15px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tab:hover {
+  color: #8E69DAFF;
+}
+
+.tab span {
+  font-size: 16px;
+  color: #9A97B0;
+  transition: color 0.3s;
+}
+
+.tab.active {
+  font-weight: bold;
+  border-bottom: 2px solid #FFFFFF;
+}
+
+.tab.active span {
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.container {
+  position: relative;
+  margin-top: 4rem;
+  width: 50%;
+  height: 100vh;
+  background-color: #1B1430; /* Darker container color */
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.floating-btn {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  background-color: #5D5AAC;
+  border: 1px solid #8E69DAFF; /* Gộp tất cả các thuộc tính border */
+  border-radius: 12px;
+  opacity: 0.9; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.floating-btn:hover {
+  background-color: #110D26FF;
+}
+
+/* Following List */
+.following-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Individual Suggestion Item */
+.following {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid #2A2140;
+}
+
+.following:first-child {
+  border-top: none; /* Remove top border for the first item */
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-info {
+  flex-grow: 1;
+}
+
+.username {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.user-details {
+  padding-top: 3px;
+  font-size: 14px;
+  color: #9A97B0; /* Follower count color */
+}
