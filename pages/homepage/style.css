@@ -7,9 +7,9 @@
 
 body {
   display: flex;
-  font-family: Arial, sans-serif;
-  color: #ffffff;
-  background-color: #0f0b28;
+  font-family: var(--font-family-heading), sans-serif;
+  color: var(--primary-100);
+  background-color: var(--primary-900);
 }
 
 
@@ -21,13 +21,13 @@ body {
   flex-direction: column;
   padding: 20px;
   padding-bottom: 0;
-  background-color: #0F0B28;
+  background-color: var(--primary-900);
 }
 
 .header {
   width: 50%;
   height: 4rem;
-  background-color: #0f0b28;
+  background-color: var(--primary-900);
   padding: 10px 20px;
   border-radius: 12px;
   display: flex;
@@ -47,7 +47,7 @@ body {
   font-size: 24px; 
   line-height: 26px; 
   font-weight: 400; 
-  color: #F8F9FAFF;
+  color: var(--primary-150);;
 }
 
 .tabs {
@@ -57,7 +57,7 @@ body {
 
 .tab {
   width: 50%;
-  background-color: #0f0b28;
+  background-color: var(--primary-900);
   border: none;
   outline: none;
   cursor: pointer;
@@ -66,24 +66,25 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 12px 12px 0 0;
 }
 
 .tab:hover {
-  background-color: #cccccc;
+  background-color: var(--primary-500);
 }
 
 .tab span {
   font-size: 16px;
-  color: #9a97b0;
+  color: var(--primary-300);;
   transition: color 0.3s;
 }
 
 .tab.active {
-  border-bottom: 2px solid #ffffff;
+  border-bottom: 2px solid var(--primary-100);
 }
 
 .tab.active span {
-  color: #ffffff;
+  color: var(--primary-100);
   font-weight: bold;
 }
 
@@ -92,7 +93,7 @@ body {
   top: 5rem;
   width: 50%;
   height: 90vh;
-  background-color: #1B1430; 
+  background-color: var(--primary-700);; 
   border-radius: 20px 20px 0 0;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 }
@@ -153,14 +154,14 @@ header {
 
 .username {
   font-weight: bold;
-  color:  #F8F9FAFF;
+  color:  var(--primary-150);
   margin-right: 10px;
   text-decoration: none;
   line-height: 21px;
 }
 
 .email {
-  color: #DEE1E6FF;
+  color: var(--primary-200);
   font-size: 0.9em;
   margin-right: 10px;
   text-decoration: none;
@@ -168,7 +169,7 @@ header {
 
 .timestamp {
   font-size: 0.8em;
-  color: #aaa;
+  color: var(--primary-300);
 }
 
 .text {
@@ -209,7 +210,7 @@ header {
 }
 
 .interaction-button button:hover {
-  background-color: #cccccc;
+  background-color: var(--primary-200);;
 }
 
 .interaction-button button:hover .icon {
@@ -241,7 +242,7 @@ header {
 .reply-box-content {
   display: flex;
   justify-content: center;
-  background-color: #1B1430;
+  background-color: var(--primary-900);
   width: 60%;
   max-width: 500px;
   border-radius: 8px;
@@ -257,7 +258,7 @@ header {
   right: 10px;
   cursor: pointer;
   font-size: 18px;
-  color: white;
+  color: var(--primary-100);
 }
 
 .reply-box-content .post {

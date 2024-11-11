@@ -1,63 +1,50 @@
 <aside class="sidebar">
-  <a class="logo-container" href="">
-    <img
-      src="../../../assets/vendor/icons/logo.svg"
-      alt="Threads Logo"
-      class="logo"
-    />
-  </a>
-  <a class="user-photo-container" href="/pages/profile/profile.html">
+  <button class="logo" onclick="location.href='/pages/homepage/homepage.html'">
+    <image src="../../assets/vendor/icons/logo.svg" alt="Add Icon" class="icon" />
+  </button>
+  
+  <button class="user-photo-container" onclick="location.href='/pages/profile/profile.html'">
     <img
       class="user-photo"
       src="../../../assets/img/avatar/ava6.png"
       alt="photo"
     />
-  </a>
+  </button>
   <nav class="nav">
-    <div class="navigation-button">
-      <a href="/pages/homepage/homepage.html">
-        <img
-          src="../../../assets/vendor/icons/home.svg"
-          alt="Icon description"
-          class="icon" id="home-icon"
-        />
-      </a>
-    </div>
-    <div class="navigation-button">
-      <a href="/pages/search/searching.html">
-        <img
-          src="../../../assets/vendor/icons/search.svg"
-          alt="Icon description"
-          class="icon" id="search-icon"
-        />
-      </a>
-    </div>
-    <div class="navigation-button">
-      <a href="#">
-        <img
-          src="../../../assets/vendor/icons/add.svg"
-          alt="Icon description"
-          class="icon" id="add-icon"
-          onclick="showPopup()"
-        />
-      </a>
-    </div>
-    <div class="navigation-button">
-      <a href="#">
-        <img
-          src="../../../assets/vendor/icons/noti.svg"
-          alt="Icon description"
-          class="icon" id="noti-icon"
-        />
-      </a>
-    </div>
+    <button class="navigation-button" onclick="location.href='/pages/homepage/homepage.html'">
+      <img
+      src="../../../assets/vendor/icons/home.svg"
+      alt="Icon description"
+      class="icon" id="home-icon"
+      />
+    </button>
+    <button class="navigation-button" onclick="location.href='/pages/search/searching.html'">
+      <img
+      src="../../../assets/vendor/icons/search.svg"
+      alt="Icon description"
+      class="icon" id="search-icon"
+      />
+    </button>
+    <button class="navigation-button" onclick="showPopup()">
+      <img
+      src="../../../assets/vendor/icons/add.svg"
+      alt="Icon description"
+      class="icon" id="add-icon"
+      />
+    </button>
+    <button class="navigation-button" onclick="location.href='#'">
+      <img
+      src="../../../assets/vendor/icons/noti.svg"
+      alt="Icon description"
+      class="icon" id="noti-icon"
+      />
+    </button>
   </nav>
-  <div class="footer-icon">
-    <a href="#"
-      ><img
-        src="../../../assets/vendor/icons/menu.svg"
-        alt="Menu Icon"
-        class="icon"
-    /></a>
-  </div>
+  <button class="footer-icon" onclick="location.href='#'">
+    <img
+      src="../../../assets/vendor/icons/menu.svg"
+      alt="Menu Icon"
+      class="icon"
+    />
+  </button>
 </aside>
