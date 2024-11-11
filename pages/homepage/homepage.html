@@ -42,6 +42,12 @@
                 }
             });
         });
+
+        function switchTab(tabButton) {
+            const tabs = document.querySelectorAll(".tab");
+            tabs.forEach(tab => tab.classList.remove("active")); 
+            tabButton.classList.add("active"); 
+        }
     </script>
   </head>
   <body>
@@ -50,8 +56,8 @@
     <div class="main-content">
       <header class="header homepage-header">
         <div class="tabs">
-          <button class="tab active"><span>For you</span></button>
-          <button class="tab"><span>Following</span></button>
+          <button class="tab active" onclick="switchTab(this)"><span>For you</span></button>
+          <button class="tab" onclick="switchTab(this)"><span>Following</span></button>
         </div>
       </header>
 

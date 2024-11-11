@@ -8,12 +8,15 @@
 
     <link rel="stylesheet" href="../base/sidebar/sidebar.css" />
     <link rel="stylesheet" href="../base/floating-btn/floating-btn.css" />
+    <link rel="stylesheet" href="../posting/posting.css" />
     <script defer src="../base/loadComponents.js"></script>
+    <script type="module" src="../base/applyTheme.js"></script>
+    <script src="../base/showPopup.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            loadComponent("sidebar", "../base/sidebar/sidebar.html").then(() => {
-                setActiveIcon("");
-            });
+            loadComponent("sidebar", "../base/sidebar/sidebar.html");
+            loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
+            loadComponent("posting", "../posting/posting.html");
         });
     </script>
 
@@ -29,7 +32,7 @@
         <div class="container">
             <div class="container-header">
                 <div class="x-button">
-                    <a href="">
+                    <a href="../profile/profile.html">
                         <img src="../../assets/vendor/icons/close.svg" alt="Icon description" class="icon">
                     </a>
                 </div>
@@ -59,5 +62,8 @@
             </div>
         </div>
     </div>
+    <div id="floating-btn"></div>
+
+    <div id="posting" style="display: none"></div>
 </body>
 </html>

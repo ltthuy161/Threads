@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notification</title>
+    <link rel="stylesheet" href="./style.css" />
+
+    <link rel="stylesheet" href="../base/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="../base/floating-btn/floating-btn.css" />
+    <link rel="stylesheet" href="../posting/posting.min.css" />
+
+
+    <script defer src="../base/loadComponents.js"></script>
+    <script type="module" src="../base/applyTheme.js"></script>
+    <script src="../base/showPopup.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            loadComponent("sidebar", "../base/sidebar/sidebar.html").then(() => {
+                setActiveIcon("noti-icon");
+            });
+            loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
+            loadComponent("posting", "../posting/posting.html");
+        });
+    </script>
+    </head>
+    <body>
+    <div id="sidebar"></div>
+
+    <div class="main-content">
+        
+      <header class="header homepage-header">
+        <div class="post-title">Notification</div>
+        <div class="tabs">
+          <button class="tab active" data-tab="all"><span>All</span></button>
+          <button class="tab" data-tab="unread"><span>Unread</span></button>
+        </div>
+      </header>
+
+      <div class="container">
+          
+            <div class="notifications all active">
+              <div class="notification">
+                
+                <a class="avt-container" href=""><img class="avt-photo" src="/assets/img/avatar/ava8.png" alt="photo"></a>
+                <div class="notification-content">
+                  <p><b>Bocchi@hoho</b> replied to your post</p>
+                  <p class="small">slay</p>
+                </div>
+                <span class="time">52m ago</span>
+              </div>
+          
+              <div class="notification unread">
+                <span class="dot"></span>
+                <a class="avt-container" href=""><img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo"></a>
+                <div class="notification-content">
+                  <p><b>Bocchi@hihi</b> mentioned you in a post</p>
+                  <p class="small">bla bla bla bla bla bla bla bla</p>
+                </div>
+                <span class="time">10m ago</span>
+              </div>
+          
+              <div class="notification">
+               
+                <a class="avt-container" href=""><img class="avt-photo" src="/assets/img/avatar/ava2.png" alt="photo"></a>
+                <div class="notification-content">
+                  <p><b>Bocchi@hoho</b> liked your tweet.</p>
+                  <p class="small">slaydklkcjsjc</p>
+                </div>
+                <span class="time">52m ago</span>
+              </div>
+
+          </div>
+      
+      
+          <div class="notifications unread">
+            <div class="notification unread">
+              <span class="dot"></span>
+              <a class="avt-container" href=""><img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo"></a>
+              <div>
+                <p><b>Bocchi@hihi</b> Mentioned you in a post</p>
+                <p class="small">bla bla bla bla bla bla bla bla</p>
+              </div>
+              <span class="time">10m ago</span>
+            </div>
+          </div>
+
+    </div>
+    <div id="floating-btn"></div>
+    <div id="posting" style="display: none"></div>
+    </div>
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.tab');
+    const notificationContainers = document.querySelectorAll('.notifications');
+  
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Xóa lớp 'active' khỏi tất cả tab và container
+        tabs.forEach(t => t.classList.remove('active'));
+        notificationContainers.forEach(container => container.classList.remove('active'));
+  
+        // Thêm lớp 'active' cho tab và container được chọn
+        tab.classList.add('active');
+        const targetTab = tab.getAttribute('data-tab');
+        document.querySelector(`.notifications.${targetTab}`).classList.add('active');
+      });
+    });
+  });
+  
+    </script>
+  </body>
+
+</html>
