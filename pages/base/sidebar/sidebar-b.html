@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navigation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Sidebar chung */
+.sidebar {
+  width: 100%; /* Full chiều rộng màn hình */
+  height: 100vh; /* Chiều cao toàn màn hình */
+  background-color: #14142b; /* Màu nền tối */
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Canh các phần tử từ trên xuống */
+  align-items: center;
+  z-index: 1000;
+  overflow: hidden; /* Đảm bảo không bị tràn nội dung */
+}
+
+/* Avatar (Góc trên bên trái) */
+.user-photo-container img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Tạo hình tròn */
+  border: 2px solid #ffffff; /* Viền trắng */
+  object-fit: cover;
+}
+
+/* Logo (Trung tâm phía trên) */
+.logo img {
+  width: 50px;
+  margin-top: 10px;
+}
+
+/* Navigation Buttons (Dưới cùng màn hình) */
+.nav {
+  position: absolute;
+  bottom: 10px; /* Canh sát mép dưới */
+  width: 100%; /* Chiều rộng full màn hình */
+  display: flex;
+  justify-content: space-around; /* Căn đều các nút */
+  padding: 0 20px; /* Khoảng cách hai bên */
+}
+
+.navigation-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.navigation-button i {
+  font-size: 1.5rem; /* Kích thước icon */
+  color: #ffffff; /* Màu trắng */
+  transition: color 0.3s ease, transform 0.3s ease; /* Hiệu ứng hover */
+}
+
+.navigation-button:hover i {
+  color: #3a3b60; /* Màu thay đổi khi hover */
+  transform: scale(1.2); /* Phóng to nhẹ khi hover */
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    width: 80px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .user-photo-container {
+    position: static;
+    margin-bottom: 20px;
+  }
+
+  .logo {
+    margin: 0 auto 20px;
+  }
+
+  .nav {
+    position: static;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <aside class="sidebar d-flex flex-column bg-dark text-light">
+        <!-- Avatar (Góc trên bên trái) -->
+        <button class="btn btn-link user-photo-container p-0 position-absolute" style="top: 10px; left: 10px;" onclick="location.href='/pages/profile/profile.html'">
+          <img src="../../../assets/img/avatar/ava6.png" alt="User Avatar" class="rounded-circle img-fluid" style="width: 40px; height: 40px;" />
+        </button>
+      
+        <!-- Logo (Chính giữa phía trên) -->
+        <button class="btn btn-link logo p-0 mx-auto mt-3" onclick="location.href='/pages/homepage/homepage.html'">
+          <img src="../../../assets/vendor/icons/logo.svg" alt="Logo Icon" class="img-fluid" style="width: 50px;" />
+        </button>
+      
+        <!-- Navigation Buttons (Dưới cùng màn hình) -->
+        <nav class="nav d-flex justify-content-around align-items-center w-100 position-absolute" style="bottom: 10px;">
+          <button class="btn btn-link navigation-button p-0" onclick="location.href='/pages/homepage/homepage.html'">
+            <i class="bi bi-house-fill" style="font-size: 1.5rem;"></i>
+          </button>
+          <button class="btn btn-link navigation-button p-0" onclick="location.href='/pages/search/searching.html'">
+            <i class="bi bi-search" style="font-size: 1.5rem;"></i>
+          </button>
+          <button class="btn btn-link navigation-button p-0" onclick="showPopup()">
+            <i class="bi bi-plus-square-fill" style="font-size: 1.5rem;"></i>
+          </button>
+          <button class="btn btn-link navigation-button p-0" onclick="location.href='/pages/notification/notification.html'">
+            <i class="bi bi-bell-fill" style="font-size: 1.5rem;"></i>
+          </button>
+        </nav>
+        <button class="btn btn-link footer-icon p-0 mt-auto" onclick="location.href='#'">
+            <i class="bi bi-list" style="font-size: 1.5rem;"></i>
+          </button>
+
+      </aside>
+      
+      
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

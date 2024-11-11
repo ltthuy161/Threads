@@ -1,0 +1,57 @@
+/* Responsive cho Mobile */
+@media screen and (max-width: 768px) {
+    /* Body */
+    body {
+      flex-direction: column;
+    }
+  
+    /* Header */
+    .header {
+        border-radius: 0;
+        
+      width: 100%;
+      height: 3rem;
+     
+      top: 4rem;
+    }
+    
+    /* Tabs */
+    .tab {
+        height: 3rem;
+        margin: 10px 0;
+        border-radius: 0;
+      font-size: 14px;
+    }
+  
+    /* Container của bài post */
+    .container-homepage {
+      top: 4rem;
+      width: 100%;
+      height: calc(100vh - 4rem);
+    }
+  
+    /* Post container */
+    .post-container-homepage {
+      height: 100%;
+    }
+  
+    /* Post */
+    .post {
+      padding: 0.5rem;
+    }
+  
+    /* Avatar */
+    .avt-container {
+      width: 30px;
+      height: 30px;
+    }
+  
+    .avt-photo {
+      width: 30px;
+    }
+  
+    /* Nội dung */
+    .content {
+      font-size: 14px;
+    }
+  }

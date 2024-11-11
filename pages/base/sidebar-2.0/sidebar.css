@@ -1,0 +1,99 @@
+.sidebar {
+  width: 80px; 
+  height: 100vh;
+  background-color: var(--primary-900); 
+  border-right: 1px solid #8e69da;
+}
+
+.navigation-button,
+.footer-icon {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-900);
+  transition: background-color 0.3s ease;
+}
+
+
+.navigation-button:hover,
+.footer-icon:hover {
+  background-color: var(--primary-100);
+}
+
+.navigation-button i {
+  color: var(--primary-900); /* Màu mặc định */
+  transition: color 0.3s ease, transform 0.3s ease; /* Hiệu ứng mượt */
+}
+
+.navigation-button:hover i {
+  color: var(--primary-100); /* Đổi màu khi hover */
+  transform: scale(1.2); /* Phóng to icon */
+}
+
+.navigation-button i.active {
+  color: var(--primary-500); /* Màu sắc khi icon active */
+  transform: none; /* Không hiệu ứng nếu đã active */
+}
+
+.navigation-button i.inactive {
+  color: var(--neutral-500); /* Màu xám cho trạng thái inactive */
+  transform: none;
+}
+
+
+@media screen and (max-width: 768px) {
+  .sidebar .footer-icon {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    align-items: flex-start;
+    z-index: 1000;
+  }
+
+  .sidebar .top-section {
+    flex-direction: row !important; 
+    width: 100%;
+    height: 3rem;
+    z-index: 10000;
+    position: relative
+}
+
+.sidebar .top-section img {
+  height: 1.8rem;
+}
+
+.sidebar .top-section .user-photo-container {
+  order: 0;
+  position: absolute;
+}
+
+.sidebar .top-section .logo {
+    order: 1;
+    margin: auto;
+    width: 100%;
+    position: absolute;
+}
+
+  .sidebar .bottom-section {
+    background-color: var(--primary-900); 
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #8e69da;
+    
+  }
+
+  .sidebar .bottom-section .navigation-button i {
+    font-size: 1.8rem;
+  }
+}

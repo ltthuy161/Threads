@@ -20,7 +20,7 @@ function loadComponent(componentId, filePath) {
 
 
 function setActiveIcon(activeIconId) {
-  const icons = document.querySelectorAll('.icon'); 
+  const icons = document.querySelectorAll('.navigation-button i'); 
   icons.forEach((icon) => {
     if (icon.id === activeIconId) {
       icon.classList.add('active');
