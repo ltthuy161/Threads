@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign in</title>
-    <link rel="stylesheet" href="signin.css" />
+    <link rel="stylesheet" href="forgot-pw.css" />
     <script type="module" src="../base/applyTheme.js"></script>
     <!-- Link to the CSS file if saved separately -->
   </head>
@@ -13,7 +13,7 @@
       <!-- Container for content -->
       <div class="container">
         <!-- Title Text -->
-        <h2 class="text">Welcome!</h2>
+        <h2 class="text">Forgot Password</h2>
 
         <div class="textbox" style="top: 150px">
           <label class="label" for="email">Email</label>
@@ -21,7 +21,7 @@
         </div>
 
         <div class="textbox" style="top: 215px">
-          <label class="label" for="password">Password</label>
+          <label class="label" for="password">New Password</label>
           <input
             type="password"
             id="password"
@@ -29,11 +29,7 @@
           />
         </div>
 
-        <div class="buttons">
-          <button class="sign-up-button" onclick="location.href='/pages/homepage/homepage.html'">Sign in</button>
-          <button class="forgot-password" onclick="location.href='/pages/forgot-pw/forgot-pw.html'">Forgot password?</button>
-        </div>
-
+        <button class="sign-up-button" onclick="location.href='/pages/signin/signin.html'">Back to Sign in</button>
       </div>
     </div>
   </body>
