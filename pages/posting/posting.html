@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../posting/posting.min.css" />
+<link rel="stylesheet" href="../posting/posting.css" />
     <!-- overlay -->
     <div class="overlay">
       <!-- Posting Section -->
@@ -19,14 +19,19 @@
             />
             <p class="username">ltthuys161</p>
             <div class="textbox">
-              <input type="text" placeholder="Add a title for your post" />
+              <input type="text" placeholder="How do you feel today??" />
             </div>
+
             <div class="post-actions">
-              <img
+              <label for="add-image">
+                <img
                 class="icon"
                 src="../../assets/vendor/icons/image.svg"
                 alt="Add Image"
-              />
+                />
+              </label>
+              <input id="add-image" type="file" id="file" style="display: none" accept="image/*" />
+
               <img
                 class="icon"
                 src="../../assets/vendor/icons/video.svg"
@@ -48,8 +53,8 @@
                 alt="Add Location"
               />
             </div>
-            <div class="vertical-line"></div>
           </div>
+
         </div>
         <button class="post-button">Post</button>
       </div>

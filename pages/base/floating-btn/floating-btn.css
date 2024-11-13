@@ -18,3 +18,10 @@
 .floating-btn:hover {
   background-color: var(--primary-300);
 }
+
+/* responsive for mobile */
+@media screen and (max-width: 768px) {
+  .floating-btn {
+    display: none;
+  }
+}
