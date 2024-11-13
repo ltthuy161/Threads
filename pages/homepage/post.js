@@ -181,6 +181,8 @@ function renderPostDetail(postId, detail = 1) {
     const postDetailContainer = document.querySelector(".post-container-homepage");
     if (detail === 1) {
         postDetailContainer.innerHTML = ""; 
+        document.querySelector('.homepage-header').style.display = 'none';
+    	document.querySelector('.post-detail-header').style.display = 'flex';
     }
 
     const post = posts.find(p => p.id === parseInt(postId));
@@ -188,24 +190,26 @@ function renderPostDetail(postId, detail = 1) {
     if (post) {
         const postImage = post.image ? `<div class="image"><img src="${post.image}" alt="Attached Image" /></div>` : "";
         const postDetail = `
-            <div class="post" data-id="${post.id}" onclick="handlePostClick(event, this)">
-                <a class="avt-container" href=""><img class="avt-photo" src="${post.avt}" alt="photo"></a>
-                <div class="content">
-                    <header>
-                        <a class="username" href=""><span>${post.username}</span></a>
-                        <a class="email" href=""><span>${post.email}</span></a>
+            <div class="post w-100 p-3 mb-2 d-flex" data-id="${post.id}" onclick="handlePostClick(event, this)">
+                <a class="avt-container" href=""><img class="avt-photo rounded-circle" src="${post.avt}" alt="photo"></a>
+                <div class="content flex-grow-1">
+                    <header class="d-flex align-items-center mb-1">
+                        <a class="username fw-bold me-1 text-decoration-none" href=""><span>${post.username}</span></a>
+                        <a class="email text-secondary me-2 text-decoration-none" href=""><span>${post.email}</span></a>
                         <time class="timestamp">${post.timestamp}</time>
                     </header>
-                    <p class="text">${post.text}</p>
+                    <p class="text my-2 text-light mt-1 mb-1">${post.text}</p>
                     ${postImage}
-                    <div class="interaction">
-                        <div class="interaction-button">
-                            <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
-                            <span class="interaction-count">${post.interactions.likes}</span> 
+                    <div class="interaction d-flex mt-2" style="gap: 2rem">
+                        <div class="interaction-button d-flex">
+                            <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
+                            onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
+                            <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">${post.interactions.likes}</span> 
                         </div>
-                        <div class="interaction-button">
-                            <button onclick="showReplyBox(${post.id})"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
-                            <span class="interaction-count">${post.interactions.comments}</span> 
+                        <div class="interaction-button d-flex">
+                            <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
+                            onclick="showReplyBox(${post.id})"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
+                            <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">${post.interactions.comments}</span> 
                         </div>
                     </div>
                 </div>
@@ -228,30 +232,32 @@ function renderReplies(excludeId) {
     const replies = posts.filter(p => p.replyTo === parseInt(excludeId));
 
     if (replies.length > 0) {
-        const replyH1 = `<div class="reply"><h1>Replies</h1></div>`;
+        const replyH1 = `<div class="reply"><div class="fs-6 fw-normal text-light text-center pb-2">Replies</div></div>`;
         postDetailContainer.innerHTML += replyH1;
 
         replies.forEach(reply => {
             const replyImage = reply.image ? `<div class="image"><img src="${reply.image}" alt="Attached Image" /></div>` : "";
             const replyHtml = `
-                <div class="post">
-                    <a class="avt-container" href=""><img class="avt-photo" src="${reply.avt}" alt="photo"></a>
-                    <div class="content">
-                        <header>
-                            <a class="username" href=""><span>${reply.username}</span></a>
-                            <a class="email" href=""><span>${reply.email}</span></a>
+                <div class="post w-100 p-3 mb-2 d-flex">
+                    <a class="avt-container" href=""><img class="avt-photo rounded-circle" src="${reply.avt}" alt="photo"></a>
+                    <div class="content flex-grow-1">
+                        <header class="d-flex align-items-center mb-1">
+                            <a class="username fw-bold me-1 text-decoration-none" href=""><span>${reply.username}</span></a>
+                            <a class="email text-secondary me-2 text-decoration-none" href=""><span>${reply.email}</span></a>
                             <time class="timestamp">${reply.timestamp}</time>
                         </header>
-                        <p class="text">${reply.text}</p>
+                        <p class="text my-2 text-light mt-1 mb-1">${reply.text}</p>
                         ${replyImage}
-                        <div class="interaction">
-                            <div class="interaction-button">
-                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
-                                <span class="interaction-count">${reply.interactions.likes}</span> 
+                        <div class="interaction d-flex mt-2" style="gap: 2rem">
+                            <div class="interaction-button d-flex">
+                                <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
+                                onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
+                                <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">${reply.interactions.likes}</span> 
                             </div>
-                            <div class="interaction-button">
-                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
-                                <span class="interaction-count">${reply.interactions.comments}</span> 
+                            <div class="interaction-button d-flex">
+                                <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
+                                onclick="changeIcon(this)"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
+                                <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">${reply.interactions.comments}</span> 
                             </div>
                         </div>
                     </div>
@@ -279,23 +285,22 @@ function showReplyBox(postId) {
 
     if (post) {
         replyBoxContainer.innerHTML = `
-        <div class="reply-box-content">
-            <div class="post">
-                <div class="from-to">
-                    <div class="avt-container"><img class="avt-photo" src="${post.avt}" alt="photo"></div>
+        <div class="reply-box-content d-flex justify-content-center w-60">
+            <div class="post w-100 p-3 mb-2 d-flex">
+                <div class="from-to d-flex flex-column align-items-center me-2">
+                    <div class="avt-container"><img class="avt-photo rounded-circle" src="${post.avt}" alt="photo"></div>
                     <div class="connect-ava"></div>
-                    <div class="avt-container"><img class="avt-photo" src="/assets/img/avatar/ava6.png" alt="photo"></div>
+                    <div class="avt-container"><img class="avt-photo rounded-circle" src="/assets/img/avatar/ava6.png" alt="photo"></div>
                 </div>
-                <div class="content">
+                <div class="content d-flex flex-column align-items-center me-2">
                     <div class="to-user">
-                        <header>
-                            <a class="username" href=""><span>${post.username}</span></a>
-                            <a class="email" href=""><span>${post.email}</span></a>
+                        <header class="d-flex align-items-center mb-1">
+                            <a class="username fw-bold me-1 text-decoration-none" href=""><span>${post.username}</span></a>
+                            <a class="email text-secondary me-2 text-decoration-none" href=""><span>${post.email}</span></a>
                             <time class="timestamp">${post.timestamp}</time>
                         </header>
-                        <p class="text">${post.text}</p>
+                        <p class="text my-2 text-light mt-1 mb-1">${post.text}</p>
                     </div>
-
                     <div class="reply-content">Post your reply</div>
                 </div>
                 <button class="close-button" style="border: none; outline: none;" onclick="closeReplyBox()">✖</button>

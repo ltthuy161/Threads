@@ -1,46 +1,56 @@
-/* Responsive cho Mobile */
+
 @media screen and (max-width: 768px) {
-    /* Body */
     body {
       flex-direction: column;
-    }
-  
-    /* Header */
+    } 
     .header {
-        border-radius: 0;
-        
-      width: 100%;
-      height: 3rem;
-     
-      top: 4rem;
+      border-radius: 0;
+      width: 100% !important;
+      height: 2.5rem !important;
+      top: 2.5rem;
     }
-    
-    /* Tabs */
+    .tabs {
+      height: 2.5rem;
+    }
     .tab {
-        height: 3rem;
-        margin: 10px 0;
-        border-radius: 0;
+      height: 2.5rem;
+
+      border-radius: 0;
       font-size: 14px;
     }
   
-    /* Container của bài post */
     .container-homepage {
-      top: 4rem;
-      width: 100%;
-      height: calc(100vh - 4rem);
+      top: 5.5rem;
+      padding-bottom: 10rem;
+      width: 100% !important;
+      height: 100vh;
+      border-radius: 0px 0px 0px 0px;
     }
   
-    /* Post container */
     .post-container-homepage {
       height: 100%;
     }
   
-    /* Post */
     .post {
-      padding: 0.5rem;
+      padding: 0.5rem; 
     }
-  
-    /* Avatar */
+
+    .post-detail-header #prev {
+      margin-left: 1rem !important;
+      margin-top: 0rem !important;
+      width: 1.8rem !important;
+      height: 1.8rem !important;
+    }
+    .post-detail-header i {
+      margin-top: 0rem !important;
+      font-size: 1rem !important;
+    }
+
+    .post-title {
+      font-size: 20px !important;
+      padding-top: 0rem !important;
+    }
+    
     .avt-container {
       width: 30px;
       height: 30px;
@@ -50,8 +60,11 @@
       width: 30px;
     }
   
-    /* Nội dung */
     .content {
       font-size: 14px;
+    }
+
+    .reply-box-content .content {
+      gap: calc(5rem);
     }
   }

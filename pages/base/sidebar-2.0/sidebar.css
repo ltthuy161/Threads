@@ -5,6 +5,10 @@
   border-right: 1px solid #8e69da;
 }
 
+.sidebar .top-section {
+  gap: 5rem;
+}
+
 .navigation-button,
 .footer-icon {
   width: 40px;
@@ -14,30 +18,31 @@
 }
 
 
-.navigation-button:hover,
-.footer-icon:hover {
-  background-color: var(--primary-100);
-}
-
+/* Mặc định */
 .navigation-button i {
-  color: var(--primary-900); /* Màu mặc định */
-  transition: color 0.3s ease, transform 0.3s ease; /* Hiệu ứng mượt */
+  color: var(--primary-900);
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.navigation-button:hover i {
-  color: var(--primary-100); /* Đổi màu khi hover */
-  transform: scale(1.2); /* Phóng to icon */
-}
-
+/* Khi active */
 .navigation-button i.active {
-  color: var(--primary-500); /* Màu sắc khi icon active */
-  transform: none; /* Không hiệu ứng nếu đã active */
+  color: var(--primary-100); /* Màu sáng khi active */
+  transform: none; /* Không hiệu ứng */
 }
 
+/* Khi inactive */
 .navigation-button i.inactive {
-  color: var(--neutral-500); /* Màu xám cho trạng thái inactive */
+  color: var(--neutral-500) !important; /* Màu xám khi inactive */
   transform: none;
 }
+
+/* Hover chỉ áp dụng khi không active */
+.navigation-button:hover i:not(.active) {
+  color: var(--primary-500); /* Màu khi hover */
+  transform: scale(1.2); /* Phóng to */
+}
+
+
 
 
 @media screen and (max-width: 768px) {
@@ -53,6 +58,7 @@
     flex-direction: row;
     align-items: flex-start;
     z-index: 1000;
+    border: none;
   }
 
   .sidebar .top-section {
@@ -63,9 +69,15 @@
     position: relative
 }
 
-.sidebar .top-section img {
+.sidebar .top-section .logo img {
   height: 1.8rem;
 }
+
+.sidebar .top-section .user-photo-container img {
+  height: 2rem !important;
+  width: 2rem !important;
+}
+
 
 .sidebar .top-section .user-photo-container {
   order: 0;
