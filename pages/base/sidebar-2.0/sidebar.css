@@ -9,6 +9,14 @@
   gap: 5rem;
 }
 
+.btn.logo, .btn.user-photo-container {
+  pointer-events: none;
+}
+
+.btn.logo img, .btn.user-photo-container img {
+  pointer-events: auto; 
+}
+
 .navigation-button,
 .footer-icon {
   width: 40px;
@@ -17,29 +25,24 @@
   transition: background-color 0.3s ease;
 }
 
-
-/* Mặc định */
 .navigation-button i {
   color: var(--primary-900);
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Khi active */
 .navigation-button i.active {
-  color: var(--primary-100); /* Màu sáng khi active */
-  transform: none; /* Không hiệu ứng */
+  color: var(--primary-100); 
+  transform: none; 
 }
 
-/* Khi inactive */
 .navigation-button i.inactive {
-  color: var(--neutral-500) !important; /* Màu xám khi inactive */
+  color: var(--neutral-500) !important; 
   transform: none;
 }
 
-/* Hover chỉ áp dụng khi không active */
 .navigation-button:hover i:not(.active) {
-  color: var(--primary-500); /* Màu khi hover */
-  transform: scale(1.2); /* Phóng to */
+  color: var(--primary-500); 
+  transform: scale(1.2); 
 }
 
 
