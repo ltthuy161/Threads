@@ -1,129 +1,109 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" href="profile.css">
-    <link rel="stylesheet" href="../base/sidebar/sidebar.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Threads/Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./style-mobile.css">
+ 
+    <link rel="stylesheet" href="../base/sidebar-2.0/sidebar.css" />
     <link rel="stylesheet" href="../base/floating-btn/floating-btn.css" />
-    <link rel="stylesheet" href="../posting/posting.css" />
+    <link rel="stylesheet" href="../posting/posting.min.css" />
+
+    <script defer src="post.js"></script>
+
     <script defer src="../base/loadComponents.js"></script>
     <script type="module" src="../base/applyTheme.js"></script>
     <script src="../base/showPopup.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            loadComponent("sidebar", "../base/sidebar/sidebar.html");
+            loadComponent("sidebar", "../base/sidebar-2.0/sidebar.html").then(() => {
+          setActiveIcon("home-icon");
+        });
             loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
             loadComponent("posting", "../posting/posting.html");
+
+
+            const postContainer = document.querySelector(".post-container");
+
+            if (window.location.pathname.startsWith("/post-detail")) {
+                const postId = window.location.pathname.split("/")[2];
+
+                renderPostDetail(postId);
+            } else {
+                loadProfile();
+            }
+
+           
+            window.addEventListener("popstate", (event) => {
+                if (event.state && event.state.postId) {
+                    renderPostDetail(event.state.postId);
+                } else {
+                    loadProfile();
+                }
+            });
         });
+
+        function switchTab(tabButton) {
+            const tabs = document.querySelectorAll(".tab");
+            tabs.forEach(tab => tab.classList.remove("active")); 
+            tabButton.classList.add("active"); 
+        }
     </script>
-</head>
-<body>
-    
+  </head>
+  <body>
     <div id="sidebar"></div>
+
     <div class="main-content">
-        <!-- Header -->
-        <header class="header">
-            <h2>Profile</h2>
-        </header>
+      <div class="page-header">
+        <h2>Profile</h2>
+      </div>
+      
+      <header class="header post-detail-header" style="display: none;">
+        <button class="navigation-button" id="prev" style="border: none; outline: none;" onclick="goToProfile()">
+          <img src="../../assets/vendor/icons/prev.svg" alt="Icon description" class="icon" id="prev-icon" >
+        </button>
+        <div class="post-title">Post</div>
+      </header>
 
-        <div class="container">
-            <!-- Profile Section -->
-            <div class="profile-section">
-                <!-- Profile Header -->
-                <div class="profile-header">
-                    <div class="profile-info">
-                        <h2>Angel Babyboo</h2>
-                        <p>@lovetothread</p>
-                        <p class="profile-bio">Your bio is here: 🌟❤️<br>I love threads 💬🌍</p>
-                        <div class="profile-stats">
-                            <span><a href="../follower/follower.html">800 Followers</a></span>
-                            <span><a href="../following/following.html">978 Following</a></span>
-                        </div>
-                    </div>
-                    <div class="profile-picture">
-                        <img class="user-photo" src="../../assets/img/avatar/ava4.png" alt="photo">
-                    </div>
-                </div>
-                <!-- Edit profile button -->
-                <div class="edit-profile">
-                    <button class="edit-button" onclick="location.href='../edit-profile/edit-profile.html'">Edit profile</button>
-                </div>
-            </div>
-            <!-- Posts Section -->
-            <ul id="post-container">
-                <!-- Individual Post -->
-                <div class="post">
-                    <a class="avt-container" href=""><img class="avt-photo" src="../../assets/img/avatar/ava4.png" alt="photo"></a>
-                    <div class="content">
-                        <header>
-                            <a class="username" href=""><span>Angel Babyboo</span></a>
-                            <a class="email" href=""><span>@lovetothread</span></a>
-                            <time class="timestamp">3h</time>
-                        </header>
-                        <p class="text">Love you to the moon and back. Please love me back!!!</p>
-                        <div class="image"><img src="../../assets/img/posts/post2.jpg" alt="Attached Image" /></div>
-                        
-                        <div class="interaction">
-                            <div class="interaction-button">
-                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
-                                <span class="interaction-count">5</span> 
-                            </div>
-                            <div class="interaction-button">
-                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
-                                <span class="interaction-count">5</span> 
-                            </div>
-                            <div class="interaction-button">
-                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/reload.svg" alt="Repost Icon" class="icon"></button>
-                                <span class="interaction-count">5</span>
-                            </div>
-                            <div class="interaction-button">
-                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/edit.svg" alt="Quote Icon" class="icon"></button>
-                                <span class="interaction-count">5</span> 
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-
-                <div class="post">
-                    <a class="avt-container" href=""><img class="avt-photo" src="../../assets/img/avatar/ava4.png" alt="photo"></a>
-                    <div class="content">
-                        <header>
-                            <a class="username" href=""><span>Angel Babyboo</span></a>
-                            <a class="email" href=""><span>@lovetothread</span></a>
-                            <time class="timestamp">5h</time>
-                        </header>
-                        <p class="text">And I could still see it all in your eyes. Back and forward from NY.</p>
-                        <div class="image"><img src="../../assets/img/posts/post3.jpg" alt="Attached Image" /></div>
-                        
-                        <div class="interaction">
-                            <div class="interaction-button">
-                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
-                                <span class="interaction-count">5</span> 
-                            </div>
-                            <div class="interaction-button">
-                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
-                                <span class="interaction-count">5</span> 
-                            </div>
-                            <div class="interaction-button">
-                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/reload.svg" alt="Repost Icon" class="icon"></button>
-                                <span class="interaction-count">5</span>
-                            </div>
-                            <div class="interaction-button">
-                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/edit.svg" alt="Quote Icon" class="icon"></button>
-                                <span class="interaction-count">5</span> 
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </ul>
+      <div class="container-profile">
+        <!-- Profile Section -->
+        <div class="profile-section">
+          <!-- Profile Header -->
+          <div class="profile-header">
+              <div class="profile-info">
+                  <h2>Angel Babyboo</h2>
+                  <p>@lovetothread</p>
+                  <p class="profile-bio">Your bio is here: 🌟❤️<br>I love threads 💬🌍</p>
+                  <div class="profile-stats">
+                      <span><a href="../follower/follower.html">800 Followers</a></span>
+                      <span><a href="../following/following.html">978 Following</a></span>
+                  </div>
+              </div>
+              <div class="profile-picture">
+                  <img class="user-photo" src="../../assets/img/avatar/ava4.png" alt="photo">
+              </div>
+          </div>
+          <!-- Edit profile button -->
+          <div class="edit-profile">
+              <button class="edit-button" onclick="location.href='../edit-profile/edit-profile.html'">Edit profile</button>
+          </div>
         </div>
+        <ul class="post-container-profile"></ul>
+        
+      </div>
     </div>
     <div id="floating-btn"></div>
 
     <div id="posting" style="display: none"></div>
-</body>
+    </body>
+
+    <div id="reply-box-container" class="reply-box-container" style="display: none;"></div>
+    </div>
+  </body>
+
 </html>
