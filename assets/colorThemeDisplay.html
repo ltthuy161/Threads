@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Theme Display</title>
+  <style>
+    /* Basic styling for the display */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    #color-display {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Container for the color display -->
+  <div id="color-display"></div>
+
+  <script>
+    // Your theme configuration
+    const theme = {
+  colors: {
+    primary: {
+      100: "#f5f5fa",
+      150: "#d6d6ea",
+      200: "#b8b7db",
+      250: "#9a98cb",
+      300: "#7b79bb",
+      350: "#5d5aac",
+      400: "#4b488f",
+      450: "#3a3970",
+      500: "#2a2951",
+      550: "#28274d",
+      600: "#262448",
+      650: "#232244",
+      700: "#21203f",
+      750: "#1f1e3b",
+      800: "#1c1b36",
+      850: "#1a1932",
+      900: "#18172d",
+      DEFAULT: "#2a2951",
+    },
+    secondary: {
+      100: "#f5f3fb",
+      150: "#d0caed",
+      200: "#aba1df",
+      250: "#8678d1",
+      300: "#624ec3",
+      350: "#4937a2",
+      400: "#372979",
+      450: "#241b4f",
+      500: "#110d26",
+      550: "#120e28",
+      600: "#130f2b",
+      650: "#140f2d",
+      700: "#15102f",
+      750: "#161132",
+      800: "#181234",
+      850: "#191336",
+      900: "#1a1339",
+      DEFAULT: "#110d26",
+    },
+    info: {
+      100: "#f2f8fd",
+      150: "#c6e1f6",
+      200: "#9bcbef",
+      250: "#70b4e8",
+      300: "#459de1",
+      350: "#2285d1",
+      400: "#1b69a6",
+      450: "#144e7a",
+      500: "#0d3451",
+      550: "#0c2f4a",
+      600: "#0b2d46",
+      650: "#0b2a41",
+      700: "#0a273d",
+      750: "#092438",
+      800: "#082134",
+      850: "#081e2f",
+      900: "#071b2b",
+      DEFAULT: "#0d3451",
+    },
+    warning: {
+      100: "#fef9ee",
+      150: "#fcf0d7",
+      200: "#fae7c0",
+      250: "#f8dea9",
+      300: "#f6d491",
+      350: "#f4cb7a",
+      400: "#f2c263",
+      450: "#f0b94b",
+      500: "#efb034",
+      550: "#eca517",
+      600: "#d29211",
+      650: "#b57e0f",
+      700: "#98690c",
+      750: "#7a550a",
+      800: "#5d4108",
+      850: "#402c05",
+      900: "#221803",
+      DEFAULT: "#efb034",
+    },
+    danger: {
+      100: "#fdf2f2",
+      150: "#f9dbdc",
+      200: "#f5c4c6",
+      250: "#f1adaf",
+      300: "#ed9699",
+      350: "#e97f83",
+      400: "#e5696d",
+      450: "#e25256",
+      500: "#de3b40",
+      550: "#d9252b",
+      600: "#c12126",
+      650: "#aa1d22",
+      700: "#93191d",
+      750: "#7b1518",
+      800: "#641114",
+      850: "#4d0d0f",
+      900: "#36090b",
+      DEFAULT: "#de3b40",
+    },
+    success: {
+      100: "#eefdf3",
+      150: "#d3f9e0",
+      200: "#b8f5cd",
+      250: "#9df2b9",
+      300: "#82eea6",
+      350: "#67ea93",
+      400: "#4ce77f",
+      450: "#31e36c",
+      500: "#1dd75b",
+      550: "#1ac052",
+      600: "#17a948",
+      650: "#14923e",
+      700: "#117b34",
+      750: "#0e642a",
+      800: "#0a4d20",
+      850: "#073517",
+      900: "#041e0d",
+      DEFAULT: "#1dd75b",
+    },
+    neutral: {
+      100: "#f5f5f5",
+      150: "#e0e0e0",
+      200: "#cccccc",
+      250: "#b7b7b7",
+      300: "#dee1e6ff",
+      350: "#8e8e8e",
+      400: "#bdc1caff",
+      450: "#656565",
+      500: "#515151",
+      550: "#474747",
+      600: "#3d3d3d",
+      650: "#333333",
+      700: "#292929",
+      750: "#323743ff",
+      800: "#1e2128ff",
+      850: "#0a0a0a",
+      900: "#000000",
+      DEFAULT: "#515151",
+    },
+    // Add more categories or styles here
+    "color-3": {
+      100: "#f6f6f9",
+      150: "#e1dfeb",
+      200: "#cdc9dd",
+      250: "#b8b2cf",
+      300: "#a39cc1",
+      350: "#8e86b3",
+      400: "#796fa5",
+      450: "#675d94",
+      500: "#584f7e",
+      550: "#504872",
+      600: "#484167",
+      650: "#403a5d",
+      700: "#393352",
+      750: "#312c47",
+      800: "#29253c",
+      850: "#221e31",
+      900: "#1a1826",
+      DEFAULT: "#584f7e",
+    },
+    "color-4": {
+      100: "#f8fbec",
+      150: "#f1f7db",
+      200: "#ebf4cb",
+      250: "#e4f0ba",
+      300: "#deecaa",
+      350: "#d8e99a",
+      400: "#d1e589",
+      450: "#cbe279",
+      500: "#c5de68",
+      550: "#b9d74a",
+      600: "#add02e",
+      650: "#94b227",
+      700: "#7b9420",
+      750: "#62761a",
+      800: "#495813",
+      850: "#303a0d",
+      900: "#171c06",
+      DEFAULT: "#c5de68",
+    },
+    "color-5": {
+      100: "#f6f3fc",
+      150: "#e9e1f8",
+      200: "#dcd0f3",
+      250: "#cfbfef",
+      300: "#c2adeb",
+      350: "#b59ce6",
+      400: "#a88be2",
+      450: "#9b79de",
+      500: "#8e69da",
+      550: "#7b50d3",
+      600: "#6937cd",
+      650: "#5c2eb8",
+      700: "#50289f",
+      750: "#432287",
+      800: "#371c6e",
+      850: "#2b1556",
+      900: "#1f0f3d",
+      DEFAULT: "#8e69da",
+    },
+    "color-6": {
+      100: "#faf1fe",
+      150: "#f5e4fd",
+      200: "#f0d7fc",
+      250: "#ebcafb",
+      300: "#e7bdfa",
+      350: "#e2b0f9",
+      400: "#dda2f8",
+      450: "#d895f7",
+      500: "#d48bf6",
+      550: "#c664f3",
+      600: "#b83ff1",
+      650: "#ab1aee",
+      700: "#9410d1",
+      750: "#7a0dac",
+      800: "#600a88",
+      850: "#460763",
+      900: "#2c053e",
+      DEFAULT: "#d48bf6",
+    },
+    post: {
+      100: "#1e2128ff",
+      200: "#323743ff"
+    }
+  },
+  extend: {
+    fontFamily: {
+      heading: "Poppins",
+      body: "Open Sans",
+    },
+  },
+};
+
+    // JavaScript code to display the colors
+    function displayColors() {
+      const container = document.getElementById("color-display");
+
+      for (const [colorGroupName, colorGroup] of Object.entries(theme.colors)) {
+        const groupContainer = document.createElement("div");
+        groupContainer.style.margin = "10px";
+        groupContainer.style.padding = "10px";
+        groupContainer.style.border = "1px solid #ccc";
+        groupContainer.style.borderRadius = "8px";
+
+        const groupHeader = document.createElement("h3");
+        groupHeader.textContent = colorGroupName;
+        groupHeader.style.marginBottom = "10px";
+        groupContainer.appendChild(groupHeader);
+
+        for (const [shade, colorValue] of Object.entries(colorGroup)) {
+          const colorBox = document.createElement("div");
+          colorBox.style.backgroundColor = colorValue;
+          colorBox.style.width = "80px";
+          colorBox.style.height = "80px";
+          colorBox.style.margin = "5px";
+          colorBox.style.borderRadius = "4px";
+          colorBox.style.display = "flex";
+          colorBox.style.alignItems = "center";
+          colorBox.style.justifyContent = "center";
+          colorBox.style.color = "#fff";
+          colorBox.style.fontSize = "12px";
+          colorBox.textContent = shade;
+
+          groupContainer.appendChild(colorBox);
+        }
+
+        container.appendChild(groupContainer);
+      }
+    }
+
+    // Call the function to display colors
+    displayColors();
+  </script>
+
+</body>
+</html>
