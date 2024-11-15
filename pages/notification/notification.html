@@ -20,6 +20,7 @@
         document.addEventListener("DOMContentLoaded", () => {
             loadComponent("sidebar", "../base/sidebar-2.0/sidebar.html").then(() => {
                 setActiveIcon("noti-icon");
+                initializeOverlay();
             });
             loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
             loadComponent("posting", "../posting/posting.html");
@@ -30,7 +31,7 @@
     <div id="sidebar"></div>
 
     <div class="main-container-noti d-flex flex-column flex-grow-1 justify-content-center align-items-center">
-      <header class="header homepage-header w-50 d-flex flex-column align-items-center justify-content-center position-fixed">
+      <header class="header-noti w-50 d-flex flex-column align-items-center justify-content-center position-fixed">
         <div class="post-title p-3 fs-3 fw-bold">Notification</div>
         <div class="tabs w-100 d-flex">
           <button class="tab active w-50 shadow-none d-flex justify-content-center align-items-center" data-tab="all"><span>All</span></button>
@@ -103,7 +104,7 @@
                 <a class="avt-container d-flex align-items-center mx-2" href=""><img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo"></a>
                 <div class="notification-content">
                   <span><b>Hitori@hihi</b> liked your post</span> <span class="time">4h ago</span>
-                  <p class="small">bla bla bla bla bla bla bla bla</p>
+                  <p class="small">bla bla bla bla bla bla bla blanvsnvsnvnjnjsngnglskngnrlng lkrngknrgnrngsfjjfjfjfjf jfjfjioqbgeobge</p>
                 </div>
                 
                 <div class="dropdown">
@@ -125,8 +126,8 @@
               <span class="dot"></span>
               <a class="avt-container d-flex align-items-center mx-2" href=""><img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo"></a>
               <div class="notification-content">
-                <span><b>Bocchi@hihi</b> Mentioned you in a post</span> <span class="time">10m ago</span>
-                <p class="small">bla bla bla bla bla bla bla bla</p>
+                <span><b>Bocchi@hihi</b> followed you</span> <span class="time">19m ago</span>
+                <p class="small"> </p>
               </div>
               
               <div class="dropdown">
@@ -145,7 +146,7 @@
               <a class="avt-container d-flex align-items-center mx-2" href=""><img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo"></a>
               <div class="notification-content">
                 <span><b>Hitori@hihi</b> liked your post</span> <span class="time">4h ago</span>
-                <p class="small">bla bla bla bla bla bla bla bla</p>
+                <p class="small">bla bla bla bla bla bla bla blanvsnvsnvnjnjsngnglskngnrlng lkrngknrgnrngsfjjfjfjfjf jfjfjioqbgeobge</p>
               </div>
               
               <div class="dropdown">

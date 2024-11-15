@@ -26,11 +26,40 @@ function setActiveIcon(activeIconId) {
       if (button.id === activeIconId) {
           icon.classList.add('active');
           icon.classList.remove('inactive');
-          console.log(`${button.id} is now active`);
       } else {
           icon.classList.add('inactive');
           icon.classList.remove('active');
-          console.log(`${button.id} is now inactive`);
       }
+  });
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+      document.body.classList.add('no-hover');
+  }
+});
+
+function handleAvatarClick() {
+  if (window.innerWidth <= 768) {
+    const overlay = document.querySelector('.mobile-overlay');
+    overlay.classList.add('active');
+  } else {
+    location.href = '../profile/profile.html';
+  }
+}
+
+
+function initializeOverlay() {
+  const overlay = document.querySelector(".mobile-overlay"); 
+  const settingContainer = document.querySelector(".setting-container"); 
+
+  if (!overlay || !settingContainer) {
+    return;
+  }
+  overlay.addEventListener("click", (event) => {
+    if (!settingContainer.contains(event.target)) {
+      overlay.classList.remove("active"); 
+    }
   });
 }

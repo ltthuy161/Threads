@@ -1,4 +1,3 @@
-
 @media screen and (max-width: 768px) {
     body {
       flex-direction: column;
@@ -6,7 +5,7 @@
     .header {
       border-radius: 0;
       width: 100% !important;
-      height: 2.5rem !important;
+      height: 2.8rem !important;
       top: 2.5rem;
     }
     .tabs {
@@ -21,7 +20,7 @@
   
     .container-homepage {
       top: 5.5rem;
-      padding-bottom: 10rem;
+      padding-bottom: 12rem;
       width: 100% !important;
       height: 100vh;
       border-radius: 0px 0px 0px 0px;
@@ -64,7 +63,8 @@
       font-size: 14px;
     }
 
-    .reply-box-content .content {
-      gap: calc(5rem);
+    .reply-box-content {
+      width: 90%;
+      min-height: 50%;
     }
   }

@@ -286,25 +286,32 @@ function showReplyBox(postId) {
     if (post) {
         replyBoxContainer.innerHTML = `
         <div class="reply-box-content d-flex justify-content-center w-60">
-            <div class="post w-100 p-3 mb-2 d-flex">
-                <div class="from-to d-flex flex-column align-items-center me-2">
-                    <div class="avt-container"><img class="avt-photo rounded-circle" src="${post.avt}" alt="photo"></div>
-                    <div class="connect-ava"></div>
-                    <div class="avt-container"><img class="avt-photo rounded-circle" src="/assets/img/avatar/ava6.png" alt="photo"></div>
-                </div>
-                <div class="content d-flex flex-column align-items-center me-2">
-                    <div class="to-user">
-                        <header class="d-flex align-items-center mb-1">
-                            <a class="username fw-bold me-1 text-decoration-none" href=""><span>${post.username}</span></a>
-                            <a class="email text-secondary me-2 text-decoration-none" href=""><span>${post.email}</span></a>
-                            <time class="timestamp">${post.timestamp}</time>
-                        </header>
-                        <p class="text my-2 text-light mt-1 mb-1">${post.text}</p>
+            
+                <div class="card text-light p-3" style="width: 400px; background-color: var(--primary-900); border: none; outline: none;">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="${post.avt}" alt="Avatar" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                        <div class="flex-grow-1">
+                            <h5 class="mb-0" style="color: var(--primary-150);">Hitoriii</h5>
+                            <small class="text-muted">@bocchi_theRock</small>
+                        </div>
+                        <small class="text-muted" style="color: var(--primary-900);">3h</small>
                     </div>
-                    <div class="reply-content">Post your reply</div>
-                </div>
-                <button class="close-button" style="border: none; outline: none;" onclick="closeReplyBox()">✖</button>
-            </div>
+                    <p class="mb-3">TextLorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <div class="d-flex align-items-center flex-wrap border-top pt-3">
+                        <img src="/assets/img/avatar/ava6.png" alt="Reply Avatar" class="rounded-circle me-2" style="width: 30px; height: 30px;">
+                        <div class="text-muted flex-grow-1">
+                            <input class="reply-input w-100" type="text" placeholder="Post your reply" />
+                        </div>
+                        <div class="reply-actions d-flex align-items-center mt-2 w-100">
+                            <label for="add-image" style="cursor: pointer;" class="me-3">
+                                <i class="bi bi-images fs-6 text-white"></i>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>            
+            <button class="close-button" style="border: none; outline: none;" onclick="closeReplyBox()">✖</button>
+        </div>
             
         `;
         replyBoxContainer.style.display = 'flex';

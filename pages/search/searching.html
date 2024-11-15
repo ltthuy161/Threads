@@ -22,10 +22,10 @@
       document.addEventListener("DOMContentLoaded", () => {
         loadComponent("sidebar", "../base/sidebar-2.0/sidebar.html").then(() => {
           setActiveIcon("search-icon");
+          initializeOverlay();
         });
         loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
         loadComponent("posting", "../posting/posting.html");
-        loadComponent("settings", "../settings/settings.html");
       });
     </script>
   </head>
@@ -181,6 +181,5 @@
       <div id="floating-btn"></div>
     </div>
     <div id="posting" style="display: none"></div>
-    <div id="settings" style="display: none"></div>
   </body>
 </html>

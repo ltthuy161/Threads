@@ -18,11 +18,11 @@ body {
   background-color: var(--primary-900);
 }
 
-.header {
+.header-noti {
   height: 4rem;
   background-color: var(--primary-900);
   top: 2rem;
-  z-index: 9999;
+  z-index: 9990;
 }
 
 .post-title {
@@ -58,6 +58,14 @@ body {
   font-weight: bold;
 }
 
+.no-hover .tab:hover {
+  background-color: var(--primary-900) !important;
+}
+
+.no-hover .tab span:hover {
+  color: var(--primary-300) !important;
+}
+
 .container {
   top: 8rem;
   height: 90vh;
@@ -80,13 +88,6 @@ body {
   margin-left: 25px; 
 }
 
-.notification-content {
-  position: absolute;
-  top: 1rem;
-  left: 5.8rem;
-  
-}
-
 .notifications {
   display: none;
   padding-top: 1rem; 
@@ -95,17 +96,32 @@ body {
 .notifications.active {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
 }
 
 .notification {
+  box-sizing: border-box;
   position: relative;
   display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem 0 0;
-  gap: 1rem;
-  border-bottom: 0.5px solid #584F7EFF; 
-  height: 5rem;
+  align-items: flex-start; 
+  padding: 0.5rem 1rem 0 0; 
+  gap: 1rem; 
+  min-height: 5rem;
+}
+
+.notification-content {
+  position: absolute;
+  top: 1rem;
+  left: 5.8rem;
+
+}
+
+
+.notification-content span,
+.notification-content p {
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    max-width: 90%; 
 }
 
 .notification.unread .dot {
@@ -151,12 +167,8 @@ body {
   padding: 10px 20px; 
 }
 
-
-
-
-
 @media (max-width: 768px) {
-  .header {
+  .header-noti {
     width: 100% !important;
     top: 2.5rem !important;
   }
@@ -176,7 +188,7 @@ body {
   }
 
   .tab span {
-    font-size: 12px;
+    font-size: 16px;
   }
 
   .notifications {
@@ -187,6 +199,8 @@ body {
     width: 100% !important; 
     top: 5rem; 
     border-radius: none; 
+    padding-top: 0; 
+    margin-top: 0;
   }
 
   .notification .time {

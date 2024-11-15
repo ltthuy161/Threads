@@ -16,13 +16,14 @@
 
     <script defer src="post.js"></script>
 
-    <script defer src="../base/loadComponents.js"></script>
+    <script src="../base/loadComponents.js" defer></script>
     <script type="module" src="../base/applyTheme.js"></script>
     <script src="../base/showPopup.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             loadComponent("sidebar", "../base/sidebar-2.0/sidebar.html").then(() => {
           setActiveIcon("home-icon");
+          initializeOverlay();
         });
             loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
             loadComponent("posting", "../posting/posting.html");

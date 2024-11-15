@@ -53,6 +53,14 @@ body {
   font-weight: bold;
 }
 
+.no-hover .tab:hover {
+  background-color: var(--primary-900) !important;
+}
+
+.no-hover .tab span:hover {
+  color: var(--primary-300) !important;
+}
+
 .container-homepage {
   top: 5rem;
   height: 90vh;
@@ -122,9 +130,16 @@ body {
   filter: invert(100%)
 }
 
+.no-hover .interaction-button button:hover {
+  background-color: inherit !important;
+  transform: none !important;
+}
+
+.no-hover .interaction-button button:hover .icon {
+  filter: none !important;
+}
 
 .reply-box-container {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -135,13 +150,14 @@ body {
   align-items: center;
   z-index: 1000;
 }
-
 .reply-box-content {
-  background-color: var(--primary-900);
-  max-width: 500px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  border: 0.5px solid #584F7EFF !important; 
+  background-color: var(--primary-900); 
+  max-width: 500px; 
+  min-height: 300px;
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  border: 1px solid #584F7E; 
+  overflow: hidden; 
 }
 
 .close-button {
@@ -155,26 +171,51 @@ body {
   color: var(--primary-100);
 }
 
-.reply-box-content .post {
-  border-bottom: none !important;
-}
-
-.reply-box-content .content {
-  margin-right: 10px;
-  gap: calc(5rem - 20px);
-}
-
-.reply-content {
-  text-align: left;
+.reply-input {
+  background: none;
+  border: none; 
+  color: #9a9a9a; 
   font-size: 14px;
-  color: #ccc;
-  font-style: italic;
-  width: 100%;
+  width: 100%; 
+  outline: none;
+  padding: 5px 0;
 }
 
-.connect-ava {
-  width: 2px;
-  height: 5rem;
-  background-color: #584F7E;
-  margin: 5px 0;
+.reply-input::placeholder {
+  color: #9a9a9a; 
+  opacity: 1; 
+}
+
+.reply-input:focus {
+  color: #ffffff; 
+  border-bottom: 1px solid #9a9a9a; 
+}
+
+.reply-actions i {
+  font-size: 20px; 
+  color: #9a9a9a; 
+  transition: color 0.3s ease; 
+}
+
+.reply-actions i:hover {
+  color: var(--primary-200);
+}
+
+.reply-actions {
+  margin-top: 10px; 
+  margin-left: 35px;
+}
+
+.reply-actions label,
+.reply-actions button {
+  cursor: pointer;
+}
+
+.reply-actions i {
+  padding: 5px;
+  border-radius: 50%; /* Bo tròn */
+}
+
+.reply-actions i:hover {
+  background-color: rgba(255, 255, 255, 0.1); 
 }

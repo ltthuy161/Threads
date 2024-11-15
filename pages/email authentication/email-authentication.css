@@ -93,4 +93,26 @@ button {
     color: var(--primary-300);
   }
 
+  @media (max-width: 768px) {
+    body {
+      overflow: hidden; 
+    }
+    .container {
+      background-color: transparent; 
+      box-shadow: none; 
+      border: none; 
+      padding: 0; 
+      width: 100%; 
+    }
+  
+    .buttons {
+      flex-direction: column; 
+      gap: 15px; 
+    }
+  
+    .forgot-password-link {
+      font-size: 14px;
+      text-align: center;
+    }
+  }
   

@@ -4,7 +4,7 @@
     <button class="btn btn-link logo p-0 mt-lg-2" onclick="location.href='/pages/homepage/homepage.html'">
       <img src="../../assets/vendor/icons/logo.svg" alt="Logo Icon" class="img-fluid" style="width: 50px;" />
     </button>
-    <button class="btn btn-link user-photo-container" onclick="showPopupSettings()">
+    <button class="btn btn-link user-photo-container" onclick="handleAvatarClick()">
       <img src="../../../assets/img/avatar/ava6.png" alt="User Avatar" class="rounded-circle img-fluid" style="width: 40px; height: 40px;" />
     </button>
    
@@ -26,7 +26,35 @@
     </button>
   </nav>
 
-  <button class="btn btn-link footer-icon rounded-circle p-0 mt-auto mb-3 text-white" onclick="location.href='#'">
-      <i class="bi bi-list fs-3"></i>
-    </button>
+  <button class="btn btn-link footer-icon rounded-circle p-0 mt-auto mb-3 text-white" onclick="location.href='/pages/signin/signin.html'">
+      <i class="bi bi-box-arrow-left fs-3"></i>
+  </button>
 </aside>
+
+<div class="mobile-overlay">
+  <div class="setting-container">
+    <div class="post-header">
+      <img src="../../assets/img/avatar/ava6.png" class="avatar" onclick="location.href='../profile/profile.html'" />
+      <p class="username">Nijika</p>
+      <p class="user-details">@nijika</p>
+    </div>
+    <div class="follow">
+      <div class="follower-container">
+        <p class="follow-count">100</p>
+        <p class="follow-title">Followers</p>
+      </div>
+      <div class="following-container">
+        <p class="follow-count">100</p>
+        <p class="follow-title">Following</p>
+      </div>
+    </div>
+    <div class="profile-container">
+      <img src="/assets/vendor/icons/user.svg" alt="Icon description" class="icon" id="profile" />
+      <button class="edit-profile">Edit Profile</button>
+    </div>
+    <div class="log-out">
+      <img src="/assets/vendor/icons/log-out.svg" alt="Icon description" class="icon" id="logout" />
+      <button class="log-out-button" onclick="location.href='/index.html'">Log Out</button>
+    </div>
+  </div>
+</div>
