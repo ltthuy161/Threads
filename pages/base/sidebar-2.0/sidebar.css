@@ -5,6 +5,18 @@
   border-right: 1px solid #8e69da;
 }
 
+.sidebar .top-section {
+  gap: 5rem;
+}
+
+.btn.logo, .btn.user-photo-container {
+  pointer-events: none;
+}
+
+.btn.logo img, .btn.user-photo-container img {
+  pointer-events: auto; 
+}
+
 .navigation-button,
 .footer-icon {
   width: 40px;
@@ -13,31 +25,27 @@
   transition: background-color 0.3s ease;
 }
 
-
-.navigation-button:hover,
-.footer-icon:hover {
-  background-color: var(--primary-100);
-}
-
 .navigation-button i {
-  color: var(--primary-900); /* Màu mặc định */
-  transition: color 0.3s ease, transform 0.3s ease; /* Hiệu ứng mượt */
-}
-
-.navigation-button:hover i {
-  color: var(--primary-100); /* Đổi màu khi hover */
-  transform: scale(1.2); /* Phóng to icon */
+  color: var(--primary-900);
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .navigation-button i.active {
-  color: var(--primary-500); /* Màu sắc khi icon active */
-  transform: none; /* Không hiệu ứng nếu đã active */
+  color: var(--primary-100); 
+  transform: none; 
 }
 
 .navigation-button i.inactive {
-  color: var(--neutral-500); /* Màu xám cho trạng thái inactive */
+  color: var(--neutral-500) !important; 
   transform: none;
 }
+
+.navigation-button:hover i:not(.active) {
+  color: var(--primary-500); 
+  transform: scale(1.2); 
+}
+
+
 
 
 @media screen and (max-width: 768px) {
@@ -53,6 +61,7 @@
     flex-direction: row;
     align-items: flex-start;
     z-index: 1000;
+    border: none;
   }
 
   .sidebar .top-section {
@@ -63,9 +72,15 @@
     position: relative
 }
 
-.sidebar .top-section img {
+.sidebar .top-section .logo img {
   height: 1.8rem;
 }
+
+.sidebar .top-section .user-photo-container img {
+  height: 2rem !important;
+  width: 2rem !important;
+}
+
 
 .sidebar .top-section .user-photo-container {
   order: 0;

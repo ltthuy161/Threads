@@ -1,9 +1,9 @@
 const posts = [
     {
         id: 1,
-        avt: "../../assets/img/avatar/ava7.png",
-        username: "Hitoriii",
-        email: "@bocchi_theRock",
+        avt: "../../assets/img/avatar/ava4.png",
+        username: "Angel Babyboo",
+        email: "@lovetothread",
         timestamp: "3h",
         text: "TextLorem ipsum dolor sit amet consectetur adipisicing elit.",
         image: "../../assets/img/posts/post1.jpg",
@@ -15,9 +15,9 @@ const posts = [
     },
     {
         id: 2,
-        avt: "../../assets/img/avatar/ava8.png",
-        username: "Hitoriii",
-        email: "@bocchi_theRock",
+        avt: "../../assets/img/avatar/ava4.png",
+        username: "Angel Babyboo",
+        email: "@lovetothread",
         timestamp: "3h",
         text: "TextLorem ipsum dolor sit amet consectetur adipisicing elit.",
         image: "../../assets/img/posts/post2.jpg",
@@ -29,9 +29,9 @@ const posts = [
     },
     {
         id: 3,
-        avt: "../../assets/img/avatar/ava9.png",
-        username: "Hitoriii",
-        email: "@bocchi_theRock",
+        avt: "../../assets/img/avatar/ava4.png",
+        username: "Angel Babyboo",
+        email: "@lovetothread",
         timestamp: "3h",
         text: "TextLorem ipsum dolor sit amet consectetur adipisicing elit.",
         image: "",
@@ -43,9 +43,9 @@ const posts = [
     },
     {
         id: 4,
-        avt: "../../assets/img/avatar/ava1.png",
-        username: "Hitoriii",
-        email: "@bocchi_theRock",
+        avt: "../../assets/img/avatar/ava4.png",
+        username: "Angel Babyboo",
+        email: "@lovetothread",
         timestamp: "3h",
         text: "TextLorem ipsum dolor sit amet consectetur adipisicing elit.",
         image: "../../assets/img/posts/post3.jpg",
@@ -57,7 +57,7 @@ const posts = [
     },
     {
         id: 5,
-        avt: "../../assets/img/avatar/ava1.png",
+        avt: "../../assets/img/avatar/ava4.png",
         username: "Hitoriii",
         email: "@bocchi_theRock",
         timestamp: "2h",
@@ -71,7 +71,7 @@ const posts = [
     },
     {
         id: 6,
-        avt: "../../assets/img/avatar/ava2.png",
+        avt: "../../assets/img/avatar/ava4.png",
         username: "Hitoriii",
         email: "@bocchi_theRock",
         timestamp: "1h",
@@ -85,7 +85,7 @@ const posts = [
     },
     {
         id: 7,
-        avt: "../../assets/img/avatar/ava7.png",
+        avt: "../../assets/img/avatar/ava4.png",
         username: "Hitoriii",
         email: "@bocchi_theRock",
         timestamp: "30m",
@@ -99,7 +99,7 @@ const posts = [
     },
     {
         id: 8,
-        avt: "../../assets/img/avatar/ava8.png",
+        avt: "../../assets/img/avatar/ava4.png",
         username: "Hitoriii",
         email: "@bocchi_theRock",
         timestamp: "35m",
@@ -128,14 +128,13 @@ const posts = [
 ];
 
 
-function loadHomepage() {
-    const postContainer = document.querySelector(".post-container-homepage");
+function loadProfile() {
+    const postContainer = document.querySelector(".post-container-profile");
     postContainer.innerHTML = "";
 
-    document.querySelector('.homepage-header').style.display = 'flex';
+    document.querySelector('.profile-header').style.display = 'flex';
     document.querySelector('.post-detail-header').style.display = 'none';
-    document.title = "Home / Threads";
-
+    document.title = "Profile";
     posts.forEach(post => {
         if (post.replyTo === null) {
             renderPostDetail(post.id, 0);
@@ -155,7 +154,7 @@ function handlePostClick(event, postElement) {
     if (post) {
         const newUrl = window.location.pathname.replace(/\/[^\/]*$/, `/post-${postId}.html`);
         history.pushState({ postId }, "", newUrl);
-	    document.querySelector('.homepage-header').style.display = 'none';
+	    document.querySelector('.profile-header').style.display = 'none';
     	document.querySelector('.post-detail-header').style.display = 'flex';
 
         document.title = `${post.username} on Thread`;
@@ -163,12 +162,12 @@ function handlePostClick(event, postElement) {
     }
 }
 
-function goToHomepage() {
+function goToProfile() {
     document.querySelector('.post-detail-header').style.display = 'none';
-    document.querySelector('.post-container-homepage').innerHTML = "";
-    document.querySelector('.homepage-header').style.display = 'flex';
-    document.title = "Home / Threads";
-    const newUrl = window.location.pathname.replace(/\/[^\/]*$/, "/homepage.html");
+    document.querySelector('.post-container-profile').innerHTML = "";
+    document.querySelector('.profile-header').style.display = 'flex';
+    document.title = "Profile";
+    const newUrl = window.location.pathname.replace(/\/[^\/]*$/, "/profile.html");
     history.pushState(null, "", newUrl);
     posts.forEach(post => {
         if (post.replyTo === null) {
@@ -178,44 +177,43 @@ function goToHomepage() {
 }
 
 function renderPostDetail(postId, detail = 1) {
-    const postDetailContainer = document.querySelector(".post-container-homepage");
+    const postDetailContainer = document.querySelector(".post-container-profile");
     if (detail === 1) {
-        postDetailContainer.innerHTML = ""; 
-        document.querySelector('.homepage-header').style.display = 'none';
-    	document.querySelector('.post-detail-header').style.display = 'flex';
+        postDetailContainer.innerHTML = "";
+        if (!postDetailContainer.querySelector('.profile-section')) {
+            postDetailContainer.innerHTML = profileHTML;
+        }
     }
 
     const post = posts.find(p => p.id === parseInt(postId));
 
+
     if (post) {
         const postImage = post.image ? `<div class="image"><img src="${post.image}" alt="Attached Image" /></div>` : "";
         const postDetail = `
-            <div class="post w-100 p-3 mb-2 d-flex" data-id="${post.id}" onclick="handlePostClick(event, this)">
-                <a class="avt-container" href=""><img class="avt-photo rounded-circle" src="${post.avt}" alt="photo"></a>
-                <div class="content flex-grow-1">
-                    <header class="d-flex align-items-center mb-1">
-                        <a class="username fw-bold me-1 text-decoration-none" href=""><span>${post.username}</span></a>
-                        <a class="email text-secondary me-2 text-decoration-none" href=""><span>${post.email}</span></a>
+            <div class="post" data-id="${post.id}" onclick="handlePostClick(event, this)">
+                <a class="avt-container" href=""><img class="avt-photo" src="${post.avt}" alt="photo"></a>
+                <div class="content">
+                    <header>
+                        <a class="username" href=""><span>${post.username}</span></a>
+                        <a class="email" href=""><span>${post.email}</span></a>
                         <time class="timestamp">${post.timestamp}</time>
                     </header>
-                    <p class="text my-2 text-light mt-1 mb-1">${post.text}</p>
+                    <p class="text">${post.text}</p>
                     ${postImage}
-                    <div class="interaction d-flex mt-2" style="gap: 2rem">
-                        <div class="interaction-button d-flex">
-                            <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
-                            onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
-                            <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">${post.interactions.likes}</span> 
+                    <div class="interaction">
+                        <div class="interaction-button">
+                            <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
+                            <span class="interaction-count">${post.interactions.likes}</span> 
                         </div>
-                        <div class="interaction-button d-flex">
-                            <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
-                            onclick="showReplyBox(${post.id})"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
-                            <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">${post.interactions.comments}</span> 
+                        <div class="interaction-button">
+                            <button onclick="showReplyBox(${post.id})"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
+                            <span class="interaction-count">${post.interactions.comments}</span> 
                         </div>
                     </div>
                 </div>
             </div>
         `;
-
         postDetailContainer.innerHTML += postDetail;
 
         if (detail === 1) {
@@ -227,37 +225,35 @@ function renderPostDetail(postId, detail = 1) {
 }
 
 function renderReplies(excludeId) {
-    const postDetailContainer = document.querySelector(".post-container-homepage");
+    const postDetailContainer = document.querySelector(".post-container-profile");
 
     const replies = posts.filter(p => p.replyTo === parseInt(excludeId));
 
     if (replies.length > 0) {
-        const replyH1 = `<div class="reply"><div class="fs-6 fw-normal text-light text-center pb-2">Replies</div></div>`;
+        const replyH1 = `<div class="reply"><h1>Replies</h1></div>`;
         postDetailContainer.innerHTML += replyH1;
 
         replies.forEach(reply => {
             const replyImage = reply.image ? `<div class="image"><img src="${reply.image}" alt="Attached Image" /></div>` : "";
             const replyHtml = `
-                <div class="post w-100 p-3 mb-2 d-flex">
-                    <a class="avt-container" href=""><img class="avt-photo rounded-circle" src="${reply.avt}" alt="photo"></a>
-                    <div class="content flex-grow-1">
-                        <header class="d-flex align-items-center mb-1">
-                            <a class="username fw-bold me-1 text-decoration-none" href=""><span>${reply.username}</span></a>
-                            <a class="email text-secondary me-2 text-decoration-none" href=""><span>${reply.email}</span></a>
+                <div class="post">
+                    <a class="avt-container" href=""><img class="avt-photo" src="${reply.avt}" alt="photo"></a>
+                    <div class="content">
+                        <header>
+                            <a class="username" href=""><span>${reply.username}</span></a>
+                            <a class="email" href=""><span>${reply.email}</span></a>
                             <time class="timestamp">${reply.timestamp}</time>
                         </header>
-                        <p class="text my-2 text-light mt-1 mb-1">${reply.text}</p>
+                        <p class="text">${reply.text}</p>
                         ${replyImage}
-                        <div class="interaction d-flex mt-2" style="gap: 2rem">
-                            <div class="interaction-button d-flex">
-                                <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
-                                onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
-                                <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">${reply.interactions.likes}</span> 
+                        <div class="interaction">
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
+                                <span class="interaction-count">${reply.interactions.likes}</span> 
                             </div>
-                            <div class="interaction-button d-flex">
-                                <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
-                                onclick="changeIcon(this)"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
-                                <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">${reply.interactions.comments}</span> 
+                            <div class="interaction-button">
+                                <button onclick="changeIcon(this)"><img src="../../assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
+                                <span class="interaction-count">${reply.interactions.comments}</span> 
                             </div>
                         </div>
                     </div>
@@ -285,22 +281,23 @@ function showReplyBox(postId) {
 
     if (post) {
         replyBoxContainer.innerHTML = `
-        <div class="reply-box-content d-flex justify-content-center w-60">
-            <div class="post w-100 p-3 mb-2 d-flex">
-                <div class="from-to d-flex flex-column align-items-center me-2">
-                    <div class="avt-container"><img class="avt-photo rounded-circle" src="${post.avt}" alt="photo"></div>
+        <div class="reply-box-content">
+            <div class="post">
+                <div class="from-to">
+                    <div class="avt-container"><img class="avt-photo" src="${post.avt}" alt="photo"></div>
                     <div class="connect-ava"></div>
-                    <div class="avt-container"><img class="avt-photo rounded-circle" src="/assets/img/avatar/ava6.png" alt="photo"></div>
+                    <div class="avt-container"><img class="avt-photo" src="/assets/img/avatar/ava6.png" alt="photo"></div>
                 </div>
-                <div class="content d-flex flex-column align-items-center me-2">
+                <div class="content">
                     <div class="to-user">
-                        <header class="d-flex align-items-center mb-1">
-                            <a class="username fw-bold me-1 text-decoration-none" href=""><span>${post.username}</span></a>
-                            <a class="email text-secondary me-2 text-decoration-none" href=""><span>${post.email}</span></a>
+                        <header>
+                            <a class="username" href=""><span>${post.username}</span></a>
+                            <a class="email" href=""><span>${post.email}</span></a>
                             <time class="timestamp">${post.timestamp}</time>
                         </header>
-                        <p class="text my-2 text-light mt-1 mb-1">${post.text}</p>
+                        <p class="text">${post.text}</p>
                     </div>
+
                     <div class="reply-content">Post your reply</div>
                 </div>
                 <button class="close-button" style="border: none; outline: none;" onclick="closeReplyBox()">✖</button>
@@ -316,3 +313,35 @@ function closeReplyBox() {
     replyBoxContainer.style.display = 'none';
 }
 
+function renderProfile() {
+    const postDetailContainer = document.querySelector(".post-container-profile");
+    if (detail === 1) {
+        postDetailContainer.innerHTML = ""; 
+    }
+
+
+    const profile = `
+    <div class="profile-section">
+          <!-- Profile Header -->
+          <div class="profile-header">
+              <div class="profile-info">
+                  <h2>Angel Babyboo</h2>
+                  <p>@lovetothread</p>
+                  <p class="profile-bio">Your bio is here: 🌟❤️<br>I love threads 💬🌍</p>
+                  <div class="profile-stats">
+                      <span><a href="../follower/follower.html">800 Followers</a></span>
+                      <span><a href="../following/following.html">978 Following</a></span>
+                  </div>
+              </div>
+              <div class="profile-picture">
+                  <img class="user-photo" src="../../assets/img/avatar/ava4.png" alt="photo">
+              </div>
+          </div>
+          <!-- Edit profile button -->
+          <div class="edit-profile">
+              <button class="edit-button" onclick="location.href='../edit-profile/edit-profile.html'">Edit profile</button>
+          </div>
+        </div>
+    `
+    postDetailContainer.innerHTML += profile;
+}

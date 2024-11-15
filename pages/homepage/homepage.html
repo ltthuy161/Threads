@@ -57,23 +57,24 @@
   <body>
     <div id="sidebar"></div>
 
-    <div class="main-content">
-      <header class="header homepage-header">
-        <div class="tabs">
-          <button class="tab active" onclick="switchTab(this)"><span>For you</span></button>
-          <button class="tab" onclick="switchTab(this)"><span>Following</span></button>
+    <div class="main-content d-flex flex-column flex-grow-1 justify-content-center align-items-center">
+      <header class="header homepage-header fixed-top m-auto w-50 h-auto pt-3">
+        <div class="tabs w-100 d-flex">
+          <button class="tab active d-flex justify-content-center align-items-center shadow-none w-50 p-3" onclick="switchTab(this)"><span>For you</span></button>
+          <button class="tab d-flex justify-content-center align-items-center shadow-none w-50 p-3" onclick="switchTab(this)"><span>Following</span></button>
         </div>
       </header>
 
-      <header class="header post-detail-header" style="display: none;">
-        <button class="navigation-button" id="prev" style="border: none; outline: none;" onclick="goToHomepage()">
-          <img src="../../assets/vendor/icons/prev.svg" alt="Icon description" class="icon" id="prev-icon" >
+      <header class="header post-detail-header fixed-top m-auto w-50 h-auto pt-3" style="display: none;">
+        <button id="prev" class="navigation-button d-inline-block mt-3 p-0 ml-3 rounded-circle text-white position-absolute start-10" style="border: none; outline: none;" onclick="goToHomepage()">
+          <i class="bi bi-arrow-left fs-4 text-white"></i>
         </button>
-        <div class="post-title">Post</div>
+        <div class="post-title text-center w-100 p-3 fw-normal fs-4">Post</div>
       </header>
 
-      <div class="container-homepage">
-        <ul class="post-container-homepage"></ul>
+
+      <div class="container-homepage position-fixed w-50">
+        <ul class="post-container-homepage list-unstyled w-100 h-100 overflow-auto"></ul>
       </div>
     </div>
     <div id="floating-btn"></div>

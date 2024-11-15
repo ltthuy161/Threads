@@ -20,14 +20,17 @@ function loadComponent(componentId, filePath) {
 
 
 function setActiveIcon(activeIconId) {
-  const icons = document.querySelectorAll('.navigation-button i'); 
-  icons.forEach((icon) => {
-    if (icon.id === activeIconId) {
-      icon.classList.add('active');
-      icon.classList.remove('inactive');
-    } else {
-      icon.classList.add('inactive');
-      icon.classList.remove('active');
-    }
+  const buttons = document.querySelectorAll('.navigation-button');
+  buttons.forEach((button) => {
+      const icon = button.querySelector('i');
+      if (button.id === activeIconId) {
+          icon.classList.add('active');
+          icon.classList.remove('inactive');
+          console.log(`${button.id} is now active`);
+      } else {
+          icon.classList.add('inactive');
+          icon.classList.remove('active');
+          console.log(`${button.id} is now inactive`);
+      }
   });
 }
