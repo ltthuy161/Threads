@@ -7,12 +7,13 @@ function showPopup() {
     popup.style.display = "block";
 }  
 
-function showPopup2() {
-    const popup = document.getElementById("posting2");
+function showPopupSettings() {
+    const popup = document.getElementById("settings");
     console.log(popup);  
     // add display
     popup.style.display = "block";
-}  
+}
+
 
 function hidePopup() {
     const popup = document.getElementById("posting");
