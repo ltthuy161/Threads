@@ -4,8 +4,8 @@ const posts = [
         avt: "../../assets/img/avatar/ava7.png",
         username: "Hitoriii",
         email: "@bocchi_theRock",
-        timestamp: "3h",
-        text: "TextLorem ipsum dolor sit amet consectetur adipisicing elit.",
+        timestamp: "2h",
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         image: "../../assets/img/posts/post1.jpg",
         interactions: {
             likes: 5,
@@ -16,10 +16,10 @@ const posts = [
     {
         id: 2,
         avt: "../../assets/img/avatar/ava8.png",
-        username: "Hitoriii",
-        email: "@bocchi_theRock",
+        username: "Ryo",
+        email: "@ryo_theRock",
         timestamp: "3h",
-        text: "TextLorem ipsum dolor sit amet consectetur adipisicing elit.",
+        text: "mlem",
         image: "../../assets/img/posts/post2.jpg",
         interactions: {
             likes: 5,
@@ -30,10 +30,10 @@ const posts = [
     {
         id: 3,
         avt: "../../assets/img/avatar/ava9.png",
-        username: "Hitoriii",
-        email: "@bocchi_theRock",
-        timestamp: "3h",
-        text: "TextLorem ipsum dolor sit amet consectetur adipisicing elit.",
+        username: "nijika",
+        email: "@nijaka_theRock",
+        timestamp: "6h",
+        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         image: "",
         interactions: {
             likes: 5,

@@ -1,24 +1,22 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body */
+
 body {
   font-family: var(--font-family-heading), sans-serif;
-  background-color: var(
-    --primary-900
-  ); /* Background color for the whole page */
+  background-color: var(--primary-900);
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   color: var(--primary-100);
+  overflow: hidden; 
 }
 
-/* Page Container */
+
 .page {
   display: flex;
   flex-direction: column;
@@ -27,7 +25,7 @@ body {
   text-align: center;
 }
 
-/* Title Text */
+
 .text {
   font-size: 32px;
   line-height: 48px;
@@ -37,12 +35,12 @@ body {
   margin-top: 20px;
 }
 
-/* Highlighted part of title */
+
 .highlight {
   color: #5d5aacff;
 }
 
-/* Button Base Style */
+
 .button {
   width: 160px;
   padding: 10px;
@@ -51,10 +49,10 @@ body {
   font-weight: bold;
   color: var(--primary-100);
   background-color: transparent;
-  border: 2px solid var(--primary-600); /* tertiary1-500 */
+  border: 2px solid var(--primary-600); 
   border-radius: 18px;
   cursor: pointer;
-  transition: all 0.3s ease; /* Smooth transition */
+  transition: all 0.3s ease; 
   text-align: center;
 }
 
@@ -63,20 +61,20 @@ body {
   border-color: var(--primary-300);
 }
 
-/* Hover Effects */
+
 .button:hover {
   background-color: var(--primary-400);
   color: var(--primary-200);
-  transform: scale(1.05); /* Slightly enlarges on hover */
+  transform: scale(1.05); 
 }
 
-/* Active State */
+
 .button:active {
   background-color: var(--primary-600);
   border-color: var(--primary-600);
 }
 
-/* Disabled State */
+
 .button:disabled {
   opacity: 0.4;
   cursor: not-allowed;

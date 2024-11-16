@@ -1,4 +1,3 @@
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -43,31 +42,30 @@ body {
     border-bottom: 3px solid #4d4a8a;
   }
 
-/* Button Base Style */
 .btn-save {
     padding: 10px;
     font-size: 16px;
     color: var(--primary-100);;
-    background-color: var(--primary-400);;
-    border: 2px solid var(--primary-500);; /* tertiary1-500 */
+    background-color: var(--primary-400);
+    border: 2px solid var(--primary-500);
     border-radius: 18px;
     cursor: pointer;
     text-align: center;
 }
-/* Hover Effects */
+
 .btn-save:hover {
     background-color: rgb(119, 116, 201);
     color: var(--primary-100);
-    transform: scale(1.05); /* Slightly enlarges on hover */
+    transform: scale(1.05); 
 }
 
-/* Active State */
+
 .btn-save:active {
-    background-color: #4d4a8a; /* Darkened on press */
+    background-color: #4d4a8a; 
     border-color: #4d4a8a;
 }
 
-/* Disabled State */
+
 .btn-save:disabled {
     opacity: 0.4;
     cursor: not-allowed;
@@ -128,9 +126,8 @@ input:focus, textarea:focus {
 
 }
 
-/* Responsive cho Mobile */
+
 @media screen and (max-width: 768px) {
-  /* Body */
   body {
     flex-direction: column;
   }

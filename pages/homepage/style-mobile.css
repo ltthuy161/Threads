@@ -13,21 +13,21 @@
     }
     .tab {
       height: 2.5rem;
-
       border-radius: 0;
       font-size: 14px;
     }
   
     .container-homepage {
       top: 5.5rem;
-      padding-bottom: 12rem;
       width: 100% !important;
       height: 100vh;
       border-radius: 0px 0px 0px 0px;
+      padding-bottom: 8em;
     }
   
     .post-container-homepage {
-      height: 100%;
+      height: 90%;
+      padding-bottom: 8em;
     }
   
     .post {

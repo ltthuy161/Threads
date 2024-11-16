@@ -213,7 +213,7 @@ body {
 
 .reply-actions i {
   padding: 5px;
-  border-radius: 50%; /* Bo tròn */
+  border-radius: 50%; 
 }
 
 .reply-actions i:hover {

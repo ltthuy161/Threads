@@ -6,6 +6,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   color: var(--primary-100);
+  overflow: hidden; 
 }
 
 
@@ -155,9 +156,6 @@ button:disabled {
 
 
 @media (max-width: 768px) {
-  body {
-    overflow: hidden; 
-  }
   .container {
     background-color: transparent; 
     box-shadow: none; 

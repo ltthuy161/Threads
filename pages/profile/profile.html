@@ -21,7 +21,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             loadComponent("sidebar", "../base/sidebar-2.0/sidebar.html").then(() => {
-          setActiveIcon("home-icon");
+          setActiveIcon("");
         });
             loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
             loadComponent("posting", "../posting/posting.html");
@@ -64,9 +64,9 @@
       </header>
 
       <div class="container-profile">
-        <!-- Profile Section -->
+      
         <div class="profile-section">
-          <!-- Profile Header -->
+        
           <div class="profile-header">
               <div class="profile-info">
                   <h2>Angel Babyboo</h2>
@@ -81,12 +81,14 @@
                   <img class="user-photo" src="../../assets/img/avatar/ava4.png" alt="photo">
               </div>
           </div>
-          <!-- Edit profile button -->
+         
           <div class="edit-profile">
               <button class="edit-button" onclick="location.href='../edit-profile/edit-profile.html'">Edit profile</button>
           </div>
         </div>
-        <ul class="post-container-profile"></ul>
+        <div class="container-profile-post">
+          <ul class="post-container-profile"></ul>
+        </div>
         
       </div>
     </div>

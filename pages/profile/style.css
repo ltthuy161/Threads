@@ -56,7 +56,7 @@ body {
   scrollbar-width: none;
 }
 
-/* Profile Section */
+
 .profile-section {
   width: 100%;
   background-color: var(--primary-700);
@@ -128,9 +128,10 @@ body {
     color: #bbbbbb;
 }
 
-.edit-profile {
+.profile-section .edit-profile {
   display: flex;
   justify-content: center;
+  background-color: inherit;
 }
 
 .edit-button {
@@ -141,26 +142,26 @@ body {
     font-weight: bold;
     color: #ffffff;
     background-color: #2a2951;
-    border: 2px solid #584F7EFF; /* tertiary1-500 */
+    border: 2px solid #584F7EFF;
     border-radius: 18px;
     cursor: pointer;
-    transition: all 0.3s ease; /* Smooth transition */
+    transition: all 0.3s ease; 
     text-align: center;
 }
 
-/* Hover Effects */
+
 .edit-button:hover {
     background-color: #5D5AACFF;
     color: var(--primary-100);
 }
 
-/* Active State */
+
 .edit-button:active {
-    background-color: #4D4A8A; /* Darkened on press */
+    background-color: #4D4A8A;
     border-color: #4D4A8A;
 }
 
-/* Disabled State */
+
 .edit-button:disabled {
     opacity: 0.4;
     cursor: not-allowed;
@@ -170,7 +171,7 @@ body {
     background-color: #444;
 }
 
-/* Bio & Stats */
+
 .profile-bio {
     font-size: 0.9rem;
     color: #bbbbbb;
@@ -287,7 +288,7 @@ header {
 
 .interaction {
   display: flex;
-  gap: 5rem;
+  gap: 2rem;
   margin-top: 10px;
 }
 
@@ -315,6 +316,15 @@ header {
 
 .interaction-button button:hover .icon {
   filter: invert(100%)
+}
+
+.no-hover .interaction-button button:hover {
+  background-color: inherit !important;
+  transform: none !important;
+}
+
+.no-hover .interaction-button button:hover .icon {
+  filter: none !important;
 }
 
 .interaction-count {
@@ -395,46 +405,43 @@ header {
   margin: 5px 0;
 }
 
-/* Responsive cho Mobile */
 @media screen and (max-width: 768px) {
-  /* Body */
   body {
     flex-direction: column;
   }
 
+  #sidebar .top-section {
+    display: none !important;
+  }
   .page-header {
     display: none;
   }
 
-  /* Header */
   .header {
     border-radius: 0;
-      
     width: 100%;
     height: 3rem;
-   
     top: 4rem;
   }
 
-  /* Container của bài post */
   .container-profile {
-    top: 4rem;
+    top: 0rem;
     width: 100%;
-    height: calc(100vh - 4rem);
+    height: calc(100vh - 3rem);
     border-radius: 0;
   }
 
-  /* Post container */
+  .container-profile-post {
+    padding-bottom: 5rem;
+  }
   .post-container-profile {
     height: 100%;
   }
 
-  /* Post */
   .post {
     padding: 0.5rem;
   }
 
-  /* Avatar */
   .avt-container {
     width: 30px;
     height: 30px;
@@ -444,7 +451,6 @@ header {
     width: 30px;
   }
 
-  /* Nội dung */
   .content {
     font-size: 14px;
   }
