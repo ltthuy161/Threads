@@ -63,6 +63,7 @@ body {
     line-height: 22px;
     font-weight: 400;
     background: var(--primary-100);
+    border-radius: 0px;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
     border-width: 0px;
@@ -80,6 +81,7 @@ body {
     max-width: 400px;
     color: var(--primary-900);
     background: var(--primary-100);
+    border-bottom: var(--primary-200) 0.5px solid;
     justify-content: flex-start;
     font-size: 14px;
     line-height: 22px;

@@ -63,12 +63,19 @@ body {
   line-height: 22px;
   font-weight: 400;
   background: var(--primary-100);
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+  border-radius: 0px;
   border-width: 0px;
   outline: none;
+  margin: 0px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+
 }
+
 .textbox .label {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom: var(--primary-200) 0.5px solid;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -84,8 +91,6 @@ body {
   font-size: 14px;
   line-height: 22px;
   font-weight: 700;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
 }
 
 
