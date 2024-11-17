@@ -1,7 +1,7 @@
 const posts = [
     {
         id: 1,
-        avt: "../../assets/img/avatar/ava4.png",
+        avt: "../../assets/img/avatar/ava6.png",
         username: "Angel Babyboo",
         email: "@lovetothread",
         timestamp: "3h",
@@ -15,7 +15,7 @@ const posts = [
     },
     {
         id: 2,
-        avt: "../../assets/img/avatar/ava4.png",
+        avt: "../../assets/img/avatar/ava6.png",
         username: "Angel Babyboo",
         email: "@lovetothread",
         timestamp: "3h",
@@ -29,7 +29,7 @@ const posts = [
     },
     {
         id: 3,
-        avt: "../../assets/img/avatar/ava4.png",
+        avt: "../../assets/img/avatar/ava6.png",
         username: "Angel Babyboo",
         email: "@lovetothread",
         timestamp: "3h",
@@ -43,7 +43,7 @@ const posts = [
     },
     {
         id: 4,
-        avt: "../../assets/img/avatar/ava4.png",
+        avt: "../../assets/img/avatar/ava6.png",
         username: "Angel Babyboo",
         email: "@lovetothread",
         timestamp: "3h",
@@ -57,7 +57,7 @@ const posts = [
     },
     {
         id: 5,
-        avt: "../../assets/img/avatar/ava4.png",
+        avt: "../../assets/img/avatar/ava6.png",
         username: "Hitoriii",
         email: "@bocchi_theRock",
         timestamp: "2h",
@@ -71,7 +71,7 @@ const posts = [
     },
     {
         id: 6,
-        avt: "../../assets/img/avatar/ava4.png",
+        avt: "../../assets/img/avatar/ava6.png",
         username: "Hitoriii",
         email: "@bocchi_theRock",
         timestamp: "1h",
@@ -85,7 +85,7 @@ const posts = [
     },
     {
         id: 7,
-        avt: "../../assets/img/avatar/ava4.png",
+        avt: "../../assets/img/avatar/ava6.png",
         username: "Hitoriii",
         email: "@bocchi_theRock",
         timestamp: "30m",
@@ -99,7 +99,7 @@ const posts = [
     },
     {
         id: 8,
-        avt: "../../assets/img/avatar/ava4.png",
+        avt: "../../assets/img/avatar/ava6.png",
         username: "Hitoriii",
         email: "@bocchi_theRock",
         timestamp: "35m",
@@ -113,7 +113,7 @@ const posts = [
     },
     {
         id: 9,
-        avt: "../../assets/img/avatar/ava4.png",
+        avt: "../../assets/img/avatar/ava6.png",
         username: "Hitoriii",
         email: "@bocchi_theRock",
         timestamp: "23m",
