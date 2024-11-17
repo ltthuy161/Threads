@@ -191,7 +191,7 @@ function renderPostDetail(postId, detail = 1) {
     if (post) {
         const postImage = post.image ? `<div class="image"><img src="${post.image}" alt="Attached Image" /></div>` : "";
         const postDetail = `
-            <div class="post" data-id="${post.id}" onclick="handlePostClick(event, this)">
+            <div class="post" data-id="${post.id}" >
                 <a class="avt-container" href=""><img class="avt-photo" src="${post.avt}" alt="photo"></a>
                 <div class="content">
                     <header>
