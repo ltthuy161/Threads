@@ -9,7 +9,6 @@ body {
   display: flex;
   min-height: 100vh;
   color: var(--primary-100);
-  overflow: hidden;
 }
 
 .main-content {
@@ -30,7 +29,7 @@ body {
   width: 100%;
   max-width: 550px;
   padding: 20px;
-  overflow: hidden;
+  
 }
 
 
@@ -49,8 +48,9 @@ body {
   width: 100%;
   background-color: var(--primary-700); 
   border-radius: 20px;
-  padding: 20px 0 0 0;
-  overflow: hidden;
+  padding: 20px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+
 }
 
 .search-textbox {
@@ -132,6 +132,7 @@ body {
 }
 
 .user-details {
+  padding-top: 3px;
   font-size: 14px;
   color: var(--primary-250);
 }
@@ -180,10 +181,16 @@ body {
   .search-page {
     width: 100% !important;
     margin: 0;
-    overflow: hidden;
   }
 
   .main-content {
     padding: 20px 0 0 0;
+  }
+
+  #sidebar {
+    position: sticky;
+    z-index: 1000;
+    top: 0 !important;
+    flex-shrink: 0;
   }
 }
