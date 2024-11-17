@@ -210,6 +210,10 @@ body {
   height: 100%; 
 }
 
+.container-profile-post {
+  padding-bottom: 5rem;
+}
+
 .post, .reply {
   width: 100%;
   box-sizing: border-box;
