@@ -9,6 +9,7 @@ body {
   display: flex;
   min-height: 100vh;
   color: var(--primary-100);
+  overflow: hidden;
 }
 
 .main-content {
