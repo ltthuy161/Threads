@@ -43,9 +43,6 @@
     scrollbar-width: none; */
   }
 
-.tabs {
-    margin-left: 4rem;
-}
   
 .tab {
     background-color: var(--primary-900);
@@ -81,6 +78,8 @@
     flex-direction: column;
     width: 100%;
     padding: 1rem;
+    margin-top: 1rem;
+    
   }
   
   /* Individual Suggestion Item */
