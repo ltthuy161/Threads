@@ -92,6 +92,38 @@ app.get("/notification", (req, res) => {
     });
 });
 
+app.get("/profile", (req, res) => {
+    res.render("profile", {
+        title: "Threads - Profile",
+        css: "/css/profile.css",
+        hasSidebar: false,
+    });
+});
+
+app.get("/edit-profile", (req, res) => {
+    res.render("edit-profile", {
+        title: "Edit Profile",
+        css: "/css/edit-profile.css",
+        hasSidebar: false,
+    });
+});
+
+app.get("/following", (req, res) => {
+    res.render("following", {
+        title: "Following",
+        css: "/css/following.css",
+        hasSidebar: false,
+    });
+});
+
+app.get("/follower", (req, res) => {
+    res.render("follower", {
+        title: "Follower",
+        css: "/css/follower.css",
+        hasSidebar: false,
+    });
+});
+
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

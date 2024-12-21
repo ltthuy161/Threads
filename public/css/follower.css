@@ -24,7 +24,10 @@
   }
   
   .header {
+    margin-top: 0;
     background-color: inherit;
+    display: flex;
+    flex-direction: row;
   }
   
   .container {
@@ -38,6 +41,10 @@
     overflow-y: scroll; 
     scrollbar-width: none;
   }
+
+.tabs {
+    margin-left: 5rem;
+}
   
 .tab {
     background-color: var(--primary-900);
@@ -72,6 +79,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding: 1rem;
   }
   
   /* Individual Suggestion Item */
@@ -178,11 +186,11 @@
       font-size: 14px;
     }
   
-    /* Container của bài post */
     .container {
-      top: 6rem;
-      width: 100%;
-      height: calc(100vh - 4rem);
-      border-radius: 0;
-    }
+        top: 4rem;
+        width: 100%;
+        height: calc(100vh - 4rem);
+        border-radius: 0;
+      }
+
   }
