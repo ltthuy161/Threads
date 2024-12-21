@@ -1,4 +1,4 @@
-import { theme } from "../../assets/theme.js";
+import { theme } from "./theme.js";
 
 function applyTheme(theme) {
   const root = document.documentElement;

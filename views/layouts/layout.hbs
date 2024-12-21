@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <script src="/js/main.js" defer></script>
+</head>
+<body class="{{#if hasSidebar}}has-sidebar{{else}}no-sidebar{{/if}}">
+    {{!-- Kiểm tra xem trang có sidebar hay không --}}
+    {{#if hasSidebar}}
+        <aside class="sidebar text-light d-flex flex-column align-items-center position-fixed top-0 start-0 sidebar-custom">
+            <div class="top-section d-flex flex-column align-items-center text-align-center">
+                <button class="btn btn-link logo p-0 mt-lg-2" onclick="location.href='/homepage'">
+                    <img src="/assets/vendor/icons/logo.svg" alt="Logo Icon" class="img-fluid" style="width: 50px;" />
+                </button>
+                <button class="btn btn-link user-photo-container" onclick="handleAvatarClick()">
+                    <img src="/assets/img/avatar/ava6.png" alt="User Avatar" class="rounded-circle img-fluid" style="width: 40px; height: 40px;" />
+                </button>
+            </div>
+            <nav class="bottom-section nav d-flex justify-content-around align-items-center gap-5 mt-auto w-100">
+                <button id="home-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white" onclick="location.href='/homepage'">
+                    <i class="bi bi-house-fill fs-4 text-white"></i>
+                </button>
+                <button id="search-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white" onclick="location.href='/search'">
+                    <i class="bi bi-search fs-4"></i>
+                </button>
+                <button id="add-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white" onclick="showPopup()">
+                    <i class="bi bi-plus-square-fill fs-4"></i>
+                </button>
+                <button id="noti-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white" onclick="location.href='/notifications'">
+                    <i class="bi bi-bell-fill fs-4"></i>
+                </button>
+            </nav>
+            <button class="btn btn-link footer-icon rounded-circle p-0 mt-auto mb-3 text-white" onclick="location.href='/logout'" title="Log out">
+                <i class="bi bi-box-arrow-left fs-3"></i>
+            </button>
+        </aside>
+    {{/if}}
+
+
+    <main class="main-content">
+
+        {{{body}}} <!-- Nội dung động -->
+        
+    </main>
+</body>
+</html>
