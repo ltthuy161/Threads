@@ -47,6 +47,7 @@ app.get("/signup", (req, res) => {
     res.render("signup", {
         title: "Sign Up",
         hasSidebar: false, // Không có sidebar
+        css: "/css/signup.css",
     });
 });
 
@@ -54,8 +55,43 @@ app.get("/signin", (req, res) => {
     res.render("signin", {
         title: "Sign In",
         hasSidebar: false, // Không có sidebar
+        css: "/css/signin.css",
     });
 });
+
+app.get("/forgot-password", (req, res) => {
+    res.render("forgot-pw", {
+        title: "Forgot Password",
+        hasSidebar: false, // Không có sidebar
+        css: "/css/forgot-pw.css",
+    });
+});
+
+app.get("/email-authentication", (req, res) => {
+    res.render("email-authentication", {
+        title: "Email Authentication",
+        hasSidebar: false, // Không có sidebar
+        css: "/css/email-authentication.css",
+    });
+});
+
+app.get("/posting", (req, res) => {
+    res.render("posting", {
+        title: "Posting",
+        hasSidebar: true,
+        css: "/css/posting.css",
+        js: "/js/showPopup.js",
+    });
+})
+
+app.get("/notification", (req, res) => {
+    res.render("notification", {
+        title: "Notification",
+        hasSidebar: true,
+        css: "/css/notification.css",
+    });
+});
+
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

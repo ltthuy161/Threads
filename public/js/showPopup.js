@@ -5,15 +5,7 @@ function showPopup() {
     console.log(popup);  
     // add display
     popup.style.display = "block";
-}  
-
-function showPopupSettings() {
-    const popup = document.getElementById("settings");
-    console.log(popup);  
-    // add display
-    popup.style.display = "block";
-}
-
+} 
 
 function hidePopup() {
     const popup = document.getElementById("posting");
