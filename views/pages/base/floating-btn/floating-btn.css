@@ -1,0 +1,27 @@
+.floating-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 5rem;
+  height: 3.5rem;
+  background-color: var(--primary-500);
+  border: 1px solid var(--color-5-500); /* Gộp tất cả các thuộc tính border */
+  border-radius: 12px;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.floating-btn:hover {
+  background-color: var(--primary-300);
+}
+
+/* responsive for mobile */
+@media screen and (max-width: 768px) {
+  .floating-btn {
+    display: none;
+  }
+}
