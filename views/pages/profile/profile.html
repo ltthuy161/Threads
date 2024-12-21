@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="icon" type="image/jpg" href="/assets/vendor/icons/logo.svg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./style.css" />
+ 
+    <link rel="stylesheet" href="../base/sidebar-2.0/sidebar.css" />
+    <link rel="stylesheet" href="../base/floating-btn/floating-btn.css" />
+    <link rel="stylesheet" href="../posting/posting.css" />
+
+    <script defer src="post.js"></script>
+
+    <script defer src="../base/loadComponents.js"></script>
+    <script type="module" src="../base/applyTheme.js"></script>
+    <script src="../base/showPopup.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            loadComponent("sidebar", "../base/sidebar-2.0/sidebar.html").then(() => {
+          setActiveIcon("");
+        });
+            loadComponent("floating-btn", "../base/floating-btn/floating-btn.html");
+            loadComponent("posting", "../posting/posting.html");
+
+
+            const postContainer = document.querySelector(".post-container");
+
+            if (window.location.pathname.startsWith("/post-detail")) {
+                const postId = window.location.pathname.split("/")[2];
+
+                renderPostDetail(postId);
+            } else {
+                loadProfile();
+            }
+
+           
+            window.addEventListener("popstate", (event) => {
+                if (event.state && event.state.postId) {
+                    renderPostDetail(event.state.postId);
+                } else {
+                    loadProfile();
+                }
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <div id="sidebar"></div>
+
+    <div class="main-content">
+      <div class="page-header">
+        <h2>Profile</h2>
+      </div>
+      
+      <header class="header post-detail-header" style="display: none;">
+        <button class="navigation-button" id="prev" style="border: none; outline: none;" onclick="goToProfile()">
+          <img src="../../assets/vendor/icons/prev.svg" alt="Icon description" class="icon" id="prev-icon" >
+        </button>
+        <div class="post-title">Post</div>
+      </header>
+
+      <div class="container-profile">
+      
+        <div class="profile-section">
+        
+          <div class="profile-header">
+              <div class="profile-info">
+                  <h2>Angel Babyboo</h2>
+                  <p>@lovetothread</p>
+                  <p class="profile-bio">Your bio is here: 🌟❤️<br>I love threads 💬🌍</p>
+                  <div class="profile-stats">
+                      <span><a href="../follower/follower.html">800 Followers</a></span>
+                      <span><a href="../following/following.html">978 Following</a></span>
+                  </div>
+              </div>
+              <div class="profile-picture">
+                  <img class="user-photo" src="../../assets/img/avatar/ava6.png" alt="photo">
+              </div>
+          </div>
+         
+          <div class="edit-profile">
+              <button class="edit-button" onclick="location.href='../edit-profile/edit-profile.html'">Edit profile</button>
+          </div>
+        </div>
+        <div class="container-profile-post">
+          <ul class="post-container-profile"></ul>
+        </div>
+        
+      </div>
+    </div>
+    <div id="floating-btn"></div>
+
+    <div id="posting" style="display: none"></div>
+    </body>
+
+    <div id="reply-box-container" class="reply-box-container" style="display: none;"></div>
+    </div>
+  </body>
+
+</html>
