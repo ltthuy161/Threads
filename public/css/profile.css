@@ -175,7 +175,7 @@ body {
 .profile-bio {
     font-size: 0.9rem;
     color: #bbbbbb;
-    margin: 10px 0 20px;
+    max-width: 10rem;
 }
 
 .profile-stats {

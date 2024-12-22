@@ -6,6 +6,7 @@ import {
     saveUser,
     requestPasswordReset,
     resetPassword,
+    getProfile,
 } from "../controllers/userController.js";
 
 const router = Router();
@@ -23,5 +24,8 @@ router.get("/reset-password/:token", resetPassword);
 
 // Route xử lý lưu mật khẩu mới
 router.post("/reset-password/:token", resetPassword);
+
+// Route to get user profile
+router.get("/profile", getProfile);
 
 export default router;

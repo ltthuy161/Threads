@@ -17,15 +17,15 @@
             <div class="profile-header">
                 <div class="profile-info">
                     <h2>Angel Babyboo</h2>
-                    <p>@lovetothread</p>
-                    <p class="profile-bio">Your bio is here: 🌟❤️<br>I love threads 💬🌍</p>
+                    <p>@{{user.username}}</p>
+                    <p class="profile-bio">{{user.bio}}</p>
                     <div class="profile-stats">
                         <span><a href="/follower">800 Followers</a></span>
                         <span><a href="/following">978 Following</a></span>
                     </div>
                 </div>
                 <div class="profile-picture">
-                    <img class="user-photo" src="../../assets/img/avatar/ava6.png" alt="photo">
+                    <img class="user-photo" src="{{user.profilePicture}}" alt="photo">
                 </div>
             </div>
         

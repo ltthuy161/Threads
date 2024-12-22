@@ -268,3 +268,36 @@ export const resetPassword = async (req, res) => {
         res.status(400).json({ error: "Invalid or expired token." });
     }
 };
+
+export const getProfile = async (req, res) => {
+    try {
+
+        // test id
+        const userId = "676800579fdee627295c671c";
+    
+        // Fetch the user from the database
+        const user = await User.findById(userId);
+    
+        if (!user) {
+            // Handle the case where the user is not found
+            return res.status(404).render("error", { message: "User not found" });
+        }
+    
+        // Add a temporary default image if profilePicture is null
+        if (!user.profilePicture) {
+            user.profilePicture = "../../assets/img/avatar/ava4.png";
+        }
+
+        // Render the profile view and pass the user data
+        res.render("profile", {
+            title: "Threads - Profile",
+            css: "/css/profile.css",
+            hasSidebar: false, // or true if needed
+            user: user, // Pass the user object to the template
+        });
+
+    } catch (error) {
+        console.error("Error fetching user profile:", error);
+        res.status(500).render("error", { message: "Internal Server Error" });
+    }
+};
