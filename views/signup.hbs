@@ -7,7 +7,7 @@
         <form method="POST" action="/signup">
 
             {{#if message}}
-                <div class="success-message">
+                <div class="message">
                     <p>{{message}}</p>
                 </div>
             {{/if}}
@@ -19,6 +19,7 @@
                     id="username"
                     name="username"
                     placeholder="Enter your user name"
+                    required
                 />
             </div>
 
@@ -29,6 +30,7 @@
                     id="email"
                     placeholder="Enter your email"
                     name="email"
+                    required
                 />
             </div>
 
@@ -39,6 +41,7 @@
                     id="password"
                     name="password"
                     placeholder="At least 8 characters"
+                    required
                 />
             </div>
 
@@ -47,3 +50,16 @@
 
     </div>
 </div>
+
+<script>
+    // Lắng nghe sự kiện submit của form
+    document.querySelector("form").addEventListener("submit", function (event) {
+        const password = document.querySelector("#password").value;
+
+        // Kiểm tra độ dài mật khẩu
+        if (password.length < 8) {
+            event.preventDefault(); // Ngăn không gửi form
+            alert("Password must be at least 8 characters long");
+        }
+    });
+</script>

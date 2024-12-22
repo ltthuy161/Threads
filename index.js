@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
 import userRoutes from "./routes/userRoute.js";
+import notiRoutes from "./routes/notiRoute.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -36,6 +37,9 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use("/", userRoutes);
+app.use("/", notiRoutes);
+
 app.get("/", (req, res) => {
     res.render("init", {
         title: "Threads - Welcome",
@@ -49,8 +53,6 @@ app.get("/signup", (req, res) => {
         css: "/css/signup.css",
     });
 });
-
-app.use("/", userRoutes);
 
 app.get("/signin", (req, res) => {
     res.render("signin", {

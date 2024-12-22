@@ -12,20 +12,6 @@ export const createUser = async (req, res) => {
         console.log("Request Body:", req.body);
 
         const { username, email, password, bio, profilePicture } = req.body;
-        if (!username || !email || !password) {
-            return res.status(400).json({ error: "All fields are required" });
-        }
-        // Validate email format
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            return res.status(400).json({ error: "Invalid email format" });
-        }
-        // Enforce password strength
-        if (password.length < 8) {
-            return res
-                .status(400)
-                .json({ error: "Password must be at least 8 characters long" });
-        }
 
         // Hash the password
         const hashPassword = bcrypt.hashSync(password, 10);
@@ -139,14 +125,15 @@ export const loginUser = async (req, res) => {
 
         const { email, password } = req.body;
 
-        if (!email || !password) {
-            return res.status(400).json({ error: "All fields are required" });
-        }
-
         // Check if user exists
         const existingUser = await User.findOne({ email });
         if (!existingUser) {
-            return res.status(400).json({ error: "Invalid email or password" });
+            return res.render("signin", {
+                title: "Sign In",
+                hasSidebar: false, // Không có sidebar
+                css: "/css/signin.css",
+                message: "Invalid email or password",
+            })
         }
 
         // Verify password
@@ -155,7 +142,12 @@ export const loginUser = async (req, res) => {
             existingUser.password
         );
         if (!passwordCorrect) {
-            return res.status(400).json({ error: "Invalid email or password" });
+            return res.render("signin", {
+                title: "Sign In",
+                hasSidebar: false, // Không có sidebar
+                css: "/css/signin.css",
+                message: "Invalid email or password",
+            })
         }
 
         // Generate JWT token
@@ -172,7 +164,7 @@ export const loginUser = async (req, res) => {
             sameSite: "strict",
         });
 
-        res.redirect("/");
+        return res.redirect("/");
     } catch (error) {
         console.error("Error during login:", error);
         res.status(500).json({ error: "Internal server error" });
@@ -186,25 +178,29 @@ export const logoutUser = (req, res) => {
 
 export const requestPasswordReset = async (req, res) => {
     try {
-        const { email, newPassword } = req.body;
+        const { email } = req.body;
+        const { password }  = req.body;
 
-        // Kiểm tra email trong cơ sở dữ liệu
+        console.log("Request Body:", req.body);
+        // Tìm user theo email
         const user = await User.findOne({ email });
+
         if (!user) {
-            return res.status(404).json({ error: "Email không tồn tại." });
+            console.log("Email not found.");
+            return res.status(200).render("forgot-pw", {
+                title: "Forgot Password",
+                css: "/css/forgot-pw.css",
+                message: "Your email is not registered. Please sign up.",
+            });
         }
 
-        // Tạo JWT reset token chứa email và mật khẩu mới
-        const resetToken = jwt.sign(
-            { email: user.email, newPassword }, // Payload chứa email và mật khẩu mới
-            process.env.SECRET_KEY, // Secret key từ .env
-            { expiresIn: "1h" } // Token hết hạn sau 1 giờ
-        );
+        // Tạo reset token
+        const resetToken = jwt.sign({ email, password }, process.env.SECRET_KEY, { expiresIn: "1h" });
 
-        // Tạo liên kết reset password
+        // Tạo liên kết reset
         const resetLink = `${req.protocol}://${req.get("host")}/reset-password/${resetToken}`;
 
-        // Gửi email với liên kết reset
+        // Gửi email
         const transporter = nodemailer.createTransport({
             service: "Gmail",
             auth: {
@@ -216,53 +212,62 @@ export const requestPasswordReset = async (req, res) => {
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: email,
-            subject: "Password Reset Confirmation",
-            html: `<p>You requested to reset your password.</p>
-                   <p>Click the link below to confirm your new password:</p>
-                   <a href="${resetLink}">${resetLink}</a>
-                   <p>If you did not request this, please ignore this email.</p>`,
+            subject: "Password Reset",
+            html: `<p>Click the link below to reset your password:</p>
+                   <a href="${resetLink}">${resetLink}</a>`,
         };
 
         await transporter.sendMail(mailOptions);
 
-        res.status(201).render("forgot-pw", {
-            title: "",
-            hasSidebar: false, // Không có sidebar
+        // Phản hồi người dùng
+        res.status(200).render("forgot-pw", {
+            title: "Forgot Password",
             css: "/css/forgot-pw.css",
-            message:
-                "Please check your email to complete reset password.",
+            message: "Please check your email to reset your password.",
         });
-
+        // res.redirect(`/forgot-password?message=Please check your email to reset your password.`);
     } catch (error) {
-        console.error("Error sending reset password email:", error.message);
-        res.status(500).json({ error: "Internal server error" });
+        console.error("Error in requestPasswordReset:", error.message);
+        res.status(500).render("forgot-pw", {
+            title: "Forgot Password",
+            css: "/css/forgot-pw.css",
+            message: "An error occurred. Please try again.",
+        });
     }
 };
 
 export const resetPassword = async (req, res) => {
     try {
         const { token } = req.params;
-
+        
         // Xác minh token
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
-        // Lấy thông tin từ token
-        const { email, newPassword } = decoded;
-
+        console.log(decoded.email);
+        console.log(decoded.password);  
+        // Kiểm tra payload token
+        if (!decoded.email) {
+            return res.status(400).json({ error: "Invalid token payload." });
+        }
+        if (!decoded.password) {
+            return res.status(400).json({ error: "Password is required." });
+        }
         // Tìm người dùng bằng email
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email: decoded.email });
         if (!user) {
-            return res.status(404).json({ error: "Người dùng không tồn tại." });
+            return res.status(404).json({ error: "User not found." });
         }
 
-        // Lưu mật khẩu mới vào cơ sở dữ liệu
-        user.password = bcrypt.hashSync(newPassword, 10); // Băm mật khẩu mới
+        // Lưu mật khẩu mới
+        user.password = bcrypt.hashSync(decoded.password, 10); // Băm mật khẩu mới
         await user.save();
-
-        res.redirect("/signin");
+        console.log("Password reset successfully.");
+        res.render("reset-password", 
+            { title: "Reset Password", css: "/css/reset-password.css", token });
+        // res.redirect("/signin");
     } catch (error) {
         if (error.name === "TokenExpiredError") {
-            return res.status(400).json({ error: "Token đã hết hạn. Vui lòng yêu cầu lại." });
+            return res.status(400).json({ error: "Token has expired. Please request a new one." });
         }
         console.error("Error resetting password:", error.message);
         res.status(400).json({ error: "Invalid or expired token." });

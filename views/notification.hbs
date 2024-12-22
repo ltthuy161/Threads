@@ -12,26 +12,27 @@
       <div class="container position-fixed w-50 overflow-auto">
           
             <div class="notifications all active">
-              <div class="notification" data-id="1">
-                
-                <a class="avt-container d-flex align-items-center mx-2" href=""><img class="avt-photo" src="/assets/img/avatar/ava8.png" alt="photo"></a>
-                <div class="notification-content">
-                  <span><b>Bocchi@hoho</b> replied to you</span> <span class="time">10m ago</span>
-                  <p class="small">slay</p>
+              {{#each notifications}}
+                <div class="notification {{#if isRead }}unread{{/if}}" data-id="{{id}}">
+                  {{#if isRead}}<span class="dot"></span>{{/if}}
+                  <a class="avt-container d-flex align-items-center mx-2" href=""><img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo"></a>
+                  <div class="notification-content">
+                    <span><b>{{likeUserName}} -</b> {{message}}</span> <span class="time">19m ago</span>
+                    <p class="small">{{threadContent}}</p>
+                  </div>
+                  <div class="dropdown">
+                    <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bi bi-three-dots text-white"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                      <li><button class="dropdown-item mark-as-read d-flex justify-content-center align-items-center">Mark as Read</button></li>
+                      <li><button class="dropdown-item delete-notification d-flex justify-content-center align-items-center">Delete</button></li>
+                    </ul>
+                  </div>
                 </div>
-                
-                <div class="dropdown">
-                  <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-three-dots text-white"></i>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                    <li><button class="dropdown-item mark-as-read d-flex justify-content-center align-items-center">Mark as Read</button></li>
-                    <li><button class="dropdown-item delete-notification d-flex justify-content-center align-items-center">Delete</button></li>
-                  </ul>
-                </div>
-              </div>
+              {{/each}}
           
-              <div class="notification unread" data-id="2">
+              {{!-- <div class="notification unread" data-id="2">
                 <span class="dot"></span>
                 <a class="avt-container d-flex align-items-center mx-2" href=""><img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo"></a>
                 <div class="notification-content">
@@ -86,7 +87,7 @@
                     <li><button class="dropdown-item delete-notification d-flex justify-content-center align-items-center">Delete</button></li>
                   </ul>
                 </div>
-              </div>
+              </div> --}}
 
           </div>
       

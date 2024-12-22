@@ -3,6 +3,12 @@
         <h2 class="text">Welcome back!</h2>
 
         <!-- Form để xử lý đăng nhập -->
+        {{#if message}}
+                <div class="message">
+                    <p>{{message}}</p>
+                </div>
+        {{/if}}
+
         <form id="signin-form" method="POST">
             <div class="textbox" style="top: 150px">
                 <label class="label" for="email">Email</label>
@@ -29,3 +35,16 @@
         <a class="forgot-password-link" href="/forgot-password">Forgot password?</a>
     </div>
 </div>
+
+<script>
+    // Lắng nghe sự kiện submit của form
+    document.querySelector("form").addEventListener("submit", function (event) {
+        const password = document.querySelector("#password").value;
+
+        // Kiểm tra độ dài mật khẩu
+        if (password.length < 8) {
+            event.preventDefault(); // Ngăn không gửi form
+            alert("Password must be at least 8 characters long");
+        }
+    });
+</script>

@@ -17,15 +17,9 @@ router.post("/signup", createUser);
 router.post("/signin", loginUser);
 router.get("/email-authentication/:token", verifyEmail);
 router.post("/save-user", saveUser);
-
-// Route gửi email reset password
-router.post("/request-password-reset", requestPasswordReset);
-
-// Route hiển thị form reset password
+router.post("/forgot-password", requestPasswordReset);
+// Route xử lý logic reset password
 router.get("/reset-password/:token", resetPassword);
-
-// Route xử lý lưu mật khẩu mới
-router.post("/reset-password/:token", resetPassword);
 
 // Route to get user profile
 router.get("/profile", getProfile);
