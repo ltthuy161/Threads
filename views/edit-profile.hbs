@@ -1,5 +1,4 @@
 <div class="main-content">
-
     <div class="container">
         <div class="container-header">
             <div class="x-button">
@@ -8,31 +7,30 @@
                 </a>
             </div>
             <h3>Edit profile</h3>
-            <button class="btn-save">Save</button>
+            <button class="btn-save" type="submit" form="profileForm">Save</button>
         </div>
 
         <div class="profile-edit">
-            <form>
+            <form id="profileForm" method="POST" action="/edit-profile">
                 <label for="name">Name</label>
-                <input type="text" id="name" placeholder="Angel Babyboo" />
-    
+                <input type="text" id="name" name="name" placeholder="{{user.username}}"/>
+
                 <label for="bio">Bio</label>
-                <textarea id="bio" rows="3" placeholder="Your bio is here ✨❤️&#10;I love threads 👌😘"></textarea>
-    
+                <textarea id="bio" name="bio" rows="3" placeholder="{{user.bio}}"></textarea>
+
                 <label for="location">Location</label>
-                <input type="text" id="location" placeholder="Your location" />
-    
+                <input type="text" id="location" name="location" placeholder="Your location" value="{{user.location}}" />
+
                 <label for="link">Link</label>
-                <input type="text" id="link" placeholder="Add link" />
+                <input type="text" id="link" name="link" placeholder="Add link" value="{{user.link}}" />
             </form>
             <div class="avatar-edit">
                 <a href="">
-                    <img class="picture" src="../../assets/img/avatar/ava6.png" alt="photo">
+                    <img class="picture" src="{{#if user.profilePicture}}{{user.profilePicture}}{{else}}../../assets/img/avatar/ava4.png{{/if}}" alt="photo">
                 </a>
             </div>
         </div>
     </div>
 </div>
 <div id="floating-btn"></div>
-
 <div id="posting" style="display: none"></div>

@@ -7,6 +7,8 @@ import {
     requestPasswordReset,
     resetPassword,
     getProfile,
+    editProfile,
+    updateProfile,
 } from "../controllers/userController.js";
 
 const router = Router();
@@ -27,5 +29,8 @@ router.post("/reset-password/:token", resetPassword);
 
 // Route to get user profile
 router.get("/profile", getProfile);
+
+router.get("/edit-profile", editProfile);
+router.post("/edit-profile", updateProfile); // Handle form submission with POST
 
 export default router;

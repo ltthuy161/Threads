@@ -301,3 +301,61 @@ export const getProfile = async (req, res) => {
         res.status(500).render("error", { message: "Internal Server Error" });
     }
 };
+
+// Function to render the edit profile form
+export const editProfile = async (req, res) => {
+    try {
+        const userId = "676800579fdee627295c671c"; 
+    
+        const user = await User.findById(userId);
+    
+        if (!user) {
+            return res.status(404).render("error", { message: "User not found" });
+        }
+    
+        res.render("edit-profile", {
+            title: "Edit Profile",
+            css: "/css/edit-profile.css",
+            hasSidebar: false,
+            user: user, // Pass the current user data to populate the form
+        });
+    } catch (error) {
+        console.error("Error fetching user data for edit:", error);
+        res.status(500).render("error", { message: "Internal Server Error" });
+    }
+  };
+
+export const updateProfile = async (req, res) => {
+    try {
+        const userId = "676800579fdee627295c671c"; 
+
+        // Get the updated data from the request body
+        const { name, bio } = req.body; 
+
+        // Build the update object dynamically
+        const updateObject = {};
+        if (name) {
+        updateObject.username = name;
+        }
+        if (bio) {
+        updateObject.bio = bio;
+        }
+
+        // Find the user and update only the provided fields
+        const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        updateObject, // Pass the dynamic update object
+        { new: true } // Return the updated document
+        );
+
+        if (!updatedUser) {
+        return res.status(404).render("error", { message: "User not found" });
+        }
+
+        // Redirect to the profile page after successful update
+        res.redirect("/profile");
+    } catch (error) {
+        console.error("Error updating user profile:", error);
+        res.status(500).render("error", { message: "Internal Server Error" });
+    }
+};
