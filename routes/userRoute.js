@@ -1,8 +1,27 @@
 import { Router } from "express";
-import { createUser } from "../controllers/userController.js";
+import {
+    createUser,
+    loginUser,
+    verifyEmail,
+    saveUser,
+    requestPasswordReset,
+    resetPassword,
+} from "../controllers/userController.js";
 
 const router = Router();
 
-router.post("/register", createUser);
+router.post("/signup", createUser);
+router.post("/signin", loginUser);
+router.get("/email-authentication/:token", verifyEmail);
+router.post("/save-user", saveUser);
+
+// Route gửi email reset password
+router.post("/request-password-reset", requestPasswordReset);
+
+// Route hiển thị form reset password
+router.get("/reset-password/:token", resetPassword);
+
+// Route xử lý lưu mật khẩu mới
+router.post("/reset-password/:token", resetPassword);
 
 export default router;

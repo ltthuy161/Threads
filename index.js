@@ -1,7 +1,7 @@
 import express from "express";
 import { connectDB } from "./config/db.js";
-import hbs from "hbs";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 import userRoutes from "./routes/userRoute.js";
 
@@ -21,6 +21,8 @@ dotenv.config();
 
 // Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Connect to the database
 connectDB();
@@ -28,9 +30,6 @@ connectDB();
 // Cấu hình view engine Handlebars
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views"));
-
-// Sử dụng các route
-app.use("/api/users", userRoutes);
 
 app.use((req, res, next) => {
     res.locals.layout = "layouts/layout"; // Đường dẫn đến layout mặc định
@@ -50,6 +49,8 @@ app.get("/signup", (req, res) => {
         css: "/css/signup.css",
     });
 });
+
+app.use("/", userRoutes);
 
 app.get("/signin", (req, res) => {
     res.render("signin", {

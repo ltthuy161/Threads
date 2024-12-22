@@ -1,23 +1,41 @@
 <div class="page">
-     
-      <div class="container">
-        
+
+    <div class="container">
+
         <h2 class="text">Forgot Password</h2>
 
-        <div class="textbox" style="top: 150px">
-          <label class="label" for="email">Email</label>
-          <input type="email" id="email" placeholder="Enter your email" />
-        </div>
+        <form action="/request-password-reset" method="POST" id="resetRequestForm">
 
-        <div class="textbox" style="top: 215px">
-          <label class="label" for="password">New Password</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="At least 8 characters"
-          />
-        </div>
+            {{#if message}}
+                <div class="success-message">
+                    <p>{{message}}</p>
+                </div>
+            {{/if}}
 
-        <button class="sign-up-button" onclick="location.href='signin'">Back to Sign in</button>
-      </div>
+            <input type="hidden" name="token" value="{{token}}" />
+            <div class="textbox" style="top: 150px">
+                <label class="label" for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    name="email"
+                    required
+                />
+            </div>
+
+            <div class="textbox" style="top: 215px">
+                <label class="label" for="password">New Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="At least 8 characters"
+                    name="password"
+                    required
+                />
+            </div>
+                    <a href="/signin" class="sign-up-link">Back to Sign in</a>
+            <button type="submit" class="submit-button">Send Reset Link</button>
+        </form>
     </div>
+</div>
