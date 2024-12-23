@@ -12,25 +12,17 @@
 
         <div class="profile-edit">
             <form id="profileForm" method="POST" action="/edit-profile">
-                <label for="name">Name</label>
+                <label for="name">Userame</label>
                 <input type="text" id="name" name="name" placeholder="{{user.username}}"/>
 
                 <label for="bio">Bio</label>
                 <textarea id="bio" name="bio" rows="3" placeholder="{{user.bio}}"></textarea>
-
-                <label for="location">Location</label>
-                <input type="text" id="location" name="location" placeholder="Your location" value="{{user.location}}" />
-
-                <label for="link">Link</label>
-                <input type="text" id="link" name="link" placeholder="Add link" value="{{user.link}}" />
             </form>
             <div class="avatar-edit">
-                <a href="">
-                    <img class="picture" src="{{#if user.profilePicture}}{{user.profilePicture}}{{else}}../../assets/img/avatar/ava4.png{{/if}}" alt="photo">
-                </a>
+                <img class="picture" id="profilePictureImg" src="{{#if user.profilePicture}}{{user.profilePicture}}{{else}}../../assets/img/avatar/ava4.png{{/if}}" alt="photo">
+                <label for="profilePicture" class="edit-label">Edit</label>
+                <input type="file" id="profilePicture" name="profilePicture" accept="image/*" style="display: none;" />
             </div>
         </div>
     </div>
 </div>
-<div id="floating-btn"></div>
-<div id="posting" style="display: none"></div>
