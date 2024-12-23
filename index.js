@@ -1,44 +1,59 @@
-import express from "express";
+import express from 'express';
+import expressHbs from'express-handlebars';
 import { connectDB } from "./config/db.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-
 import userRoutes from "./routes/userRoute.js";
 import notiRoutes from "./routes/notiRoute.js";
+import threadRoutes from './routes/threadRoute.js';
 
 import path from "path";
-import { fileURLToPath } from "url";
+
 
 const app = express();
-// Tạo `__dirname` cho ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+const __dirname = path.resolve();
 // Cấu hình thư mục tĩnh
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(__dirname + "/public"));
 
 app.use(express.json()); // Middleware để parse JSON từ request body
 dotenv.config();
 
 // Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '15mb' }));
+app.use(express.urlencoded({ limit: '15mb', extended: true }));
+
 app.use(cookieParser());
 
 // Connect to the database
 connectDB();
 
 // Cấu hình view engine Handlebars
+app.engine(
+    'hbs', 
+    expressHbs.engine({
+        layoutsDir: __dirname + "/views/layouts",
+        partialsDir: __dirname + "/views/partials",
+        extname: "hbs",
+        defaultLayout: "layout",
+        runtimeOptions: {
+            allowProtoPropertiesByDefault: true,
+        },
+        helpers: {
+            formatDate: (date) => {
+                return new Date(date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                });
+            },
+        }
+    })
+);
 app.set("view engine", "hbs");
-app.set("views", path.join(__dirname, "views"));
-
-app.use((req, res, next) => {
-    res.locals.layout = "layouts/layout"; // Đường dẫn đến layout mặc định
-    next();
-});
 
 app.use("/", userRoutes);
 app.use("/", notiRoutes);
+app.use("/thread", threadRoutes);
 
 app.get("/", (req, res) => {
     res.render("init", {
@@ -126,6 +141,11 @@ app.get("/follower", (req, res) => {
         hasSidebar: false,
     });
 });
+
+app.get('/homepage', (req, res) => {
+    res.redirect('/threads');
+});
+app.use('/threads', threadRoutes);
 
 
 const PORT = process.env.PORT;

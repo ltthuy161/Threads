@@ -120,6 +120,7 @@ export const saveUser = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
+    console.log("Login request received.");
     try {
         console.log("Request Body:", req.body);
 
@@ -156,15 +157,15 @@ export const loginUser = async (req, res) => {
             SECRET_KEY,
             { expiresIn: "1h" } // Token expiration time
         );
-
+        console.log("Generated Token:", token);
         // Set token in cookie
         res.cookie("token", token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
         });
-
-        return res.redirect("/");
+        console.log(email, password)
+        return res.redirect("/homepage");
     } catch (error) {
         console.error("Error during login:", error);
         res.status(500).json({ error: "Internal server error" });

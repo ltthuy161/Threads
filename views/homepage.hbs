@@ -1,0 +1,25 @@
+<div class="main-content d-flex flex-column flex-grow-1 justify-content-center align-items-center">
+    <header class="header homepage-header fixed-top m-auto w-50 h-auto pt-3">
+        <div class="tabs w-100 d-flex">
+            <button class="tab active d-flex justify-content-center align-items-center shadow-none w-50 p-3" 
+                onclick="window.location.href='/threads'"><span>For you</span></button>
+            <button class="tab d-flex justify-content-center align-items-center shadow-none w-50 p-3" 
+                onclick="window.location.href='/threads/following'"><span>Following</span></button>
+        </div>
+    </header>
+    <div class="container-homepage position-fixed w-50">
+        <ul class="post-container-homepage list-unstyled w-100 h-100 overflow-auto">
+            {{#each threads}}
+                {{> post}}
+            {{/each}}
+        </ul>
+    </div>
+    {{> posting}}
+    <div id="reply-box-container" class="reply-box-container" style="display: none;">
+        {{> reply-box threadId=thread._id userId=thread.userId content=thread.content createdAt=thread.createdAt }}
+    </div>
+</div>
+    {{> floating-btn}}
+    
+
+<script src="/js/detailPost.js"></script>

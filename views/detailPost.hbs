@@ -1,0 +1,84 @@
+<div class="main-content d-flex flex-column flex-grow-1 justify-content-center align-items-center">
+    <header class="header post-detail-header fixed-top m-auto w-50 h-auto pt-3">
+        <button id="prev" class="navigation-button d-inline-block mt-3 p-0 ml-3 rounded-circle text-white position-absolute start-10" style="border: none; outline: none;" 
+        onclick="goToHomepage()">
+            <i class="bi bi-arrow-left fs-4 text-white"></i>
+        </button>
+        <div class="post-title text-center w-100 p-3 fw-normal fs-4">Post</div>
+    </header>
+    <div class="container-homepage position-fixed w-50">
+        <ul class="post-detail-container list-unstyled w-100 h-100 overflow-auto">
+            <li class="post w-100 p-3 mb-2 d-flex">
+                <a class="avt-container" href=""><img class="avt-photo rounded-circle" src="{{thread.userId.profilePicture}}" alt="photo"></a>
+                <div class="content flex-grow-1">
+                    <header class="d-flex align-items-center mb-1">
+                        <a class="username fw-bold me-1 text-decoration-none" href=""><span>{{thread.userId.username}}</span></a>
+                        <a class="email text-secondary me-2 text-decoration-none" href=""><span>{{thread.userId.username}}</span></a>
+                        <time class="timestamp">{{formatDate thread.createdAt}}</time>
+                    </header>
+                    <p class="text my-2 text-light mt-1 mb-1">{{thread.content}}</p>
+                    {{#if thread.image}}
+                    <div class="image"><img src="{{thread.image}}" alt="Attached Image" /></div>
+                    {{/if}}
+                    <div class="interaction d-flex mt-2" style="gap: 2rem">
+                        <div class="interaction-button d-flex">
+                            <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
+                                  onclick="changeIcon(this)"><img src="/assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
+                            <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">10</span> 
+                        </div>
+                        <div class="interaction-button d-flex">
+                            <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
+                                  onclick="showReplyBox('{{thread._id}}')"><img src="/assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
+                            <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">10</span> 
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <div class="reply">
+                <div class="fs-6 fw-normal text-light text-center pb-2">Replies</div>
+            </div>
+
+            {{#each replies}}
+            <li class="post w-100 p-3 mb-2 d-flex"  onclick="showPostDetail('{{this._id}}')">
+                <a class="avt-container" href=""><img class="avt-photo rounded-circle" src="{{this.userId.profilePicture}}" alt="photo"></a>
+                <div class="content flex-grow-1">
+                    <header class="d-flex align-items-center mb-1">
+                        <a class="username fw-bold me-1 text-decoration-none" href=""><span>{{this.userId.username}}</span></a>
+                        <a class="email text-secondary me-2 text-decoration-none" href=""><span>{{this.userId.username}}</span></a>
+                        <time class="timestamp">{{formatDate this.createdAt}}</time>
+                    </header>
+                    <p class="text my-2 text-light mt-1 mb-1">{{this.content}}</p>
+                    {{#if this.image}}
+                    <div class="image"><img src="{{this.image}}" alt="Attached Image" /></div>
+                    {{/if}}
+                    <div class="interaction d-flex mt-2" style="gap: 2rem">
+                        <div class="interaction-button d-flex">
+                            <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
+                                  onclick="changeIcon(this)"><img src="/assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
+                            <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">10</span> 
+                        </div>
+                        <div class="interaction-button d-flex">
+                            <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
+                                  onclick="showReplyBox('{{this._id}}')"><img src="/assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
+                            <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">10</span> 
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+      </div>
+
+
+    {{> posting}}
+    <div id="reply-box-container" class="reply-box-container" style="display: none;">
+        {{> reply-box threadId=thread._id userId=thread.userId content=thread.content createdAt=thread.createdAt }}
+    </div>
+</div>
+    
+    {{> floating-btn}}
+    
+
+
+<script src="/js/detailPost.js"></script>

@@ -4,8 +4,21 @@
   box-sizing: border-box;
 }
 
+#posting {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center; 
+  align-items: center; 
+  z-index: 1000;
+}
 
-.post-container {
+.posting-post-container {
+  position: relative;
   width: 50%;
   height: 40%;
   background: var(--neutral-800); 
@@ -19,7 +32,7 @@
 }
 
 
-.line-header {
+.posting-line-header {
   position: absolute;
   top: 22%;
   left: 0px;
@@ -31,7 +44,7 @@
   transform: rotate(0deg);
 }
 
-.post-header {
+.posting-post-header {
   display: flex;
   align-items: center;
   font-size: clamp(14px, 2vw, 18px); 
@@ -41,30 +54,30 @@
   left: 2%;
 }
 
-.post-header .cancel {
+.posting-post-header .posting-cancel {
   color: var(--primary-300);
   cursor: pointer;
   transition: color 0.3s;
 }
 
-.post-header .cancel:hover {
+.posting-post-header .posting-cancel:hover {
   color: var(--primary--100);
 }
 
-.post-header .title {
+.posting-post-header .posting-title {
   font-size: 36px;
   font-weight: bold;
   color: var(--primary--100);
 }
 
 
-.post-body {
+.posting-post-body {
   position: absolute;
   top: 25%;
   left: 7%;
 }
 
-.post-input-section {
+.posting-post-input-section {
   position: relative;
   display: flex;
   align-items: center;
@@ -72,13 +85,13 @@
   width: 100%;
 }
 
-.post-input-section .avatar {
+.posting-post-input-section .posting-avatar {
   width: 9%;
   height: 9%;
   border-radius: 50%;
 }
 
-.post-input-section .username {
+.posting-post-input-section .posting-username {
   position: absolute;
   top: 10%;
   left: 12%;
@@ -88,14 +101,14 @@
 }
 
 
-.post-input-section .textbox {
+.posting-post-input-section .posting-textbox {
   position: absolute;
   top: 40%;
   left: 12%;
   opacity: 1;
 }
 
-.post-input-section .textbox input {
+.posting-post-input-section .posting-textbox input {
   width: 100%;
   height: 40px;
   padding-left: 12px;
@@ -113,36 +126,36 @@
 }
 
 
-.post-input-section .textbox input:hover {
+.posting-post-input-section .posting-textbox input:hover {
   color: var(--neutral-400); 
   box-shadow: 0 1px 0 var(--neutral-400); 
 }
 
 
-.post-input-section .textbox input:focus {
+.posting-post-input-section .posting-textbox input:focus {
   color: var(--neutral-400); 
   box-shadow: 0 1px 0 var(--neutral-400); 
 }
 
 
-.post-input-section .textbox input:disabled {
+.posting-post-input-section .posting-textbox input:disabled {
   color: var(--neutral-400); 
   box-shadow: 0 1px 0 var(--neutral-400); 
 }
 
 
-.post-actions {
+.posting-post-actions {
   display: grid;
   position: absolute;
   grid-template-columns: repeat(5, auto);
-  top: 140%;
+  top: 200%;
   left: 10%;
   width: 50%;
   max-width: 300px;
   height: auto;
 }
 
-.post-actions .icon {
+.posting-post-actions .posting-icon {
   width: clamp(20px, 2vw, 26px);
   height: clamp(20px, 2vw, 26px);
   fill: var(--neutral-400); 
@@ -159,13 +172,13 @@
     color 0.3s;
 }
 
-.post-actions .icon:hover {
+.posting-post-actions .posting-icon:hover {
   background: var(--primary-450);
   color: var(--primary--100);
 }
 
 
-.post-actions .post-btn {
+.posting-post-actions .posting-post-btn {
   padding: 10px 20px;
   background: var(--primary-350);
   color: var(--primary--100);
@@ -178,7 +191,7 @@
 }
 
 
-.post-button {
+.posting-post-button {
   position: absolute;
   top: 75%;
   left: 80%;
@@ -201,56 +214,56 @@
 }
 
 
-.post-button:hover {
+.posting-post-button:hover {
   color: var(--neutral-300); 
   background: var(--primary-400); 
 }
 
-.post-button:hover:active {
+.posting-post-button:hover:active {
   color: var(--neutral-300); 
   background: var(--primary-500);  
 }
 
-.post-button:disabled {
+.posting-post-button:disabled {
   opacity: 0.4;
 }
 
 
 
 @media screen and (max-width: 768px) {
-  .post-container {
+  .posting-post-container {
     width: 85%;
     height: 50%;
     border-radius: 8%;
   }
 
-  .post-header {
+  .posting-post-header {
     gap: 20%;
     top: 5%;
     left: 5%;
   }
 
-  .line-header {
+  .posting-line-header {
     top: 14%;
   }
 
-  .post-body {
+  .posting-post-body {
     top: 18%;
     left: 5%;
   }
 
-  .post-input-section .avatar {
+  .posting-post-input-section .posting-avatar {
     width: 15%;
     height: 15%;
   }
 
-  .post-input-section .username {
+  .posting-post-input-section .posting-username {
     top: 10%;
     left: 20%;
     font-size: 15px;
   }
 
-  .post-input-section .textbox {
+  .posting-post-input-section .textbox {
 
     top: 60%;
     left: 20%;
@@ -258,7 +271,7 @@
     height: 40%;
   }
 
-  .post-input-section .textbox input {
+  .posting-post-input-section .posting-textbox input {
     height: 30px;
     padding-left: 8px;
     padding-right: 8px;
@@ -267,23 +280,23 @@
 
   }
 
-  .post-actions {
+  .posting-post-actions {
     top: 130%;
     left: 20%;
     grid-template-columns: repeat(5, auto);
   }
 
-  .post-actions .icon {
+  .posting-post-actions .icon {
     width: 25px;
     height: 25px;
   }
 
-  .post-actions .post-btn {
+  .posting-post-actions .post-btn {
     padding: 1px 2px;
     font-size: 13px;
   }
 
-  .post-button {
+  .posting-post-button {
     top: 70%;
     left: 70%;
     width: 20%;

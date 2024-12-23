@@ -1,15 +1,14 @@
-// write a function to show a popup as a modal dialog box in file html ./posting/posting.html
-
 function showPopup() {
     const popup = document.getElementById("posting");
-    console.log(popup);  
-    // add display
-    popup.style.display = "block";
-} 
+    if (!popup) {
+        console.error("Popup element not found!");
+        return;
+    }
+    popup.style.display = "flex";
+}
+
 
 function hidePopup() {
     const popup = document.getElementById("posting");
-    console.log(popup);  
-    // add display
     popup.style.display = "none";
 }
