@@ -122,12 +122,6 @@ body {
     color: var(--primary-100);
 }
 
-.profile-header .profile-info p {
-    font-size: 0.9rem;
-    padding-top: 0.4rem;
-    color: #bbbbbb;
-}
-
 .profile-section .edit-profile {
   display: flex;
   justify-content: center;
