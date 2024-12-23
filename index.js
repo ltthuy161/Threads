@@ -51,9 +51,10 @@ app.engine(
 );
 app.set("view engine", "hbs");
 
+app.use("/", threadRoutes);
 app.use("/", userRoutes);
 app.use("/", notiRoutes);
-app.use("/thread", threadRoutes);
+
 
 app.get("/", (req, res) => {
     res.render("init", {
@@ -143,10 +144,8 @@ app.get("/follower", (req, res) => {
 });
 
 app.get('/homepage', (req, res) => {
-    res.redirect('/threads');
+    res.redirect('/threads/');
 });
-app.use('/threads', threadRoutes);
-
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
