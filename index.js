@@ -128,21 +128,21 @@ app.get("/edit-profile", (req, res) => {
     });
 });
 
-app.get("/following", (req, res) => {
-    res.render("following", {
-        title: "Following",
-        css: "/css/following.css",
-        hasSidebar: false,
-    });
-});
+// app.get("/following", (req, res) => {
+//     res.render("following", {
+//         title: "Following",
+//         css: "/css/following.css",
+//         hasSidebar: false,
+//     });
+// });
 
-app.get("/follower", (req, res) => {
-    res.render("follower", {
-        title: "Follower",
-        css: "/css/follower.css",
-        hasSidebar: false,
-    });
-});
+// app.get("/follower", (req, res) => {
+//     res.render("follower", {
+//         title: "Follower",
+//         css: "/css/follower.css",
+//         hasSidebar: false,
+//     });
+// });
 
 app.get('/homepage', (req, res) => {
     res.redirect('/threads/');
