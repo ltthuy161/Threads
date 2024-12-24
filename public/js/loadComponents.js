@@ -1,37 +1,23 @@
-function loadComponent(componentId, filePath) {
-  return new Promise((resolve, reject) => {
-    fetch(filePath)
-      .then((response) => {
-        if (!response.ok) {
-          reject(new Error(`Failed to load ${filePath}`)); 
-        }
-        return response.text();
-      })
-      .then((data) => {
-        document.getElementById(componentId).innerHTML = data;
-        resolve(); 
-      })
-      .catch((error) => {
-        console.error(error);
-        reject(error); 
-      });
-  });
-}
+document.addEventListener("DOMContentLoaded", () => {
+    initializeOverlay(); 
+});
 
 
-function setActiveIcon(activeIconId) {
+
+function setActiveIcon(activeIconId) {  
   const buttons = document.querySelectorAll('.navigation-button');
   buttons.forEach((button) => {
-      const icon = button.querySelector('i');
-      if (button.id === activeIconId) {
-          icon.classList.add('active');
-          icon.classList.remove('inactive');
-      } else {
-          icon.classList.add('inactive');
-          icon.classList.remove('active');
-      }
+      button.classList.remove('active');
+      button.classList.add('inactive');
   });
+  
+  const activeButton = document.getElementById(activeIconId);
+  if (activeButton) {
+      activeButton.classList.add('active');
+      activeButton.classList.remove('inactive');
+  }
 }
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
