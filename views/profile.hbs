@@ -1,8 +1,4 @@
 <div class="main-content">
-    <div class="page-header">
-        <h2>Profile</h2>
-    </div>
-    
     <header class="header post-detail-header" style="display: none;">
         <button class="navigation-button" id="prev" style="border: none; outline: none;" onclick="goToProfile()">
         <img src="../../assets/vendor/icons/prev.svg" alt="Icon description" class="icon" id="prev-icon" >
@@ -11,9 +7,9 @@
     </header>
 
     <div class="container-profile">
-    
+
         <div class="profile-section">
-        
+
             <div class="profile-header">
                 <div class="profile-info">
                     <h2>{{user.username}}</h2>
@@ -27,17 +23,64 @@
                     <img class="user-photo" src="{{user.profilePicture}}" alt="photo">
                 </div>
             </div>
-        
+
             <div class="edit-profile">
-                <button class="edit-button" onclick="location.href='/edit-profile'">Edit profile</button>
+                {{!-- Check if this is the logged-in user's profile --}}
+                {{#if isCurrentUser}}
+                    <button class="edit-button" onclick="location.href='/edit-profile'">Edit profile</button>
+                {{else}}
+                    {{!-- Check if the logged-in user is following this user --}}
+                    {{#if isFollowing}}
+                        <button class="unfollow-button" data-user-id="{{user._id}}">Unfollow</button>
+                    {{else}}
+                        <button class="follow-button" data-user-id="{{user._id}}">Follow</button>
+                    {{/if}}
+                {{/if}}
             </div>
         </div>
         <div class="container-profile-post">
             <ul class="post-container-profile"></ul>
         </div>
-    
+
     </div>
 </div>
+
+<script>
+    const followButton = document.querySelector(".follow-button");
+const unfollowButton = document.querySelector(".unfollow-button");
+
+if (followButton) {
+    followButton.addEventListener("click", async () => {
+        const userId = followButton.dataset.userId;
+        const response = await fetch(`/follow/${userId}`, { method: "POST" }); // Create a /follow route
+        if (response.ok) {
+            // Update button to "Unfollow"
+            followButton.textContent = "Unfollow";
+            followButton.classList.remove("follow-button");
+            followButton.classList.add("unfollow-button");
+            window.location.reload();
+        } else {
+            // Handle error
+        }
+    });
+}
+
+if (unfollowButton) {
+    unfollowButton.addEventListener("click", async () => {
+        const userId = unfollowButton.dataset.userId;
+        const response = await fetch(`/unfollow/${userId}`, { method: "POST" }); // Create an /unfollow route
+        if (response.ok) {
+            // Update button to "Follow"
+            unfollowButton.textContent = "Follow";
+            unfollowButton.classList.remove("unfollow-button");
+            unfollowButton.classList.add("follow-button");
+            window.location.reload();
+        } else {
+            // Handle error
+        }
+    });
+}
+</script>
 
 <div id="posting" style="display: none"></div>
 </body>

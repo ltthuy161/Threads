@@ -4,6 +4,8 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
 
+import Follow  from "../models/followModel.js";
+
 dotenv.config();
 const SECRET_KEY = process.env.SECRET_KEY;
 
@@ -279,7 +281,7 @@ export const getProfile = async (req, res) => {
     try {
 
         // test id
-        const userId = "676800579fdee627295c671c";
+        const userId = req.user.id;
     
         // Fetch the user from the database
         const user = await User.findById(userId);
@@ -300,6 +302,7 @@ export const getProfile = async (req, res) => {
             css: "/css/profile.css",
             hasSidebar: false, // or true if needed
             user: user, // Pass the user object to the template
+            isCurrentUser: true,
         });
 
     } catch (error) {
@@ -311,7 +314,7 @@ export const getProfile = async (req, res) => {
 // Function to render the edit profile form
 export const editProfile = async (req, res) => {
     try {
-        const userId = "676800579fdee627295c671c"; 
+        const userId = req.user.id;
     
         const user = await User.findById(userId);
     
@@ -324,16 +327,17 @@ export const editProfile = async (req, res) => {
             css: "/css/edit-profile.css",
             hasSidebar: false,
             user: user, // Pass the current user data to populate the form
+            isCurrentUser: true, 
         });
     } catch (error) {
         console.error("Error fetching user data for edit:", error);
         res.status(500).render("error", { message: "Internal Server Error" });
     }
-  };
+};
 
 export const updateProfile = async (req, res) => {
     try {
-        const userId = "676800579fdee627295c671c"; 
+        const userId = req.user.id;
 
         // Get the updated data from the request body
         const { name, bio } = req.body; 
@@ -363,5 +367,119 @@ export const updateProfile = async (req, res) => {
     } catch (error) {
         console.error("Error updating user profile:", error);
         res.status(500).render("error", { message: "Internal Server Error" });
+    }
+};
+
+export const getUserProfile = async (req, res) => {
+    try {
+        const loggedInUserId = req.user.id; // Logged-in user's ID
+        const userIdToView = req.params.userId; // ID of the user to view (get this from URL params)
+
+        // Fetch the user to view from the database
+        const userToView = await User.findById(userIdToView);
+
+        if (!userToView) {
+            return res.status(404).render("error", { message: "User not found" });
+        }
+
+        // Determine if the logged-in user is following the viewed user
+        // (You'll need to implement the logic to check your database for this)
+        const isFollowing = await checkIfFollowing(loggedInUserId, userIdToView);
+
+        // Add a temporary default image if profilePicture is null
+        if (!userToView.profilePicture) {
+            userToView.profilePicture = "../../assets/img/avatar/ava4.png";
+        }
+
+        console.log("helololo");
+
+        res.render("profile", {
+            title: "User Profile",
+            css: "/css/profile.css",
+            hasSidebar: false,
+            user: userToView,
+            isCurrentUser: false,
+            isFollowing: isFollowing,
+        });
+    } catch (error) {
+        console.error("Error fetching user profile:", error);
+        res.status(500).render("error", { message: "Internal Server Error" });
+    }
+};
+
+// Helper function to check if loggedInUserId is following userIdToView
+async function checkIfFollowing(loggedInUserId, userIdToView) {
+    try {
+        const followRelationship = await Follow.findOne({
+            followerId: loggedInUserId,
+            followeeId: userIdToView,
+        });
+        return !!followRelationship; // Returns true if a follow relationship exists, false otherwise
+    } catch (error) {
+        console.error("Error checking follow relationship:", error);
+        return false; // Return false on error (or handle it differently if needed)
+    }
+}
+
+export const followUser = async (req, res) => {
+    try {
+        const loggedInUserId = req.user.id;
+        const userIdToFollow = req.params.userId;
+
+        // Prevent user from following themselves
+        if (loggedInUserId === userIdToFollow) {
+            return res.status(400).json({ message: "You cannot follow yourself" });
+        }
+
+        // Check if already following
+        const existingFollow = await Follow.findOne({
+            followerId: loggedInUserId,
+            followeeId: userIdToFollow,
+        });
+
+        if (existingFollow) {
+            return res.status(400).json({ message: "Already following this user" });
+        }
+
+        // Create follow relationship
+        const newFollow = new Follow({
+            followerId: loggedInUserId,
+            followeeId: userIdToFollow,
+        });
+        await newFollow.save();
+
+        res.status(200).json({ message: "Followed successfully" });
+        
+    } catch (error) {
+        console.error("Error following user:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+export const unfollowUser = async (req, res) => {
+    try {
+        const loggedInUserId = req.user.id;
+        const userIdToUnfollow = req.params.userId;
+
+        // Check if following
+        const existingFollow = await Follow.findOne({
+            followerId: loggedInUserId,
+            followeeId: userIdToUnfollow,
+        });
+
+        if (!existingFollow) {
+            return res.status(400).json({ message: "Not following this user" });
+        }
+
+        // Delete follow relationship
+        await Follow.deleteOne({
+            followerId: loggedInUserId,
+            followeeId: userIdToUnfollow,
+        });
+
+        res.status(200).json({ message: "Unfollowed successfully" });
+    } catch (error) {
+        console.error("Error unfollowing user:", error);
+        res.status(500).json({ message: "Internal Server Error" });
     }
 };
