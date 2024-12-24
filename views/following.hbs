@@ -1,33 +1,31 @@
-<div class="main-content">
-    <header class="header homepage-header fixed-top m-auto w-50 h-auto pt-3">
-        {{!-- <div class="x-button">
-            <a href="/profile">
-                <img src="../../assets/vendor/icons/close.svg" alt="Icon description" class="icon">
-            </a>
-        </div> --}}
-        <div class="tabs w-100 d-flex">
-            <button class="tab d-flex justify-content-center align-items-center shadow-none w-50 p-3" onclick="location.href='/follower/{{userId}}'"><span>Follower</span></button>
-          <button class="tab active d-flex justify-content-center align-items-center shadow-none w-50 p-3" onclick="location.href='/following/{{userId}}'"><span>Following</span></button>
-        </div>
-    </header>
-    
-    <div class="container">
-        <!-- Following List -->
-        <div class="following-list">
-            {{#each users}}
-            <div class="following">
-                <a href="/profile/{{this._id}}"> 
-                    <img src="{{#if this.profilePicture}}{{this.profilePicture}}{{else}}../../assets/img/avatar/ava4.png{{/if}}" alt="Avatar" class="avatar">
-                </a>
-                <div class="user-info">
-                    <a href="/profile/{{this._id}}" style="text-decoration: none;"> 
-                        <p class="username">{{this.username}}</p>
-                    </a>
-                </div>
-            </div>
-            {{/each}}
-
-        </div>
+<div class="header homepage-header fixed-top m-auto w-50 h-auto pt-3">
+    <div class="topbar">
+        <button class="back-btn" href="" onclick="history.back()">
+            <img src="../../assets/vendor/icons/left-arrow.svg" alt="Icon description" class="icon">
+        </button>
+        <h4>{{user.username}}</h4>
     </div>
-    
+    <div class="tabs w-100 d-flex">
+        <button class="tab d-flex justify-content-center align-items-center shadow-none w-50 p-3" onclick="location.href='/follower/{{user._id}}'"><span>Follower</span></button>
+        <button class="tab active d-flex justify-content-center align-items-center shadow-none w-50 p-3" onclick="location.href='/following/{{user._id}}'"><span>Following</span></button>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Following List -->
+    <div class="following-list">
+        {{#each users}}
+        <div class="following">
+            <a href="/profile/{{this._id}}"> 
+                <img src="{{#if this.profilePicture}}{{this.profilePicture}}{{else}}../../assets/img/avatar/ava4.png{{/if}}" alt="Avatar" class="avatar">
+            </a>
+            <div class="user-info">
+                <a href="/profile/{{this._id}}" style="text-decoration: none"> 
+                    <p class="username">{{this.username}}</p>
+                </a>
+            </div>
+        </div>
+        {{/each}}
+
+    </div>
 </div>

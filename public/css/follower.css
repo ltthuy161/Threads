@@ -11,36 +11,41 @@
     background-color: var(--primary-900);
   }
   
-  .main-content {
-    flex-grow: 1;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    padding-bottom: 0;
-    background-color: var(--primary-900);
-  }
-  
   .header {
-    margin-top: 0;
+    /* position: fixed; */
     background-color: inherit;
     display: flex;
+    flex-direction: column;
+  }
+
+  .topbar {
+    display: flex;
     flex-direction: row;
+  }
+
+  .back-btn {
+    background-color: transparent;
+    margin-left: 1rem;
+    border-style: none;
+  }
+
+  .topbar h4 {
+    align-self: center;
+    font-weight: 600;
   }
   
   .container {
     position: fixed;
-    top: 5rem;
+    top: 6rem;
     width: 50%;
     height: 100%;
     background-color: var(--primary-700);
     border-radius: 20px 20px 0 0;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    overflow-y: scroll; 
-    scrollbar-width: none;
+    /* overflow-y: scroll; 
+    scrollbar-width: none; */
   }
+
   
 .tab {
     background-color: var(--primary-900);
@@ -71,16 +76,17 @@
   }
   
   /* Following List */
-  .follower-list {
+  .following-list {
     display: flex;
     flex-direction: column;
     width: 100%;
     padding: 1rem;
     margin-top: 1rem;
+    
   }
   
   /* Individual Suggestion Item */
-  .follower {
+  .following {
     display: flex;
     align-items: center;
     padding: 0;
@@ -88,7 +94,7 @@
     margin-bottom: 1rem;
   }
   
-  .follower:first-child {
+  .following:first-child {
     border-top: none; /* Remove top border for the first item */
   }
   
@@ -107,46 +113,6 @@
     margin-bottom: 0.8rem;
   }
   
-  /* Follow Button (Absolute Position in Search Container) */
-  .button {
-    top: 3px; 
-    left: 498px; 
-    height: 36px; 
-    padding: 0 12px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    font-size: 14px; 
-    line-height: 22px; 
-    font-weight: 400; 
-    color: #DEE1E6FF; /* neutral-300 */
-    background: #110D26FF; /* secondary-500 */
-    opacity: 1; 
-    border-radius: 12px; /* border-m */
-    border-width: 1px; 
-    border-color: #8E69DAFF; /* tertiary3-500 */
-    border-style: solid; 
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  /* Hover State */
-  .button:hover {
-    background: #110D26FF; /* secondary-500 */
-    color: #8E69DAFF; /* neutral-300 */
-  }
-  
-  /* Pressed State */
-  .button:active {
-    background: #110D26FF; /* secondary-500 */
-    color: #DEE1E6FF; /* neutral-300 */
-  }
-  
-  /* Disabled State */
-  .button:disabled {
-    opacity: 0.4;
-  }
-  
   /* Responsive cho Mobile */
   @media screen and (max-width: 768px) {
     /* Body */
@@ -159,8 +125,13 @@
       width: 100% !important;
       height: 2.5rem !important;
       top: 2.5rem;
+
     }
   
+    .topbar h4 {
+        margin-left: 8rem;
+      }
+
     .tabs {
       height: 2.5rem;
     }
@@ -172,10 +143,9 @@
     }
   
     .container {
-        top: 4rem;
-        width: 100%;
-        height: calc(100vh - 4rem);
-        border-radius: 0;
-      }
-
+      top: 7rem;
+      width: 100%;
+      height: calc(100vh - 4rem);
+      border-radius: 0;
+    }
   }

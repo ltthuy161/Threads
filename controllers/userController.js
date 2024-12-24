@@ -510,6 +510,7 @@ export const getFollowers = async (req, res) => {
 
         // Extract the follower data
         const followerUsers = followers.map((follow) => follow.followerId);
+        const currentUsername = req.user.username; 
 
         res.render("follower", {
             title: "Followers",
@@ -517,7 +518,7 @@ export const getFollowers = async (req, res) => {
             hasSidebar: false,
             users: followerUsers,
             isFollowerPage: true,
-            userId,
+            user: user,
         });
     } catch (error) {
         console.error("Error fetching followers:", error);
@@ -549,7 +550,7 @@ export const getFollowing = async (req, res) => {
             hasSidebar: false,
             users: followingUsers,
             isFollowerPage: false,
-            userId,
+            user: user,
         });
     } catch (error) {
         console.error("Error fetching following:", error);
