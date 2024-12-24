@@ -47,6 +47,7 @@ app.engine(
                     day: "numeric",
                 });
             },
+            eq: (a, b) => a === b 
         }
     })
 );
@@ -95,20 +96,13 @@ app.get("/email-authentication", (req, res) => {
     });
 });
 
-app.get("/posting", (req, res) => {
-    res.render("posting", {
-        title: "Posting",
-        hasSidebar: true,
-        css: "/css/posting.css",
-        js: "/js/showPopup.js",
-    });
-})
 
 app.get("/notification", (req, res) => {
     res.render("notification", {
         title: "Notification",
         hasSidebar: true,
         css: "/css/notification.css",
+        activeIcon: 'noti-icon',
     });
 });
 
@@ -117,6 +111,7 @@ app.get("/profile", (req, res) => {
         title: "Threads - Profile",
         css: "/css/profile.css",
         hasSidebar: false,
+        activeIcon: "",
     });
 });
 
@@ -125,24 +120,9 @@ app.get("/edit-profile", (req, res) => {
         title: "Edit Profile",
         css: "/css/edit-profile.css",
         hasSidebar: false,
+        activeIcon: "",
     });
 });
-
-// app.get("/following", (req, res) => {
-//     res.render("following", {
-//         title: "Following",
-//         css: "/css/following.css",
-//         hasSidebar: false,
-//     });
-// });
-
-// app.get("/follower", (req, res) => {
-//     res.render("follower", {
-//         title: "Follower",
-//         css: "/css/follower.css",
-//         hasSidebar: false,
-//     });
-// });
 
 app.get('/homepage', (req, res) => {
     res.redirect('/threads/');

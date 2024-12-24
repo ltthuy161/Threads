@@ -39,6 +39,7 @@ controller.getAllThreads = async (req, res) => {
             title: 'Homepage',
             css: '/css/homepage.css',
             hasSidebar: true,
+            activeIcon: 'home-icon',
             threads
         });
     } catch (error) {
