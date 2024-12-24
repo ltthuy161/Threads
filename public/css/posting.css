@@ -65,9 +65,10 @@
 }
 
 .posting-post-header .posting-title {
-  font-size: 36px;
+  font-size: 26px;
   font-weight: bold;
   color: var(--primary--100);
+  margin-bottom: 10px;
 }
 
 
@@ -155,6 +156,10 @@
   height: auto;
 }
 
+.posting-post-actions input {
+  display: none;
+}
+
 .posting-post-actions .posting-icon {
   width: clamp(20px, 2vw, 26px);
   height: clamp(20px, 2vw, 26px);
@@ -226,6 +231,20 @@
 
 .posting-post-button:disabled {
   opacity: 0.4;
+}
+
+.posting-textbox textarea {
+  color: var(--primary--100);
+  background-color: var(--primary-900);
+  margin-left: 25px; 
+  margin-top: 10px;
+  width: 200px;
+  height: 30px;
+}
+
+.posting-textbox textarea:focus {
+  color: var(--primary--100);
+  background-color: var(--primary-900);
 }
 
 

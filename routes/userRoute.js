@@ -9,6 +9,7 @@ import {
     getProfile,
     editProfile,
     updateProfile,
+    logoutUser,
 } from "../controllers/userController.js";
 
 const router = Router();
@@ -18,6 +19,7 @@ router.post("/signin", loginUser);
 router.get("/email-authentication/:token", verifyEmail);
 router.post("/save-user", saveUser);
 router.post("/forgot-password", requestPasswordReset);
+router.get("/logout", logoutUser);
 // Route xử lý logic reset password
 router.get("/reset-password/:token", resetPassword);
 

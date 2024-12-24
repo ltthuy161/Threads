@@ -158,6 +158,10 @@ export const loginUser = async (req, res) => {
             { expiresIn: "1h" } // Token expiration time
         );
         console.log("Generated Token:", token);
+        
+        // set user in session
+        res.user = existingUser;
+        console.log("User:", req.params.user);
         // Set token in cookie
         res.cookie("token", token, {
             httpOnly: true,

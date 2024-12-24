@@ -1,10 +1,11 @@
 import Notification from '../models/notiModel.js';
 
-
 import Thread from '../models/threadModel.js';
 import {User} from '../models/userModel.js';
 import Like from '../models/likeModel.js';
-import { create } from 'hbs';
+import jwt from 'jsonwebtoken';
+import dotenv from "dotenv";
+
 
 async function createThreadObject() {
     try {
@@ -78,11 +79,17 @@ export const createNotification = async (req, res) => {
 
 // Lấy tất cả thông báo của một người dùng
 export const getNotificationsByUser = async (req, res) => {
+    // Xác minh token
+    const token = req.cookies.token;
+    console.log("token: ", token);
+    // get user id from token
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    console.log("decoded: ", decoded);
     try {
-        // const { userId } = req.params;
-        // get the first user and get id
-        const firstUser = await User.findOne();
-        const firstID = firstUser._id;
+        const firstID = decoded.id;
+        console.log(firstID);
+
+        
         // console.log(firstUser.email);
         if (!firstID) {
             return res.status(400).json({ error: 'userId is required' });
@@ -90,7 +97,6 @@ export const getNotificationsByUser = async (req, res) => {
 
         // Fetch all notifications from MongoDB
         const notifications = await Notification.find({ userId: firstID }).sort({ createdAt: -1 });
-        //res.status(200).json({ data: notifications });
         
         // extract information from notifications is type = like
         const likeNotifications = notifications.filter(notification => notification.type === 'like');
@@ -101,8 +107,7 @@ export const getNotificationsByUser = async (req, res) => {
         // get thread from likes
         const threadIds = likes.map(like => like.threadId);
         const threads = await Thread.find({ _id: { $in: threadIds } });
-        // get thread content
-        console.log("id: ", threads);
+        
         const threadContents = threads.map(thread => thread.content);
         console.log(threadContents);
         // get user who created the thread
@@ -139,11 +144,6 @@ export const getNotificationsByUser = async (req, res) => {
             css: "/css/notification.css",
             notifications: notificationsInfo
         });
-        // res.render("notification", {
-        //     title: "Notification",
-        //     hasSidebar: true,
-        //     css: "/css/notification.css",
-        // });
        
     } catch (error) {
         console.error(error);
