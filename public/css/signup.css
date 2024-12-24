@@ -147,6 +147,21 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.signin-link {
+    display: inline-block;
+    font-size: 14px;
+    font-style: italic; 
+    color: var(--primary-100);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    text-align: center;
+    margin-top: -1rem;
+  }
+  
+.signin-link:hover {
+    color: var(--primary-400);
+  }
 
 @media (max-width: 768px) {
   .container {
