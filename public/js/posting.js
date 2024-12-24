@@ -9,7 +9,7 @@ document.querySelectorAll('#posting-form, #reply-form').forEach((form) => {
         let base64Image = null;
         if (imageInput && imageInput.files.length > 0) {
             const file = imageInput.files[0];
-            if (file.size > 10 * 1024 * 1024) {
+            if (file.size > 20 * 1024 * 1024) {
                 alert('File size exceeds 10MB. Please upload a smaller file.');
                 return;
             }

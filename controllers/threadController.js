@@ -53,7 +53,7 @@ controller.createThread = async (req, res) => {
     try {
         const { content, image, parentThreadId } = req.body;
         const userId = req.user.id;
-
+        
         if (!userId || !content) {
             return res.status(400).json({ error: 'User ID and content are required' });
         }
@@ -95,7 +95,7 @@ controller.showDetails = async (req, res) => {
 
         const replies = await Thread.find({ parentThreadId: id })
             .populate('userId', 'username profilePicture')
-            .sort({ createdAt: 1 });
+            .sort({ createdAt: -1 });
         
         res.render('detailPost', {
             title: `Post by ${thread.userId.username}`,
