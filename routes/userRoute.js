@@ -9,8 +9,12 @@ import {
     getProfile,
     editProfile,
     updateProfile,
+    getUserProfile,
+    followUser,
+    unfollowUser,
     logoutUser,
 } from "../controllers/userController.js";
+import { protectRoute } from "./protectRoute.js";
 
 const router = Router();
 
@@ -24,9 +28,14 @@ router.get("/logout", logoutUser);
 router.get("/reset-password/:token", resetPassword);
 
 // Route to get user profile
-router.get("/profile", getProfile);
+router.get("/profile", protectRoute, getProfile);
 
-router.get("/edit-profile", editProfile);
-router.post("/edit-profile", updateProfile); // Handle form submission with POST
+router.get("/edit-profile", protectRoute, editProfile);
+router.post("/edit-profile", protectRoute, updateProfile); // Handle form submission with POST
+
+router.get("/profile/:userId", protectRoute, getUserProfile);
+
+router.post("/follow/:userId", protectRoute, followUser);
+router.post("/unfollow/:userId", protectRoute, unfollowUser);
 
 export default router;

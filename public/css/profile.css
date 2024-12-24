@@ -128,7 +128,7 @@ body {
   background-color: inherit;
 }
 
-.edit-button {
+.edit-button, .unfollow-button, .follow-button {
     max-width: 400px;
     width: 70%;
     padding: 10px;
@@ -144,13 +144,13 @@ body {
 }
 
 
-.edit-button:hover {
+.edit-button:hover, .unfollow-button:hover, .follow-button:hover {
     background-color: #5D5AACFF;
     color: var(--primary-100);
 }
 
 
-.edit-button:active {
+.edit-button:active, .unfollow-button:active, .follow-button:active {
     background-color: #4D4A8A;
     border-color: #4D4A8A;
 }

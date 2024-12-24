@@ -6,7 +6,7 @@
             <a class="email text-secondary me-2 text-decoration-none" href=""><span>{{userId.username}}</span></a>
             <time class="timestamp">{{formatDate createdAt}}</time>
         </header>
-        <p class="text my-2 text-light mt-1 mb-1">{{content}}</p>
+        <p class="content-text my-2 text-light mt-1 mb-1">{{content}}</p>
         {{#if image}}
         <div class="image"><img src="{{image}}" alt="Attached Image" /></div>
         {{/if}}
@@ -23,6 +23,7 @@
                 <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">10</span> 
             </div>
         </div>
+        
     </div>
 </li>
 

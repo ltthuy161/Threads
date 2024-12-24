@@ -107,6 +107,10 @@ body {
   color: var(--primary-300);
 }
 
+.content-text {
+  font-size: 18px;
+}
+
 .image img {
   max-width: 70%;
   border-radius: 10px;
@@ -146,9 +150,13 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5); 
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+}
+.reply-box-container.show { 
+  display: flex;
 }
 .reply-box-content {
   background-color: var(--primary-900); 
@@ -218,4 +226,78 @@ body {
 
 .reply-actions i:hover {
   background-color: rgba(255, 255, 255, 0.1); 
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+  body {
+    flex-direction: column;
+  } 
+  .header {
+    border-radius: 0;
+    width: 100% !important;
+    height: 2.8rem !important;
+    top: 2.5rem;
+  }
+  .tabs {
+    height: 2.5rem;
+  }
+  .tab {
+    height: 2.5rem;
+    border-radius: 0;
+    font-size: 14px;
+  }
+
+  .container-homepage {
+    top: 5.5rem;
+    width: 100% !important;
+    height: 100vh;
+    border-radius: 0px 0px 0px 0px;
+    padding-bottom: 8em;
+  }
+
+  .post-container-homepage {
+    height: 90%;
+    padding-bottom: 8em;
+  }
+
+  .post {
+    padding: 0.5rem; 
+  }
+
+  .post-detail-header #prev {
+    margin-left: 1rem !important;
+    margin-top: 0rem !important;
+    width: 1.8rem !important;
+    height: 1.8rem !important;
+  }
+  .post-detail-header i {
+    margin-top: 0rem !important;
+    font-size: 1rem !important;
+  }
+
+  .post-title {
+    font-size: 20px !important;
+    padding-top: 0rem !important;
+  }
+  
+  .avt-container {
+    width: 30px;
+    height: 30px;
+  }
+
+  .avt-photo {
+    width: 30px;
+  }
+
+  .content {
+    font-size: 14px;
+  }
+
+  .reply-box-content {
+    width: 90%;
+    min-height: 50%;
+  }
 }
