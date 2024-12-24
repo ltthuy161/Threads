@@ -8,64 +8,14 @@
     </header>
     <div class="container-homepage position-fixed w-50">
         <ul class="post-container-homepage list-unstyled w-100 h-100 overflow-auto">
-            <li class="post w-100 p-3 mb-2 d-flex">
-                <a class="avt-container" href=""><img class="avt-photo rounded-circle" src="{{thread.userId.profilePicture}}" alt="photo"></a>
-                <div class="content flex-grow-1">
-                    <header class="d-flex align-items-center mb-1">
-                        <a class="username fw-bold me-1 text-decoration-none" href=""><span>{{thread.userId.username}}</span></a>
-                        <a class="email text-secondary me-2 text-decoration-none" href=""><span>{{thread.userId.username}}</span></a>
-                        <time class="timestamp">{{formatDate thread.createdAt}}</time>
-                    </header>
-                    <p class="content-text my-2 mt-1 mb-1">{{thread.content}}</p>
-                    {{#if thread.image}}
-                    <div class="image"><img src="{{thread.image}}" alt="Attached Image" /></div>
-                    {{/if}}
-                    <div class="interaction d-flex mt-2" style="gap: 2rem">
-                        <div class="interaction-button d-flex">
-                            <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
-                                  onclick="changeIcon(this)"><img src="/assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
-                            <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">10</span> 
-                        </div>
-                        <div class="interaction-button d-flex">
-                            <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
-                                  onclick="showReplyBox('{{thread._id}}')"><img src="/assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
-                            <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">10</span> 
-                        </div>
-                    </div>
-                </div>
-            </li>
+            {{> post thread}}
 
             <div class="reply">
                 <div class="fs-6 fw-normal text-light text-center pb-2">Replies</div>
             </div>
 
             {{#each replies}}
-            <li class="post w-100 p-3 mb-2 d-flex"  onclick="showPostDetail('{{this._id}}')">
-                <a class="avt-container" href=""><img class="avt-photo rounded-circle" src="{{this.userId.profilePicture}}" alt="photo"></a>
-                <div class="content flex-grow-1">
-                    <header class="d-flex align-items-center mb-1">
-                        <a class="username fw-bold me-1 text-decoration-none" href=""><span>{{this.userId.username}}</span></a>
-                        <a class="email text-secondary me-2 text-decoration-none" href=""><span>{{this.userId.username}}</span></a>
-                        <time class="timestamp">{{formatDate this.createdAt}}</time>
-                    </header>
-                    <p class="text my-2 text-light mt-1 mb-1">{{this.content}}</p>
-                    {{#if this.image}}
-                    <div class="image"><img src="{{this.image}}" alt="Attached Image" /></div>
-                    {{/if}}
-                    <div class="interaction d-flex mt-2" style="gap: 2rem">
-                        <div class="interaction-button d-flex">
-                            <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
-                                  onclick="changeIcon(this)"><img src="/assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
-                            <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">10</span> 
-                        </div>
-                        <div class="interaction-button d-flex">
-                            <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
-                                  onclick="showReplyBox('{{this._id}}')"><img src="/assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
-                            <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">10</span> 
-                        </div>
-                    </div>
-                </div>
-            </li>
+                {{> post this}}
             {{/each}}
         </ul>
       </div>

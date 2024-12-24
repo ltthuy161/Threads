@@ -1,14 +1,30 @@
 import Thread from '../models/threadModel.js';
 import { User } from '../models/userModel.js';
 import Follow from '../models/followModel.js';
+import Like from '../models/likeModel.js';
 
 const controller = {};
 
 controller.init = async (req, res, next) => {
     try {
-        res.locals.threads = await Thread.find({ parentThreadId: null })
+        const userId = req.user.id;
+        const threads = await Thread.find({ parentThreadId: null })
             .populate('userId', 'username profilePicture email')
             .sort({ createdAt: -1 }); 
+
+            const threadsWithLikes = await Promise.all(
+                threads.map(async (thread) => {
+                    const likeCount = await Like.countDocuments({ threadId: thread._id });
+                    const isLiked = await Like.exists({ threadId: thread._id, userId });
+                    const replies = await Thread.countDocuments({ parentThreadId: thread._id });
+                    thread.likeCount = likeCount;
+                    thread.isLiked = !!isLiked;
+                    thread.replyCount = replies;
+                    return thread;
+                })
+            );
+        
+        res.locals.threads = threadsWithLikes;
         next();
     } catch (error) {
         console.error('Error in init middleware:', error);
@@ -92,17 +108,36 @@ controller.showDetails = async (req, res) => {
         if (!thread) {
             return res.status(404).render('error', { message: 'Thread not found' });
         }
+        
+        const like_Count = await Like.countDocuments({ threadId: thread._id });
+        const is_Liked = await Like.exists({ threadId: thread._id, userId: thread.userId });
+        const reply_Count = await Thread.countDocuments({ parentThreadId: thread._id });
+        thread.likeCount = like_Count;
+        thread.isLiked = !!is_Liked;
+        thread.replyCount = reply_Count;
 
         const replies = await Thread.find({ parentThreadId: id })
             .populate('userId', 'username profilePicture')
             .sort({ createdAt: -1 });
+
+        const repliesWithLikes = await Promise.all(
+            replies.map(async (thread) => {
+                const likeCount = await Like.countDocuments({ threadId: thread._id });
+                const isLiked = await Like.exists({ threadId: thread._id, userId: thread.userId });
+                const replies = await Thread.countDocuments({ parentThreadId: thread._id });
+                thread.likeCount = likeCount;
+                thread.isLiked = !!isLiked;
+                thread.replyCount = replies;
+                return thread;
+            })
+        );
         
         res.render('detailPost', {
             title: `Post by ${thread.userId.username}`,
             css: '/css/homepage.css',
             hasSidebar: true,
             thread, 
-            replies
+            replies: repliesWithLikes,
         });
     } catch (error) {
         console.error("Error fetching thread detail:", error);

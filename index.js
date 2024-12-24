@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import userRoutes from "./routes/userRoute.js";
 import notiRoutes from "./routes/notiRoute.js";
 import threadRoutes from './routes/threadRoute.js';
+import likeRoutes from './routes/likeRoute.js';
 
 import path from "path";
 
@@ -54,7 +55,7 @@ app.set("view engine", "hbs");
 app.use("/", threadRoutes);
 app.use("/", userRoutes);
 app.use("/", notiRoutes);
-
+app.use("/", likeRoutes);
 
 app.get("/", (req, res) => {
     res.render("init", {

@@ -40,12 +40,43 @@ window.closeReplyBox = function () {
     replyBoxContainer.removeAttribute('data-thread-id'); 
 };
 
-function changeIcon(button) {
-    const img = button.querySelector("img"); 
+async function changeIcon(button, threadId) {
+    const img = button.querySelector("img");
+    const countSpan = button.parentElement.querySelector(".interaction-count"); 
     
-    if (img.src.includes("-2.svg")) {
+    let isLiked = img.src.includes("-2.svg");
+    if (isLiked) {
         img.src = img.src.replace("-2.svg", ".svg");
+        countSpan.textContent = parseInt(countSpan.textContent) - 1;
     } else {
         img.src = img.src.replace(".svg", "-2.svg");
+        countSpan.textContent = parseInt(countSpan.textContent) + 1;
+    }
+
+    try {
+        const response = await fetch('/toggle-like', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ threadId}),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            alert(result.error || 'Failed to toggle like');
+            if (isLiked) {
+                img.src = img.src.replace(".svg", "-2.svg");
+                countSpan.textContent = parseInt(countSpan.textContent) + 1;
+            } else {
+                img.src = img.src.replace("-2.svg", ".svg");
+                countSpan.textContent = parseInt(countSpan.textContent) - 1;
+            }
+        }
+    } catch (error) {
+        console.error('Error toggling like:', error);
+        alert('An error occurred while toggling like.');
     }
 }
+

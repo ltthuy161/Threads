@@ -14,13 +14,13 @@
         <div class="interaction d-flex mt-2" style="gap: 2rem">
             <div class="interaction-button d-flex">
                 <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
-                onclick="changeIcon(this)"><img src="/assets/vendor/icons/heart.svg" alt="Like Icon" class="icon"></button>
-                <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">10</span> 
+                onclick="changeIcon(this, '{{id}}')"><img src="/assets/vendor/icons/heart{{#if isLiked}}-2{{/if}}.svg" alt="Like Icon" class="icon"></button>
+                <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">{{likeCount}}</span> 
             </div>
             <div class="interaction-button d-flex">
                 <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
                 onclick="showReplyBox('{{id}}')"><img src="/assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
-                <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">10</span> 
+                <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">{{replyCount}}</span> 
             </div>
         </div>
         
