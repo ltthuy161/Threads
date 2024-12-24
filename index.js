@@ -121,6 +121,7 @@ app.get("/edit-profile", (req, res) => {
         css: "/css/edit-profile.css",
         hasSidebar: false,
         activeIcon: "",
+
     });
 });
 
