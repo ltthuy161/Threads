@@ -3,8 +3,12 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
+import fs from 'fs/promises'; 
+import path from 'path';
 
 import Follow  from "../models/followModel.js";
+import Thread from '../models/threadModel.js';
+import Like from '../models/likeModel.js';
 
 dotenv.config();
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -315,11 +319,6 @@ export const getProfile = async (req, res) => {
 
         const followerCount = await Follow.countDocuments({ followeeId: userId });
         const followingCount = await Follow.countDocuments({ followerId: userId });
-    
-        // Add a temporary default image if profilePicture is null
-        if (!user.profilePicture) {
-            user.profilePicture = "../../assets/img/avatar/ava4.png";
-        }
 
         // Render the profile view and pass the user data
         res.render("profile", {
@@ -352,7 +351,7 @@ export const editProfile = async (req, res) => {
         res.render("edit-profile", {
             title: "Edit Profile",
             css: "/css/edit-profile.css",
-            hasSidebar: false,
+            hasSidebar: true,
             user: user, // Pass the current user data to populate the form
             isCurrentUser: true, 
         });
@@ -365,24 +364,17 @@ export const editProfile = async (req, res) => {
 export const updateProfile = async (req, res) => {
     try {
         const userId = req.user.id;
+        const { name, bio, profilePicture } = req.body;
 
-        // Get the updated data from the request body
-        const { name, bio } = req.body; 
-
-        // Build the update object dynamically
         const updateObject = {};
-        if (name) {
-        updateObject.username = name;
-        }
-        if (bio) {
-        updateObject.bio = bio;
-        }
+        if (name) updateObject.username = name;
+        if (bio) updateObject.bio = bio;
+        if (profilePicture) updateObject.profilePicture = profilePicture;
 
-        // Find the user and update only the provided fields
         const updatedUser = await User.findByIdAndUpdate(
-        userId,
-        updateObject, // Pass the dynamic update object
-        { new: true } // Return the updated document
+            userId,
+            updateObject, // Pass the dynamic update object
+            { new: true } // Return the updated document
         );
 
         if (!updatedUser) {
@@ -390,7 +382,7 @@ export const updateProfile = async (req, res) => {
         }
 
         // Redirect to the profile page after successful update
-        res.redirect("/profile");
+        res.redirect(`/profile/${userId}`);
     } catch (error) {
         console.error("Error updating user profile:", error);
         res.status(500).render("error", { message: "Internal Server Error" });
@@ -414,19 +406,33 @@ export const getUserProfile = async (req, res) => {
 
         const isFollowing = await checkIfFollowing(loggedInUserId, userIdToView);
 
-        // Add a temporary default image if profilePicture is null
-        if (!userToView.profilePicture) {
-            userToView.profilePicture = "../../assets/img/avatar/ava4.png";
-        }
+        const threads = await Thread.find({ userId: userIdToView, parentThreadId: null })
+            .populate("userId", "_id username profilePicture")
+            .sort({ createdAt: -1 });
+
+        // Thêm thông tin likeCount, isLiked, replyCount vào từng thread
+        const threadsWithDetails = await Promise.all(
+            threads.map(async (thread) => {
+                const likeCount = await Like.countDocuments({ threadId: thread._id });
+                const isLiked = await Like.exists({ threadId: thread._id, userId: loggedInUserId });
+                const replies = await Thread.countDocuments({ parentThreadId: thread._id });
+                thread.likeCount = likeCount;
+                thread.isLiked = !!isLiked;
+                thread.replyCount = replies;
+                return thread;
+            })
+        );
+
         res.render("profile", {
-            title: "User Profile",
+            title: `${userToView.username}'s Profile`,
             css: "/css/profile.css",
-            hasSidebar: false,
+            hasSidebar: true,
             user: userToView,
-            isCurrentUser: false,
+            isCurrentUser: loggedInUserId === userIdToView,
             isFollowing: isFollowing,
-            followerCount: followerCount, // Pass the counts to the template
+            followerCount: followerCount,
             followingCount: followingCount,
+            threads: threadsWithDetails,
         });
     } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -434,7 +440,6 @@ export const getUserProfile = async (req, res) => {
     }
 };
 
-// Helper function to check if loggedInUserId is following userIdToView
 async function checkIfFollowing(loggedInUserId, userIdToView) {
     try {
         const followRelationship = await Follow.findOne({
@@ -533,7 +538,7 @@ export const getFollowers = async (req, res) => {
         res.render("follower", {
             title: "Followers",
             css: "/css/follower.css", // Assuming you're using the same CSS for both
-            hasSidebar: false,
+            hasSidebar: true,
             users: followerUsers,
             isFollowerPage: true,
             user: user,
@@ -565,7 +570,7 @@ export const getFollowing = async (req, res) => {
         res.render("following", {
             title: "Following",
             css: "/css/following.css",
-            hasSidebar: false,
+            hasSidebar: true,
             users: followingUsers,
             isFollowerPage: false,
             user: user,

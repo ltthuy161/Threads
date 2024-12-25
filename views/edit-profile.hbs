@@ -2,7 +2,7 @@
     <div class="container">
         <div class="container-header">
             <div class="x-button">
-                <a href="/profile">
+                <a href="/profile/{{user.id}}">
                     <img src="../../assets/vendor/icons/close.svg" alt="Icon description" class="icon">
                 </a>
             </div>
@@ -11,18 +11,68 @@
         </div>
 
         <div class="profile-edit">
-            <form id="profileForm" method="POST" action="/edit-profile">
+            <form id="profileForm" method="POST" action="/edit-profile/{{user.id}}" enctype="multipart/form-data">
                 <label for="name">Userame</label>
                 <input type="text" id="name" name="name" placeholder="{{user.username}}"/>
 
                 <label for="bio">Bio</label>
                 <textarea id="bio" name="bio" rows="3" placeholder="{{user.bio}}"></textarea>
+                <div class="avatar-edit">
+                    <img class="picture" id="profilePictureImg" src="{{#if user.profilePicture}}{{user.profilePicture}}{{else}}/assets/img/avatar/profile.png{{/if}}" alt="photo">
+                    <label for="profilePicture" class="edit-label">Edit</label>
+                    <input type="file" id="profilePicture" name="profilePicture" accept="image/*" style="display: none;" />
+                </div>
             </form>
-            <div class="avatar-edit">
-                <img class="picture" id="profilePictureImg" src="{{#if user.profilePicture}}{{user.profilePicture}}{{else}}../../assets/img/avatar/ava4.png{{/if}}" alt="photo">
-                <label for="profilePicture" class="edit-label">Edit</label>
-                <input type="file" id="profilePicture" name="profilePicture" accept="image/*" style="display: none;" />
-            </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.querySelector('#profileForm').addEventListener('submit', async (event) => {
+    event.preventDefault(); 
+
+    const form = event.target;
+    const name = form.querySelector('input[name="name"]').value;
+    const bio = form.querySelector('textarea[name="bio"]').value;
+    const avatarInput = form.querySelector('input[name="profilePicture"]');
+    let base64Avatar = null;
+
+    if (avatarInput && avatarInput.files.length > 0) {
+        const file = avatarInput.files[0];
+        if (file.size > 50 * 1024 * 1024) {
+            alert('File size exceeds 10MB. Please upload a smaller file.');
+            return;
+        }
+        base64Avatar = await toBase64(file);
+    }
+
+    const data = {
+        name,
+        bio,
+        profilePicture: base64Avatar,
+    };
+
+    try {
+        const userId = form.getAttribute('action').split('/').pop(); 
+        const response = await fetch(`/edit-profile/${userId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            alert(`Failed to update profile: ${response.status} ${response.statusText}`);
+            return;
+        }
+
+        window.location.href = `/profile/${userId}`;
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        alert('An error occurred while updating the profile');
+    }
+});
+
+
+</script>

@@ -9,9 +9,13 @@ import threadRoutes from './routes/threadRoute.js';
 import likeRoutes from './routes/likeRoute.js';
 
 import path from "path";
+import { protectRoute } from './routes/protectRoute.js';
 
 
 const app = express();
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
 const __dirname = path.resolve();
 // Cấu hình thư mục tĩnh
 app.use(express.static(__dirname + "/public"));
@@ -20,8 +24,6 @@ app.use(express.json()); // Middleware để parse JSON từ request body
 dotenv.config();
 
 // Middleware
-app.use(express.json({ limit: '20mb' }));
-app.use(express.urlencoded({ limit: '20mb', extended: true }));
 
 app.use(cookieParser());
 
@@ -47,7 +49,34 @@ app.engine(
                     day: "numeric",
                 });
             },
-            eq: (a, b) => a === b 
+            eq: (a, b) => a === b,
+            json: (obj) => {
+                if (obj === undefined || obj === null) {
+                    return ""; 
+                }
+                try {
+                    const jsonString = JSON.stringify(obj);
+                    return jsonString
+                        .replace(/</g, "\\u003c") 
+                        .replace(/>/g, "\\u003e")
+                        .replace(/&/g, "\\u0026")
+                        .replace(/'/g, "\\u0027")
+                        .replace(/"/g, "\\u0022");
+                } catch (error) {
+                    console.error("Error in JSON helper:", error, "Data:", obj);
+                    return "";
+                }
+            },
+            ifEquals: (arg1, arg2, options) => {
+                return (arg1 === arg2) ? options.fn(this) : options.inverse(this);
+            },
+            getDomain: (email) => {
+                if (!email || typeof email !== 'string') {
+                    return ''; 
+                }
+                const domain = email.split('@')[0]; 
+                return domain ? `@${domain}` : ''; 
+            }
         }
     })
 );
@@ -106,15 +135,6 @@ app.get("/notification", (req, res) => {
     });
 });
 
-app.get("/profile", (req, res) => {
-    res.render("profile", {
-        title: "Threads - Profile",
-        css: "/css/profile.css",
-        hasSidebar: false,
-        activeIcon: "",
-    });
-});
-
 app.get("/edit-profile", (req, res) => {
     res.render("edit-profile", {
         title: "Edit Profile",
@@ -125,7 +145,7 @@ app.get("/edit-profile", (req, res) => {
     });
 });
 
-app.get('/homepage', (req, res) => {
+app.get('/homepage', protectRoute, (req, res) => {
     res.redirect('/threads/');
 });
 

@@ -1,9 +1,15 @@
 <li class="post w-100 p-3 mb-2 d-flex" data-id="{{id}}" onclick="handlePostClick(event, this)">
-    <a class="avt-container" href="/profile/{{userId._id}}"><img class="avt-photo rounded-circle" src="{{userId.profilePicture}}" alt="photo"></a>
+    <a class="avt-container" href="/profile/{{userId._id}}">
+        {{#if userId.profilePicture}}
+            <img class="avt-photo rounded-circle" src="{{userId.profilePicture}}" alt="photo">
+        {{else}}
+            <img class="avt-photo rounded-circle" src="/assets/img/avatar/profile.png" alt="photo">
+        {{/if}}
+    </a>
     <div class="content flex-grow-1">
         <header class="d-flex align-items-center mb-1">
             <a class="username fw-bold me-1 text-decoration-none" href=""><span>{{userId.username}}</span></a>
-            <a class="email text-secondary me-2 text-decoration-none" href=""><span>{{userId.username}}</span></a>
+            <a class="email text-secondary me-2 text-decoration-none" href=""><span>{{getDomain userId.email}}</span></a>
             <time class="timestamp">{{formatDate createdAt}}</time>
         </header>
         <p class="content-text my-2 text-light mt-1 mb-1">{{content}}</p>
@@ -19,13 +25,13 @@
             </div>
             <div class="interaction-button d-flex">
                 <button class="d-flex justify-content-center align-items-center rounded-circle border-0 shadow-none" 
-                onclick="showReplyBox('{{id}}')"><img src="/assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
+                    onclick="showReplyBox('{{id}}', '{{userId.username}}', '{{userId.email}}', '{{formatDate createdAt}}', '{{content}}', '{{userId.profilePicture}}')">
+
+
+                    <img src="/assets/vendor/icons/chat.svg" alt="Comment Icon" class="icon"></button>
                 <span class="interaction-count d-flex justify-content-center align-items-center text-secondary">{{replyCount}}</span> 
             </div>
         </div>
         
     </div>
 </li>
-
-
-<script type="module" src="/js/detailPost.js"></script>

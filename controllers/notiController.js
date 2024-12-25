@@ -54,6 +54,7 @@ export const getNotificationsByUser = async (req, res) => {
         if (!firstID) {
             return res.status(400).json({ error: "userId is required" });
         }
+        const userToView = await User.findById(firstID);
 
         // Fetch all notifications from MongoDB
         const notifications = await Notification.find({
@@ -184,6 +185,7 @@ export const getNotificationsByUser = async (req, res) => {
             css: "/css/notification.css",
             notifications: notificationsInfo,
             activeIcon: "noti-icon",
+            user: userToView,
         });
     } catch (error) {
         console.error(error);

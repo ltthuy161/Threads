@@ -26,12 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-function handleAvatarClick() {
+function handleAvatarClick(userId) {
   if (window.innerWidth <= 768) {
     const overlay = document.querySelector('.mobile-overlay');
     overlay.classList.add('active');
   } else {
-    location.href = '../profile/profile.html';
+    location.href = `/profile/${userId}`;
   }
 }
 

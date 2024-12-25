@@ -81,6 +81,10 @@ body {
     justify-content: space-between;
 }
 
+.avatar-edit .user-photo {
+  object-fit: cover;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -133,6 +137,7 @@ input:focus, textarea:focus {
     border-radius: 50%;
     opacity: 0.85;
     display: block; /* Important for centering the label */
+    object-fit: cover;
   }
   
   .edit-label {

@@ -272,8 +272,9 @@
   }
 
   .posting-post-input-section .posting-avatar {
-    width: 15%;
-    height: 15%;
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
   }
 
   .posting-post-input-section .posting-username {

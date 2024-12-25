@@ -84,7 +84,7 @@ body {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    background-color: #aaa;
+    background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,6 +97,7 @@ body {
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .profile-header .profile-picture::after {
@@ -209,23 +210,13 @@ body {
 }
 
 .post, .reply {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 1rem;
-  margin-bottom: 0.5rem;
-  display: flex;
-  border-top: 0.5px solid #584F7EFF; 
+  border-bottom: 0.5px solid #584F7EFF; 
   cursor: pointer;
 }
 
-.reply h1 {
-  padding-left: 3rem;
-  font-size: 16px; 
+.reply .reply-heading {
   line-height: 26px; 
-  font-weight: 400; 
   color: #F8F9FAFF;
-  text-align: center;
-  padding-bottom: 0.5rem;
 }
 
 .avt-container {
@@ -237,33 +228,13 @@ body {
 
 .avt-photo {
   width: 40px;
-  border-radius: 50%;
+  height: 40px;
   object-fit: cover;
 }
 
-.content {
-  flex-grow: 1;
-}
-
-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
-}
-
 .username {
-  font-weight: bold;
   color:  var(--primary-150);
-  margin-right: 10px;
-  text-decoration: none;
   line-height: 21px;
-}
-
-.email {
-  color: var(--primary-200);
-  font-size: 0.9em;
-  margin-right: 10px;
-  text-decoration: none;
 }
 
 .timestamp {
@@ -271,10 +242,8 @@ header {
   color: var(--primary-300);
 }
 
-.text {
-  margin-top: 5px;
-  margin-bottom: 10px;
-  color: #F8F9FAFF;
+.content-text {
+  font-size: 18px;
 }
 
 .image img {
@@ -284,32 +253,16 @@ header {
   object-fit: contain;
 }
 
-.interaction {
-  display: flex;
-  gap: 2rem;
-  margin-top: 10px;
-}
-
-.interaction-button {
-  display: flex;
-}
-
 .interaction-button button {
   width: 30px;
   height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%; 
   background-color: inherit;
   cursor: pointer;
-  border: none;
-  outline: none;
   transition: background-color 0.3s ease;
 }
 
 .interaction-button button:hover {
-  background-color: var(--primary-200);;
+  background-color: var(--primary-200);
 }
 
 .interaction-button button:hover .icon {
@@ -325,37 +278,29 @@ header {
   filter: none !important;
 }
 
-.interaction-count {
-  margin-left: 0.3em; 
-  font-size: 14px;
-  color: #555; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .reply-box-container {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5); 
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
-
-.reply-box-content {
+.reply-box-container.show { 
   display: flex;
-  justify-content: center;
-  background-color: var(--primary-900);
-  width: 60%;
-  max-width: 500px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  border: 0.5px solid #584F7EFF !important; 
+}
+.reply-box-content {
+  background-color: var(--primary-900); 
+  max-width: 500px; 
+  min-height: 300px;
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  border: 1px solid #584F7E; 
+  overflow: hidden; 
 }
 
 .close-button {
@@ -369,38 +314,53 @@ header {
   color: var(--primary-100);
 }
 
-.reply-box-content .post {
-  border-bottom: none !important;
-}
-
-.reply-box-content .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 10px;
-  gap: calc(5rem - 10px);
-}
-
-.reply-content {
-  text-align: left;
+.reply-input {
+  background: none;
+  border: none; 
+  color: #9a9a9a; 
   font-size: 14px;
-  color: #ccc;
-  font-style: italic;
-  width: 100%;
+  width: 100%; 
+  outline: none;
+  padding: 5px 0;
 }
 
-.from-to {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 10px;
+.reply-input::placeholder {
+  color: #9a9a9a; 
+  opacity: 1; 
 }
 
-.connect-ava {
-  width: 2px;
-  height: 5rem;
-  background-color: #584F7E;
-  margin: 5px 0;
+.reply-input:focus {
+  color: #ffffff; 
+  border-bottom: 1px solid #9a9a9a; 
+}
+
+.reply-actions i {
+  font-size: 20px; 
+  color: #9a9a9a; 
+  transition: color 0.3s ease; 
+}
+
+.reply-actions i:hover {
+  color: var(--primary-200);
+}
+
+.reply-actions {
+  margin-top: 10px; 
+  margin-left: 35px;
+}
+
+.reply-actions label,
+.reply-actions button {
+  cursor: pointer;
+}
+
+.reply-actions i {
+  padding: 5px;
+  border-radius: 50%; 
+}
+
+.reply-actions i:hover {
+  background-color: rgba(255, 255, 255, 0.1); 
 }
 
 @media screen and (max-width: 768px) {
@@ -447,6 +407,7 @@ header {
 
   .avt-photo {
     width: 30px;
+    height: 30px;
   }
 
   .content {

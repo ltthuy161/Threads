@@ -17,6 +17,10 @@
   pointer-events: auto; 
 }
 
+.btn.user-photo-container img {
+  object-fit: cover;
+}
+
 .navigation-button,
 .footer-icon {
   width: 40px;
@@ -75,136 +79,137 @@
   left: 0px; 
   width: 226px; 
   height: 93%; 
-  background: var(--primary-600); /* primary-500 */
-  border-radius: 0px 18px 18px 0px; /* border-tr-none border-br-none */
-  box-shadow: 0px 28.5px 59px var(--primary-800), 0px 0px 2px #171a1f; /* shadow-xl */
+  background: var(--primary-600); 
+  border-radius: 0px 18px 18px 0px; 
+  box-shadow: 0px 28.5px 59px var(--primary-800), 0px 0px 2px #171a1f; 
 }
 
 .setting-container .post-header {
-position: absolute; 
-top: 21px; 
-left: 18px; 
-width: 123px; 
-height: 49px;
+  position: absolute; 
+  top: 21px; 
+  left: 18px; 
+  width: 123px; 
+  height: 49px;
 }
 
-/* Image 9 */
+
 .post-header .avatar {
-position: relative; 
-top: 0px; 
-left: 0px; 
-width: 50px; 
-height: 50px; 
-border-radius: 50%; 
+  position: relative; 
+  top: 0px; 
+  left: 0px; 
+  width: 50px; 
+  height: 50px; 
+  border-radius: 50%; 
+  object-fit: cover;
 }
 
 .post-header .user-info {
-position: absolute; 
-top: 10px; 
-left: 40px; 
-font-family: var(--font-family-heading), sans-serif;
-font-size: 12px; 
-line-height: 20px; 
-font-weight: 400; 
-color: #F8F9FAFF; /* neutral-150 */
+  position: absolute; 
+  top: 10px; 
+  left: 40px; 
+  font-family: var(--font-family-heading), sans-serif;
+  font-size: 12px; 
+  line-height: 20px; 
+  font-weight: 400; 
+  color: #F8F9FAFF; 
 }
 
 .post-header .user-details {
-position: absolute; 
-top: 31px; 
-left: 75px; 
-font-family: var(--font-family-heading), sans-serif;
-font-size: 11px; 
-line-height: 18px; 
-font-weight: 400; 
-color: #BDC1CAFF; /* neutral-400 */
+  position: absolute; 
+  top: 31px; 
+  left: 75px; 
+  font-family: var(--font-family-heading), sans-serif;
+  font-size: 11px; 
+  line-height: 18px; 
+  font-weight: 400; 
+  color: #BDC1CAFF; 
 }
 
 .follow {
-position: absolute; 
-top: 100px; 
-left: 10px; 
-width: 90%; 
-height: 5%; 
-background: inherit; /* primary-500 */
-border-bottom: var(--primary-400) 2px solid; /* border-primary-800 */
-padding-left: 10px;
+  position: absolute; 
+  top: 100px; 
+  left: 10px; 
+  width: 90%; 
+  height: 5%; 
+  background: inherit;
+  border-bottom: var(--primary-400) 2px solid; 
+  padding-left: 10px;
 }
 
 .follower-container {
-position: absolute; 
-top: 0px; 
-left: 0px; 
-font-family: var(--font-family-heading), sans-serif;
-font-size: 14px; 
-line-height: 22px; 
-font-weight: 400; 
-color: var(--primary-200);
-display: flex;
-gap: 5px;
+  position: absolute; 
+  top: 0px; 
+  left: 0px; 
+  font-family: var(--font-family-heading), sans-serif;
+  font-size: 14px; 
+  line-height: 22px; 
+  font-weight: 400; 
+  color: var(--primary-200);
+  display: flex;
+  gap: 5px;
 }
 
 .follower-container .follow-count {
-color: var(--primary-100)
+  color: var(--primary-100)
 }
 
 .following-container .follow-count {
-color: var(--primary-100)
+  color: var(--primary-100)
 }
 
 .following-container {
-position: absolute; 
-top: 0px; 
-left: 119px; 
-font-family: var(--font-family-heading), sans-serif;
-font-size: 14px; 
-line-height: 22px; 
-font-weight: 400; 
-color: var(--primary-200);
-display: flex;
-gap: 5px;
+  position: absolute; 
+  top: 0px; 
+  left: 119px; 
+  font-family: var(--font-family-heading), sans-serif;
+  font-size: 14px; 
+  line-height: 22px; 
+  font-weight: 400; 
+  color: var(--primary-200);
+  display: flex;
+  gap: 5px;
 }
 
 .profile-container {
-display: flex;
-margin-top: 180px;
-margin-left: 20px;
+  display: flex;
+  margin-top: 180px;
+  margin-left: 20px;
 }
 
 .edit-profile {
-margin: 20px;
-background-color: var(--primary-600);
-border: none;
-font-family: var(--font-family-heading), sans-serif;
-color: var(--primary-200);
+  margin: 20px;
+  background-color: var(--primary-600);
+  border: none;
+  font-family: var(--font-family-heading), sans-serif;
+  color: var(--primary-200);
 }
 
 .log-out {
-display: flex;
-margin-left: 20px;
+  display: flex;
+  margin-left: 20px;
 }
 
 .log-out-button {
-margin: 10px 10px 10px 20px;
-background-color: var(--primary-600);
-border: none;
-font-family: var(--font-family-heading), sans-serif;
-color: var(--primary-200);
+  margin: 10px 10px 10px 20px;
+  background-color: var(--primary-600);
+  border: none;
+  font-family: var(--font-family-heading), sans-serif;
+  color: var(--primary-200);
 }
 
 .close {
-position: absolute; 
-margin-left: 20px;
-top: 700px; 
-color: var(--primary-200);
+  position: absolute; 
+  margin-left: 20px;
+  top: 700px; 
+  color: var(--primary-200);
 }
 
 .close-button {
-margin: 10px 10px 10px 20px;
-background-color: var(--primary-600);
-border: none;
-font-family: var(--font-family-heading), sans-serif;
-color: var(--primary-200);
+  margin: 10px 10px 10px 20px;
+  background-color: var(--primary-600);
+  border: none;
+  font-family: var(--font-family-heading), sans-serif;
+  color: var(--primary-200);
 }
 
 

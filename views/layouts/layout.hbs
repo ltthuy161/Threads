@@ -4,33 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-
+    <link rel="icon" type="image/jpg" href="/assets/vendor/icons/logo.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">    
+    <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{css}}">
     <link rel="stylesheet" href="/css/sidebar.css" />
     <link rel="stylesheet" href="/css/floating-btn.css">
     <link rel="stylesheet" href="/css/posting.css">
-    
 
     <script type="module" src="/js/applyTheme.js"></script>
-    
     <script src="{{js}}"></script>
     <script src="/js/loadComponents.js" defer></script>
     <script src="/js/showPopup.js" defer></script>
     <script src="/js/posting.js" defer></script>
+    <script src="/js/detailPost.js" defer></script>
 </head>
 <body class="{{#if hasSidebar}}has-sidebar{{else}}no-sidebar{{/if}}">
-    {{!-- Kiểm tra xem trang có sidebar hay không --}}
     {{#if hasSidebar}}
         <aside class="sidebar text-light d-flex flex-column align-items-center position-fixed top-0 start-0 sidebar-custom">
             <div class="top-section d-flex flex-column align-items-center text-align-center">
                 <button class="btn btn-link logo p-0 mt-lg-2" onclick="location.href='/homepage'">
                     <img src="/assets/vendor/icons/logo.svg" alt="Logo Icon" class="img-fluid" style="width: 50px;" />
                 </button>
-                <button class="btn btn-link user-photo-container" onclick="handleAvatarClick()">
-                    <img src="/assets/img/avatar/ava6.png" alt="User Avatar" class="rounded-circle img-fluid" style="width: 40px; height: 40px;" />
+                <button class="btn btn-link user-photo-container" onclick="handleAvatarClick('{{user.id}}')"  style="cursor: pointer;">
+                    {{#if user.profilePicture}}
+                        <img src="{{user.profilePicture}}" alt="User Avatar" class="rounded-circle img-fluid" style="width: 40px; height: 40px;" />
+                    {{else}}
+                        <img src="/assets/img/avatar/profile.png" alt="User Avatar" class="rounded-circle img-fluid" style="width: 40px; height: 40px;" />
+                    {{/if}}
                 </button>
             </div>
             <nav class="bottom-section nav d-flex justify-content-around align-items-center gap-5 mt-auto w-100">
@@ -53,32 +56,27 @@
         </aside>
 
         <div class="mobile-overlay">
-  <div class="setting-container">
-    <div class="post-header">
-      <img src="../../assets/img/avatar/ava6.png" class="avatar" onclick="location.href='../profile/profile.html'" />
-      <p class="username">Ikuyo</p>
-      <p class="user-details">@ikuyo</p>
+            <div class="setting-container">
+                <div class="post-header">
+                    {{#if user.profilePicture}}
+                        <img src="{{user.profilePicture}}" class="avatar" onclick="location.href='../profile/profile.html'" />
+                    {{else}}
+                        <img src="/assets/img/avatar/profile.png" class="avatar" onclick="location.href='../profile/profile.html'" />
+                    {{/if}}
+                    <p class="username">{{user.username}}</p>
+                    <p class="email">{{getDomain user.email}}</p>
+                </div>
+            
+            <div class="profile-container">
+                <img src="/assets/vendor/icons/user.svg" alt="Icon description" class="icon" id="profile" />
+                <button class="edit-profile" onclick="location.href='/edit-profile/{{user.id}}'">Edit Profile</button>
+            </div>
+            <div class="log-out">
+                <img src="/assets/vendor/icons/log-out.svg" alt="Icon description" class="icon" id="logout" />
+                <button class="log-out-button" onclick="location.href='/logout'">Log Out</button>
+            </div>
+        </div>
     </div>
-    <div class="follow">
-      <div class="follower-container">
-        <p class="follow-count">100</p>
-        <p class="follow-title">Followers</p>
-      </div>
-      <div class="following-container">
-        <p class="follow-count">100</p>
-        <p class="follow-title">Following</p>
-      </div>
-    </div>
-    <div class="profile-container">
-      <img src="/assets/vendor/icons/user.svg" alt="Icon description" class="icon" id="profile" />
-      <button class="edit-profile" onclick="location.href='/pages/edit-profile/edit-profile.html'">Edit Profile</button>
-    </div>
-    <div class="log-out">
-      <img src="/assets/vendor/icons/log-out.svg" alt="Icon description" class="icon" id="logout" />
-      <button class="log-out-button" onclick="location.href='/index.html'">Log Out</button>
-    </div>
-  </div>
-</div>
     {{/if}}
 
     {{{body}}}

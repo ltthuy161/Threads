@@ -30,10 +30,9 @@ router.get("/logout", logoutUser);
 router.get("/reset-password/:token", resetPassword);
 
 // Route to get user profile
-router.get("/profile", protectRoute, getProfile);
 
-router.get("/edit-profile", protectRoute, editProfile);
-router.post("/edit-profile", protectRoute, updateProfile); // Handle form submission with POST
+router.get("/edit-profile/:userId", protectRoute, editProfile);
+router.post("/edit-profile/:userId", protectRoute, updateProfile); // Handle form submission with POST
 
 router.get("/profile/:userId", protectRoute, getUserProfile);
 

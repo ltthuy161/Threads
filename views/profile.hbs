@@ -5,11 +5,8 @@
         </button>
         <div class="post-title">Post</div>
     </header>
-
     <div class="container-profile">
-
         <div class="profile-section">
-
             <div class="profile-header">
                 <div class="profile-info">
                     <h2>{{user.username}}</h2>
@@ -20,16 +17,14 @@
                     </div>
                 </div>
                 <div class="profile-picture">
-                    <img class="user-photo" src="{{user.profilePicture}}" alt="photo">
+                        <img class="user-photo" src="{{user.profilePicture}}" alt="photo">
                 </div>
             </div>
 
             <div class="edit-profile">
-                {{!-- Check if this is the logged-in user's profile --}}
                 {{#if isCurrentUser}}
-                    <button class="edit-button" onclick="location.href='/edit-profile'">Edit profile</button>
+                    <button class="edit-button" onclick="location.href='/edit-profile/{{user.id}}'">Edit profile</button>
                 {{else}}
-                    {{!-- Check if the logged-in user is following this user --}}
                     {{#if isFollowing}}
                         <button class="unfollow-button" data-user-id="{{user._id}}">Unfollow</button>
                     {{else}}
@@ -39,12 +34,19 @@
             </div>
         </div>
         <div class="container-profile-post">
-            <ul class="post-container-profile"></ul>
+            <ul class="post-container-profile">
+                {{#each threads}}
+                    {{> post}}
+                {{/each}}
+            </ul>
         </div>
-
+        {{> posting}}
+        <div id="reply-box-container" class="reply-box-container">
+            {{> replyBox}}
+        </div>
     </div>
 </div>
-
+    {{> floating-btn}}
 <script>
     const followButton = document.querySelector(".follow-button");
 const unfollowButton = document.querySelector(".unfollow-button");
@@ -81,9 +83,3 @@ if (unfollowButton) {
     });
 }
 </script>
-
-<div id="posting" style="display: none"></div>
-</body>
-
-<div id="reply-box-container" class="reply-box-container" style="display: none;"></div>
-</div>

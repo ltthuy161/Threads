@@ -1,9 +1,9 @@
 <div class="main-content d-flex flex-column flex-grow-1 justify-content-center align-items-center">
     <header class="header homepage-header fixed-top m-auto w-50 h-auto pt-3">
         <div class="tabs w-100 d-flex">
-            <button class="tab active d-flex justify-content-center align-items-center shadow-none w-50 p-3" 
+            <button class="tab {{#ifEquals type 'forYou'}}active{{/ifEquals}} d-flex justify-content-center align-items-center shadow-none w-50 p-3" 
                 onclick="window.location.href='/threads'"><span>For you</span></button>
-            <button class="tab d-flex justify-content-center align-items-center shadow-none w-50 p-3" 
+            <button class="tab {{#ifEquals type 'following'}}active{{/ifEquals}} d-flex justify-content-center align-items-center shadow-none w-50 p-3" 
                 onclick="window.location.href='/threads/following'"><span>Following</span></button>
         </div>
     </header>
@@ -14,12 +14,10 @@
             {{/each}}
         </ul>
     </div>
-    {{> posting}}
+    {{> posting user=user}}
     <div id="reply-box-container" class="reply-box-container">
-        {{> replyBox}}
+        {{> replyBox }}
     </div>
 </div>
     {{> floating-btn}}
     
-
-<script src="/js/detailPost.js"></script>

@@ -14,7 +14,7 @@ function goToHomepage() {
     history.back();
 }
 
-window.showReplyBox = function (id) {
+window.showReplyBox = function (id, username, email, createdAt, content, profilePicture) {
     const replyBoxContainer = document.getElementById('reply-box-container');
 
     if (replyBoxContainer.classList.contains('show') && replyBoxContainer.getAttribute('data-thread-id') === id) {
@@ -29,7 +29,28 @@ window.showReplyBox = function (id) {
     const replyForm = document.getElementById('reply-form');
     replyForm.reset();
     replyForm.setAttribute('data-parent-id', id);
+
+    const replyBoxContent = replyBoxContainer.querySelector('.reply-box-content');
+    replyBoxContent.querySelector('h5').textContent = username;
+    replyBoxContent.querySelector('small.text-muted').textContent = email.split('@')[0];
+    content = content.replace(/[\u2028\u2029]/g, "");
+    replyBoxContent.querySelector('p').textContent = content;
+    replyBoxContent.querySelector('.text-muted:last-child').textContent = createdAt;
+
+    const avatarImage = replyBoxContent.querySelector('img');
+    if (avatarImage) {
+        if (profilePicture) {
+            avatarImage.src = profilePicture;
+            avatarImage.style.display = "block"; // Hiển thị ảnh đại diện
+        } else {
+            avatarImage.src = ""; // Đặt ảnh đại diện rỗng nếu không có
+            avatarImage.style.display = "none"; // Ẩn ảnh đại diện nếu không có
+        }
+    } else {
+        console.error("Avatar image element not found");
+    }
 };
+
 
 
 

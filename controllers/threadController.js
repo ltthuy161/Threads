@@ -1,6 +1,7 @@
 import Thread from '../models/threadModel.js';
 import Follow from '../models/followModel.js';
 import Like from '../models/likeModel.js';
+import { User } from "../models/userModel.js";
 import { createNotification } from './notiController.js';
 
 const controller = {};
@@ -8,23 +9,42 @@ const controller = {};
 controller.init = async (req, res, next) => {
     try {
         const userId = req.user.id;
-        const threads = await Thread.find({ parentThreadId: null })
-            .populate('userId', 'username profilePicture email')
-            .sort({ createdAt: -1 }); 
+        const userToView = await User.findById(userId);
 
-            const threadsWithLikes = await Promise.all(
+        const allThreads = await Thread.find({ parentThreadId: null })
+            .populate('userId', 'username profilePicture email')
+            .sort({ createdAt: -1 });
+
+        const followees = await Follow.find({ followerId: userId }).select('followeeId');
+        const followeeIds = followees.map(f => f.followeeId);
+
+        const followingThreads = await Thread.find({
+            userId: { $in: followeeIds },
+            parentThreadId: null,
+        })
+            .populate('userId', 'username profilePicture email')
+            .sort({ createdAt: -1 });
+
+        const processThreads = async (threads) => {
+            return Promise.all(
                 threads.map(async (thread) => {
                     const likeCount = await Like.countDocuments({ threadId: thread._id });
                     const isLiked = await Like.exists({ threadId: thread._id, userId });
-                    const replies = await Thread.countDocuments({ parentThreadId: thread._id });
+                    const replyCount = await Thread.countDocuments({ parentThreadId: thread._id });
                     thread.likeCount = likeCount;
                     thread.isLiked = !!isLiked;
-                    thread.replyCount = replies;
+                    thread.replyCount = replyCount;
                     return thread;
                 })
             );
-        
+        };
+
+        const threadsWithLikes = await processThreads(allThreads);
+        const followingThreadsWithLikes = await processThreads(followingThreads);
+
+        res.locals.user = userToView;
         res.locals.threads = threadsWithLikes;
+        res.locals.followingThreads = followingThreadsWithLikes;
         next();
     } catch (error) {
         console.error('Error in init middleware:', error);
@@ -34,34 +54,24 @@ controller.init = async (req, res, next) => {
 
 controller.getAllThreads = async (req, res) => {
     try {
-        const threads = res.locals.threads;
+        const { type } = req.query;
+        let threads;
+        if (type === 'following') {
+            threads = res.locals.followingThreads;
+        } else {
+            threads = res.locals.threads;
+        }
         res.render('homepage', {
-            title: 'Homepage',
+            title: 'Homepage / Threads',
             css: '/css/homepage.css',
             hasSidebar: true,
             activeIcon: 'home-icon',
-            threads
+            threads,
+            user: res.locals.user,
+            type,
         });
     } catch (error) {
         console.error('Error fetching threads:', error);
-        res.status(500).send('Internal Server Error');
-    }
-};
-
-
-controller.showFollowingThreads = async (req, res) => {
-    try {
-        const userId = req.user.id;
-        const followees = await Follow.find({ followerId: userId }).select('followeeId');
-        const followeeIds = followees.map(f => f.followeeId);
-
-        const threads = await Thread.find({ userId: { $in: followeeIds }, parentThreadId: null })
-            .populate('userId', 'username')
-            .sort({ createdAt: -1 });
-
-        res.render('followingThreads', { threads });
-    } catch (error) {
-        console.error('Error fetching following threads:', error);
         res.status(500).send('Internal Server Error');
     }
 };
@@ -71,8 +81,8 @@ controller.createThread = async (req, res) => {
         const { content, image, parentThreadId } = req.body;
         const userId = req.user.id;
         
-        if (!userId || !content) {
-            return res.status(400).json({ error: 'User ID and content are required' });
+        if (!userId) {
+            return res.status(400).json({ error: 'User ID is required' });
         }
 
         const newThread = new Thread({ userId, content, image, parentThreadId });
@@ -119,7 +129,7 @@ controller.showDetails = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const thread = await Thread.findById(id).populate('userId', 'username profilePicture');
+        const thread = await Thread.findById(id).populate('userId', 'username profilePicture email');
         if (!thread) {
             return res.status(404).render('error', { message: 'Thread not found' });
         }
@@ -132,7 +142,7 @@ controller.showDetails = async (req, res) => {
         thread.replyCount = reply_Count;
 
         const replies = await Thread.find({ parentThreadId: id })
-            .populate('userId', 'username profilePicture')
+            .populate('userId', 'username profilePicture email')
             .sort({ createdAt: -1 });
 
         const repliesWithLikes = await Promise.all(
