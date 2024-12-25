@@ -61,5 +61,15 @@
             event.preventDefault(); // Ngăn không gửi form
             alert("Password must be at least 8 characters long");
         }
+
+        // Kiểm tra username ít nhất 8 kí tự, không chứa kí tự đặc biệt
+        const username = document.querySelector("#username").value;
+        if (username.length < 4) {
+            event.preventDefault(); // Ngăn không gửi form
+            alert("Username must be at least 4 characters long");
+        } else if (!/^[a-zA-Z0-9]*$/.test(username)) {
+            event.preventDefault(); // Ngăn không gửi form
+            alert("Username must contain only letters and numbers");
+        }
     });
 </script>

@@ -47,6 +47,7 @@ app.engine(
                     day: "numeric",
                 });
             },
+            eq: (a, b) => a === b, // Đăng ký helper eq
         }
     })
 );

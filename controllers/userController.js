@@ -21,7 +21,25 @@ export const createUser = async (req, res) => {
         // Check for duplicate email
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.status(400).json({ error: "Email already in use" });
+            return res.status(201).render("signup", {
+                title: "Sign Up",
+                hasSidebar: false, // Không có sidebar
+                css: "/css/signup.css",
+                message:
+                    "This email is already registered. Please sign in or use a different email.",
+            });
+        }
+
+        // username is unique
+        const existingUsername = await User.findOne({ username });
+        if (existingUsername) {
+            return res.status(201).render("signup", {
+                title: "Sign Up",
+                hasSidebar: false, // Không có sidebar
+                css: "/css/signup.css",
+                message:
+                    "This username is already taken. Please choose a different username.",
+            });
         }
 
         // Tạo JWT chứa thông tin người dùng

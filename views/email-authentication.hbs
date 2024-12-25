@@ -1,11 +1,11 @@
 <div class="container">
     <div class="message-box">
-      <h1>Email Verification</h1>
-      <p class="confirmation-text">Thank you for verifying your email!</p>
-      <p>Please click the button below to continue.</p>
-      <form action="/save-user" method="POST">
+        <h1>Email Verification</h1>
+        <p class="confirmation-text">Thank you for verifying your email!</p>
+        <p>Please click the button below to continue.</p>
+        <form action="/save-user" method="POST">
             <input type="hidden" name="token" value="{{token}}" />
             <button type="submit" class="button">Go to Sign in</button>
         </form>
     </div>
-  </div>
+</div>

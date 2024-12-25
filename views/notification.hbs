@@ -13,24 +13,36 @@
           
             <div class="notifications all active">
               {{#each notifications}}
-                <div class="notification {{#if isRead }}unread{{/if}}" data-id="{{id}}">
-                  {{#if isRead}}<span class="dot"></span>{{/if}}
-                  <a class="avt-container d-flex align-items-center mx-2" href=""><img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo"></a>
-                  <div class="notification-content">
-                    <span><b>{{likeUserName}} -</b> {{message}}</span> <span class="time">19m ago</span>
-                    <p class="small">{{threadContent}}</p>
-                  </div>
-                  <div class="dropdown">
-                    <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="bi bi-three-dots text-white"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                      <li><button class="dropdown-item mark-as-read d-flex justify-content-center align-items-center">Mark as Read</button></li>
-                      <li><button class="dropdown-item delete-notification d-flex justify-content-center align-items-center">Delete</button></li>
-                    </ul>
-                  </div>
-                </div>
-              {{/each}}
+
+<div class="notification {{#unless isRead}}unread{{/unless}}" data-id="{{id}}">
+        {{#if isRead}}<span class="dot"></span>{{/if}}
+        <a class="avt-container d-flex align-items-center mx-2" href="">
+            <img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo">
+        </a>
+        <div class="notification-content">
+            {{#if (eq type "like")}}
+                <span><b>{{likeUserName}} </b> {{message}}</span> 
+            {{else if (eq type "comment")}}
+                <span><b>{{commentUserName}}</b> {{message}}</span>
+            {{/if}}
+            <span class="time" data-created-at="{{createdAt}}">{{createdAt}}</span>
+            <p class="small">{{threadContent}}</p>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-three-dots text-white"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                <li>
+                    <button class="dropdown-item mark-as-read d-flex justify-content-center align-items-center">Mark as Read</button>
+                </li>
+                <li>
+                    <button class="dropdown-item delete-notification d-flex justify-content-center align-items-center">Delete</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+{{/each}}
           
               {{!-- <div class="notification unread" data-id="2">
                 <span class="dot"></span>
@@ -195,5 +207,17 @@
                 unreadNotifications.forEach(noti => noti.remove());
             });
         });
+
+    document.addEventListener('DOMContentLoaded', () => {
+    if (typeof moment !== 'undefined') {
+        document.querySelectorAll('.time').forEach(el => {
+            const createdAt = new Date(el.getAttribute('data-created-at'));
+            el.textContent = moment(createdAt).fromNow(); // Hiển thị thời gian động
+        });
+    } else {
+        console.error('Moment.js is not loaded.');
+    }
+});
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

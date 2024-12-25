@@ -1,7 +1,7 @@
 import Thread from '../models/threadModel.js';
-import { User } from '../models/userModel.js';
 import Follow from '../models/followModel.js';
 import Like from '../models/likeModel.js';
+import { createNotification } from './notiController.js';
 
 const controller = {};
 
@@ -76,6 +76,20 @@ controller.createThread = async (req, res) => {
 
         const newThread = new Thread({ userId, content, image, parentThreadId });
         await newThread.save();
+
+        if (parentThreadId) {
+            const parentThread = await Thread.findById(parentThreadId);
+            console.log('Parent thread:', parentThread);
+            if (parentThread) {
+                await createNotification({
+                    userId,
+                    recipientId: parentThread.userId,
+                    type: 'comment',
+                    relatedId: newThread._id,
+                    message: ' replied to your thread.'
+                });
+            }
+        }
 
         res.status(201).json({ message: 'Thread created successfully', thread: newThread });
     } catch (error) {
