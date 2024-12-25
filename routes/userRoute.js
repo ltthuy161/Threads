@@ -13,6 +13,8 @@ import {
     followUser,
     unfollowUser,
     logoutUser,
+    getFollowers,
+    getFollowing,
 } from "../controllers/userController.js";
 import { protectRoute } from "./protectRoute.js";
 
@@ -37,5 +39,8 @@ router.get("/profile/:userId", protectRoute, getUserProfile);
 
 router.post("/follow/:userId", protectRoute, followUser);
 router.post("/unfollow/:userId", protectRoute, unfollowUser);
+
+router.get("/follower/:userId", protectRoute, getFollowers);
+router.get("/following/:userId", protectRoute, getFollowing);
 
 export default router;

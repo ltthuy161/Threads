@@ -26,24 +26,23 @@
 }
 
 .navigation-button i {
-  color: var(--primary-900);
+  color: var(--neutral-500); /* Mặc định là màu mờ */
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.navigation-button i.active {
-  color: var(--primary-100); 
-  transform: none; 
+.navigation-button.active i {
+  color: var(--primary-100); /* Màu sáng khi active */
 }
 
-.navigation-button i.inactive {
-  color: var(--neutral-500) !important; 
-  transform: none;
+.navigation-button.inactive i {
+  color: var(--neutral-500); /* Màu mờ khi inactive */
 }
 
 .navigation-button:hover i:not(.active) {
-  color: var(--primary-500); 
-  transform: scale(1.2); 
+  color: var(--primary-500); /* Màu nổi bật khi hover */
+  transform: scale(1.2);
 }
+
 
 * {
   margin: 0;

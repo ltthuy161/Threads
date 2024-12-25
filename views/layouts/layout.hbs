@@ -17,6 +17,7 @@
     <script type="module" src="/js/applyTheme.js"></script>
     
     <script src="{{js}}"></script>
+    <script src="/js/loadComponents.js" defer></script>
     <script src="/js/showPopup.js" defer></script>
     <script src="/js/posting.js" defer></script>
 </head>
@@ -33,13 +34,16 @@
                 </button>
             </div>
             <nav class="bottom-section nav d-flex justify-content-around align-items-center gap-5 mt-auto w-100">
-                <button id="home-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white" onclick="location.href='/homepage'">
-                    <i class="bi bi-house-fill fs-4 text-white"></i>
+                <button id="home-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white {{#if (eq activeIcon "home-icon")}}active{{else}}inactive{{/if}}" 
+                    onclick="setActiveIcon('home-icon'); location.href='/homepage'">
+                    <i class="bi bi-house-fill fs-4"></i>
                 </button>
-                <button id="add-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white" onclick="showPopup()">
+                <button id="add-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white {{#if (eq activeIcon "add-icon")}}active{{else}}inactive{{/if}}" 
+                    onclick="showPopup()">
                     <i class="bi bi-plus-square-fill fs-4"></i>
                 </button>
-                <button id="noti-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white" onclick="location.href='/notification/{{userId}}'">
+                <button id="noti-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white {{#if (eq activeIcon "noti-icon")}}active{{else}}inactive{{/if}}" 
+                    onclick="setActiveIcon('noti-icon'); location.href='/notification/{{userId}}'">
                     <i class="bi bi-bell-fill fs-4"></i>
                 </button>
             </nav>
@@ -47,6 +51,34 @@
                 <i class="bi bi-box-arrow-left fs-3"></i>
             </button>
         </aside>
+
+        <div class="mobile-overlay">
+  <div class="setting-container">
+    <div class="post-header">
+      <img src="../../assets/img/avatar/ava6.png" class="avatar" onclick="location.href='../profile/profile.html'" />
+      <p class="username">Ikuyo</p>
+      <p class="user-details">@ikuyo</p>
+    </div>
+    <div class="follow">
+      <div class="follower-container">
+        <p class="follow-count">100</p>
+        <p class="follow-title">Followers</p>
+      </div>
+      <div class="following-container">
+        <p class="follow-count">100</p>
+        <p class="follow-title">Following</p>
+      </div>
+    </div>
+    <div class="profile-container">
+      <img src="/assets/vendor/icons/user.svg" alt="Icon description" class="icon" id="profile" />
+      <button class="edit-profile" onclick="location.href='/pages/edit-profile/edit-profile.html'">Edit Profile</button>
+    </div>
+    <div class="log-out">
+      <img src="/assets/vendor/icons/log-out.svg" alt="Icon description" class="icon" id="logout" />
+      <button class="log-out-button" onclick="location.href='/index.html'">Log Out</button>
+    </div>
+  </div>
+</div>
     {{/if}}
 
     {{{body}}}

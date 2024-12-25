@@ -15,8 +15,8 @@
                     <h2>{{user.username}}</h2>
                     <p class="profile-bio">{{user.bio}}</p>
                     <div class="profile-stats">
-                        <span><a href="/follower">800 Followers</a></span>
-                        <span><a href="/following">978 Following</a></span>
+                        <span><a href="/follower/{{user._id}}">{{followerCount}} Followers</a></span>
+                        <span><a href="/following/{{user._id}}">{{followingCount}} Following</a></span>
                     </div>
                 </div>
                 <div class="profile-picture">

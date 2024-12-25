@@ -312,6 +312,9 @@ export const getProfile = async (req, res) => {
             // Handle the case where the user is not found
             return res.status(404).render("error", { message: "User not found" });
         }
+
+        const followerCount = await Follow.countDocuments({ followeeId: userId });
+        const followingCount = await Follow.countDocuments({ followerId: userId });
     
         // Add a temporary default image if profilePicture is null
         if (!user.profilePicture) {
@@ -325,6 +328,8 @@ export const getProfile = async (req, res) => {
             hasSidebar: false, // or true if needed
             user: user, // Pass the user object to the template
             isCurrentUser: true,
+            followerCount: followerCount, // Pass the counts to the template
+            followingCount: followingCount,
         });
 
     } catch (error) {
@@ -404,17 +409,15 @@ export const getUserProfile = async (req, res) => {
             return res.status(404).render("error", { message: "User not found" });
         }
 
-        // Determine if the logged-in user is following the viewed user
-        // (You'll need to implement the logic to check your database for this)
+        const followerCount = await Follow.countDocuments({ followeeId: userToView });
+        const followingCount = await Follow.countDocuments({ followerId: userToView });
+
         const isFollowing = await checkIfFollowing(loggedInUserId, userIdToView);
 
         // Add a temporary default image if profilePicture is null
         if (!userToView.profilePicture) {
             userToView.profilePicture = "../../assets/img/avatar/ava4.png";
         }
-
-        console.log("helololo");
-
         res.render("profile", {
             title: "User Profile",
             css: "/css/profile.css",
@@ -422,6 +425,8 @@ export const getUserProfile = async (req, res) => {
             user: userToView,
             isCurrentUser: false,
             isFollowing: isFollowing,
+            followerCount: followerCount, // Pass the counts to the template
+            followingCount: followingCount,
         });
     } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -441,7 +446,7 @@ async function checkIfFollowing(loggedInUserId, userIdToView) {
         console.error("Error checking follow relationship:", error);
         return false; // Return false on error (or handle it differently if needed)
     }
-}
+};
 
 export const followUser = async (req, res) => {
     try {
@@ -503,5 +508,70 @@ export const unfollowUser = async (req, res) => {
     } catch (error) {
         console.error("Error unfollowing user:", error);
         res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+export const getFollowers = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+
+        // Find the user
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).render("error", { message: "User not found" });
+        }
+
+        // Get the list of followers (users who are following the current user)
+        const followers = await Follow.find({ followeeId: userId })
+            .populate("followerId", "username profilePicture bio") // Populate the follower's data
+            .lean(); // Convert to plain JavaScript objects
+
+        // Extract the follower data
+        const followerUsers = followers.map((follow) => follow.followerId);
+        const currentUsername = req.user.username; 
+
+        res.render("follower", {
+            title: "Followers",
+            css: "/css/follower.css", // Assuming you're using the same CSS for both
+            hasSidebar: false,
+            users: followerUsers,
+            isFollowerPage: true,
+            user: user,
+        });
+    } catch (error) {
+        console.error("Error fetching followers:", error);
+        res.status(500).render("error", { message: "Internal Server Error" });
+    }
+};
+
+export const getFollowing = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+
+        // Find the user
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).render("error", { message: "User not found" });
+        }
+
+        // Get the list of users the current user is following
+        const following = await Follow.find({ followerId: userId })
+            .populate("followeeId", "username profilePicture bio") // Populate the followee's data
+            .lean();
+
+        // Extract the following data
+        const followingUsers = following.map((follow) => follow.followeeId);
+
+        res.render("following", {
+            title: "Following",
+            css: "/css/following.css",
+            hasSidebar: false,
+            users: followingUsers,
+            isFollowerPage: false,
+            user: user,
+        });
+    } catch (error) {
+        console.error("Error fetching following:", error);
+        res.status(500).render("error", { message: "Internal Server Error" });
     }
 };

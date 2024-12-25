@@ -183,6 +183,7 @@ export const getNotificationsByUser = async (req, res) => {
             hasSidebar: true,
             css: "/css/notification.css",
             notifications: notificationsInfo,
+            activeIcon: "noti-icon",
         });
     } catch (error) {
         console.error(error);
