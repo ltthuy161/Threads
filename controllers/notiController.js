@@ -93,6 +93,8 @@ export const getNotificationsByUser = async (req, res) => {
             (notification) => notification.createdAt
         );
 
+
+        
         // *** Xử lý thông báo loại "comment" ***
         const commentNotifications = notifications.filter(
             (notification) => notification.type === "comment"
@@ -100,13 +102,11 @@ export const getNotificationsByUser = async (req, res) => {
         const commentThreadIds = commentNotifications.map(
             (notification) => notification.relatedId
         ); // relatedId chính là threadId của comment
-
         // Tìm các comment (thread có parentThreadId không null)
         const comments = await Thread.find({ _id: { $in: commentThreadIds } });
         if (!comments.length) {
             console.log("No comments found");
         }
-
         // Lấy thông tin thread gốc (parent thread)
         const parentThreadIds = comments.map(
             (comment) => comment.parentThreadId
@@ -114,7 +114,6 @@ export const getNotificationsByUser = async (req, res) => {
         const parentThreads = await Thread.find({
             _id: { $in: parentThreadIds },
         });
-
         // Lấy nội dung thread gốc
         const parentThreadContents = parentThreads.map(
             (thread) => thread.content
@@ -147,8 +146,44 @@ export const getNotificationsByUser = async (req, res) => {
             (notification) => notification.createdAt
         );
 
+
+
+        // *** Xử lý thông báo loại "follow" ***
+        const followNotifications = notifications.filter(
+            (notification) => notification.type === "follow"
+        );
+
+        const followUserIds = followNotifications.map(
+            (notification) => notification.relatedId // relatedId là userId của người được theo dõi
+        );
+
+        const followUsers = await User.find({ _id: { $in: followUserIds } });
+        const followUserNames = followUsers.map((user) => user.username);
+
+        // Lấy các trường khác từ thông báo
+        const followMessages = followNotifications.map(
+            (notification) => notification.message
+        );
+        const followIsRead = followNotifications.map(
+            (notification) => notification.isRead
+        );
+        const followCreatedAt = followNotifications.map(
+            (notification) => notification.createdAt
+        );
+
         // Gộp thông tin thông báo "like" và "comment"
         const notificationsInfo = [];
+
+        // Thêm thông báo "follow" vào danh sách thông báo
+        for (let i = 0; i < followNotifications.length; i++) {
+            notificationsInfo.push({
+                type: "follow",
+                followerName: followUserNames[i] || "Unknown user",
+                message: followMessages[i],
+                isRead: followIsRead[i],
+                createdAt: followCreatedAt[i],
+            });
+        }
 
         // Thêm thông báo "like"
         for (let i = 0; i < likeNotifications.length; i++) {
