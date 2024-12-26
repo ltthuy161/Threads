@@ -35,7 +35,10 @@ window.showReplyBox = function (id, username, email, createdAt, content, profile
     replyBoxContent.querySelector('small.text-muted').textContent = email.split('@')[0];
     content = content.replace(/[\u2028\u2029]/g, "");
     replyBoxContent.querySelector('p').textContent = content;
-    replyBoxContent.querySelector('.text-muted:last-child').textContent = createdAt;
+
+    const date = replyBoxContent.querySelector('small.text-muted:last-child');
+    date.textContent = createdAt;
+    date.style.color = white;
 
     const avatarImage = replyBoxContent.querySelector('img');
     if (avatarImage) {

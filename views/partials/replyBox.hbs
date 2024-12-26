@@ -1,7 +1,7 @@
 <div class="reply-box-content d-flex justify-content-center w-60" style="display: none;">
     <form id="reply-form" data-parent-id="{{thread._id}}">
-        <div class="card text-light p-3" style="width: 400px; background-color: var(--primary-900); border: none; outline: none;">
-            <div class="d-flex align-items-center mb-3">
+       <div class="card text-light p-4 ps-5" style="width: 400px; background-color: var(--primary-900); border: none; outline: none;">
+            <div class="d-flex align-items-center mb-3"> 
                 {{#if userId.profilePicture}}
                     <img src="{{thread.userId.profilePicture}}" alt="Avatar" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover">
                 {{else}}
@@ -9,15 +9,15 @@
                 {{/if}}
                 <div class="flex-grow-1">
                     <h5 class="mb-0" style="color: var(--primary-150);">{{thread.userId.username}}</h5>
-                    <small class="text-muted">{{thread.userId.email}}</small>
+                    <small class="text-muted" style="color: white !important;">{{thread.createdAt}}</small>
                 </div>
-                <small class="text-muted">{{thread.createdAt}}</small>
+                {{!-- <small class="text-muted" style="color: white !important;">{{thread.createdAt}}</small> --}}
             </div>
             <p class="mb-3">{{thread.content}}</p>
             <div class="d-flex align-items-center flex-wrap border-top pt-3">
-                <textarea class="reply-input w-100" name="content" placeholder="Post your reply"></textarea>
+                <textarea class="reply-input" name="content" placeholder="Post your reply" style="width: 100%; box-sizing: border-box;"></textarea>
                 <div class="reply-actions d-flex align-items-center mt-2 w-100">
-                    <input id="add-image" type="file" name="image" accept="image/*"  />
+                    <input id="add-image" type="file" name="image" accept="image/*" />
                 </div>
                 <button class="btn btn-primary ms-auto" type="submit" style="background-color: var(--primary-700); color: var(--primary-50); 
                                      border: none; transition: background-color 0.3s ease, color 0.3s ease; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);">
@@ -25,5 +25,6 @@
             </div>
         </div>
     </form>
-    <button class="close-button" style="border: none; outline: none;" onclick="closeReplyBox()">✖</button>
+    <button class="close-button pe-5" style="background-color: var(--primary-900); border: none; outline: none;" onclick="closeReplyBox()">✖</button>
 </div>
+

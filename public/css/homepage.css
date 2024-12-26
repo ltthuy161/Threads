@@ -302,4 +302,12 @@ body {
     width: 90%;
     min-height: 50%;
   }
+
+  .card {
+    padding-left: 6rem !important;
+  }
+
+  .close-button {
+    padding-right: 7rem !important;
+  }
 }
