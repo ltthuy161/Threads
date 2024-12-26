@@ -10,6 +10,7 @@
             <div class="profile-header">
                 <div class="profile-info">
                     <h2>{{userToView.username}}</h2>
+                    <p class="profile-email">{{getDomain userToView.email}}</p>
                     <p class="profile-bio">{{userToView.bio}}</p>
                     <div class="profile-stats">
                         <span><a href="/follower/{{userToView._id}}">{{followerCount}} Followers</a></span>

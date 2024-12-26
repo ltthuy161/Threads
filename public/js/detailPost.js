@@ -38,15 +38,16 @@ window.showReplyBox = function (id, username, email, createdAt, content, profile
 
     const date = replyBoxContent.querySelector('small.text-muted:last-child');
     date.textContent = createdAt;
-    date.style.color = white;
+    
 
     const avatarImage = replyBoxContent.querySelector('img');
     if (avatarImage) {
         if (profilePicture) {
+            console.log("img");
             avatarImage.src = profilePicture;
             avatarImage.style.display = "block"; // Hiển thị ảnh đại diện
         } else {
-            avatarImage.src = ""; // Đặt ảnh đại diện rỗng nếu không có
+            avatarImage.src = "/assets/img/avatar/profile.png"; // Đặt ảnh đại diện rỗng nếu không có
             avatarImage.style.display = "none"; // Ẩn ảnh đại diện nếu không có
         }
     } else {

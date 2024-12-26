@@ -101,18 +101,6 @@ body {
   object-fit: cover;
 }
 
-.profile-header .profile-picture::after {
-    content: "";
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    width: 15px;
-    height: 15px;
-    background-color: #4caf50;
-    border-radius: 50%;
-    border: 2px solid #282537;
-}
-
 .profile-info {
   display: flex;
   flex-direction: column;
@@ -167,6 +155,11 @@ body {
     background-color: #444;
 }
 
+.profile-email {
+  font-size: 1.2rem;
+  color: #bbbbbb;
+  max-width: 10rem;
+}
 
 .profile-bio {
     font-size: 0.9rem;
