@@ -9,26 +9,31 @@
         <div class="profile-section">
             <div class="profile-header">
                 <div class="profile-info">
-                    <h2>{{user.username}}</h2>
-                    <p class="profile-bio">{{user.bio}}</p>
+                    <h2>{{userToView.username}}</h2>
+                    <p class="profile-bio">{{userToView.bio}}</p>
                     <div class="profile-stats">
-                        <span><a href="/follower/{{user._id}}">{{followerCount}} Followers</a></span>
-                        <span><a href="/following/{{user._id}}">{{followingCount}} Following</a></span>
+                        <span><a href="/follower/{{userToView._id}}">{{followerCount}} Followers</a></span>
+                        <span><a href="/following/{{userToView._id}}">{{followingCount}} Following</a></span>
                     </div>
                 </div>
                 <div class="profile-picture">
-                        <img class="user-photo" src="{{user.profilePicture}}" alt="photo">
+                    {{#if userToView.profilePicture}}
+                        <img class="user-photo" src="{{userToView.profilePicture}}" alt="photo">
+                    {{else}}
+                        <img class="user-photo" src="/assets/img/avatar/profile.png" alt="photo">
+                    {{/if}}
+                    
                 </div>
             </div>
 
             <div class="edit-profile">
                 {{#if isCurrentUser}}
-                    <button class="edit-button" onclick="location.href='/edit-profile/{{user.id}}'">Edit profile</button>
+                    <button class="edit-button" onclick="location.href='/edit-profile/{{userToView.id}}'">Edit profile</button>
                 {{else}}
                     {{#if isFollowing}}
-                        <button class="unfollow-button" data-user-id="{{user._id}}">Unfollow</button>
+                        <button class="unfollow-button" data-user-id="{{userToView._id}}">Unfollow</button>
                     {{else}}
-                        <button class="follow-button" data-user-id="{{user._id}}">Follow</button>
+                        <button class="follow-button" data-user-id="{{userToView._id}}">Follow</button>
                     {{/if}}
                 {{/if}}
             </div>

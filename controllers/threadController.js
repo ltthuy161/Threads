@@ -128,7 +128,8 @@ controller.getThreadById = async (req, res) => {
 controller.showDetails = async (req, res) => {
     try {
         const { id } = req.params;
-
+        const loggedInUserId = req.user.id;
+        const viewer = await User.findById(loggedInUserId);
         const thread = await Thread.findById(id).populate('userId', 'username profilePicture email');
         if (!thread) {
             return res.status(404).render('error', { message: 'Thread not found' });
@@ -163,6 +164,7 @@ controller.showDetails = async (req, res) => {
             hasSidebar: true,
             thread, 
             replies: repliesWithLikes,
+            user: viewer,
         });
     } catch (error) {
         console.error("Error fetching thread detail:", error);

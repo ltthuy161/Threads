@@ -395,6 +395,7 @@ export const getUserProfile = async (req, res) => {
         const loggedInUserId = req.user.id; // Logged-in user's ID
         const userIdToView = req.params.userId; // ID of the user to view (get this from URL params)
 
+        const viewer = await User.findById(loggedInUserId);
         // Fetch the user to view from the database
         const userToView = await User.findById(userIdToView);
 
@@ -428,7 +429,8 @@ export const getUserProfile = async (req, res) => {
             title: `${userToView.username}'s Profile`,
             css: "/css/profile.css",
             hasSidebar: true,
-            user: userToView,
+            user: viewer,
+            userToView: userToView,
             isCurrentUser: loggedInUserId === userIdToView,
             isFollowing: isFollowing,
             followerCount: followerCount,
