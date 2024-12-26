@@ -12,17 +12,21 @@
 
         <div class="profile-edit">
             <form id="profileForm" method="POST" action="/edit-profile/{{user.id}}" enctype="multipart/form-data">
-                <label for="name">Userame</label>
-                <input type="text" id="name" name="name" placeholder="{{user.username}}"/>
+                <div class="tutuvovo">
+                    <label for="name">Userame</label>
+                    <input type="text" id="name" name="name" placeholder="{{user.username}}"/>
 
-                <label for="bio">Bio</label>
-                <textarea id="bio" name="bio" rows="3" placeholder="{{user.bio}}"></textarea>
-            </form>
-            <div class="avatar-edit">
+                    <label for="bio">Bio</label>
+                    <textarea id="bio" name="bio" rows="3" placeholder="{{user.bio}}"></textarea>
+                </div>
+                
+            
+                <div class="avatar-edit">
                     <img class="picture" id="profilePictureImg" src="{{#if user.profilePicture}}{{user.profilePicture}}{{else}}/assets/img/avatar/profile.png{{/if}}" alt="photo">
                     <label for="profilePicture" class="edit-label">Edit</label>
                     <input type="file" id="profilePicture" name="profilePicture" accept="image/*" style="display: none;" />
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

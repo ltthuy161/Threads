@@ -81,6 +81,17 @@ body {
     justify-content: space-between;
 }
 
+.tutuvovo {
+    display: flex;
+    flex-direction: column;
+}
+
+#profileForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .avatar-edit .user-photo {
   object-fit: cover;
 }
@@ -142,7 +153,7 @@ input:focus, textarea:focus {
   
   .edit-label {
       position: absolute;
-      top: 50%; /* Center vertically */
+      top: 55%; /* Center vertically */
       left: 50%; /* Center horizontally */
       transform: translate(-50%, -50%); /* Adjust for exact centering */
       background-color: rgba(0, 0, 0, 0.5);

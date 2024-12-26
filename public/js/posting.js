@@ -40,7 +40,12 @@ document.querySelectorAll('#posting-form, #reply-form').forEach((form) => {
 
             const result = await response.json();
            
-            window.location.href = `/threads/detail/${result.thread._id}`;
+            if (parentThreadId) {
+                window.location.href = `/threads/detail/${parentThreadId}`;
+            }
+            else {
+                window.location.href = `/threads/detail/${result.thread._id}`;
+            }
         } catch (error) {
             console.error('Error:', error);
             alert('An error occurred while creating thread');
