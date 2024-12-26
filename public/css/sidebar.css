@@ -278,3 +278,19 @@
     font-size: 1.8rem;
   }
 }
+
+#noti-icon.has-unread::after {
+  content: "";
+  position: absolute;
+  top: 69%;
+  right: 10%;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+#noti-icon.no-unread i {
+  color: white;
+}

@@ -3,6 +3,7 @@ import Notification from "../models/notiModel.js";
 import Thread from "../models/threadModel.js";
 import { User } from "../models/userModel.js";
 import Like from "../models/likeModel.js";
+import Follow from "../models/followModel.js";
 import jwt from "jsonwebtoken";
 
 export const createNotification = async ({
@@ -70,19 +71,31 @@ export const getNotificationsByUser = async (req, res) => {
             (notification) => notification.relatedId
         );
         const likes = await Like.find({ _id: { $in: likeRelatedIds } });
+        const likeUserIds = likeNotifications.map((notification) => notification.userId);
+        // get users from likeUserIds as array (id can be duplicate)
+        let  likeUsers = []
+        // add user to likeUsers in orders
+        for (let i = 0; i < likeUserIds.length; i++) {
+            const user = await User.findById(likeUserIds[i]);
+            likeUsers.push(user);
+        }
+        const likeUsernames = likeUsers.map((user) => user.username);
+
         const likeThreadIds = likes.map((like) => like.threadId);
         const likeThreads = await Thread.find({ _id: { $in: likeThreadIds } });
         const likeThreadContents = likeThreads.map((thread) => thread.content);
-        const likeThreadUserIds = likeThreads.map((thread) => thread.userId);
-        const likeThreadUsers = await User.find({
-            _id: { $in: likeThreadUserIds },
-        });
-        const likeThreadUserNames = likeThreadUsers.map((user) => user.email);
-        const likeUserIds = likeNotifications.map(
-            (notification) => notification.userId
-        );
-        const likeUsers = await User.find({ _id: { $in: likeUserIds } });
-        const likeUserNames = likeUsers.map((user) => user.username);
+        
+        //const likeThreadUserIds = likeThreads.map((thread) => thread.userId);
+        // const likeThreadUsers = await User.find({
+        //     _id: { $in: likeThreadUserIds },
+        // });
+        // const likeThreadUserNames = likeThreadUsers.map((user) => user.email);
+        // const likeUserIds = likeNotifications.map(
+        //     (notification) => notification.userId
+        // );
+        // const likeUsers = await User.find({ _id: { $in: likeUserIds } });
+        // const likeUserNames = likeUsers.map((user) => user.username);
+        // console.log("Like user names:", likeUserNames);
         const likeMessages = likeNotifications.map(
             (notification) => notification.message
         );
@@ -154,11 +167,14 @@ export const getNotificationsByUser = async (req, res) => {
         );
 
         const followUserIds = followNotifications.map(
-            (notification) => notification.relatedId // relatedId là userId của người được theo dõi
+            (notification) => notification.relatedId // relatedId là followid
         );
 
-        const followUsers = await User.find({ _id: { $in: followUserIds } });
-        const followUserNames = followUsers.map((user) => user.username);
+        // Lấy các bản ghi Follow từ bảng Follow
+        const followRecords = await Follow.find({ _id: { $in: followUserIds } }).populate("followerId", "username");
+
+        // Lấy danh sách tên người dùng (username) từ bảng User
+        const followUserNames = followRecords.map((record) => record.followerId.username);
 
         // Lấy các trường khác từ thông báo
         const followMessages = followNotifications.map(
@@ -177,6 +193,7 @@ export const getNotificationsByUser = async (req, res) => {
         // Thêm thông báo "follow" vào danh sách thông báo
         for (let i = 0; i < followNotifications.length; i++) {
             notificationsInfo.push({
+                id: followNotifications[i]._id,
                 type: "follow",
                 followerName: followUserNames[i] || "Unknown user",
                 message: followMessages[i],
@@ -185,13 +202,14 @@ export const getNotificationsByUser = async (req, res) => {
             });
         }
 
-        // Thêm thông báo "like"
+        // // Thêm thông báo "like"
         for (let i = 0; i < likeNotifications.length; i++) {
             notificationsInfo.push({
+                id: likeNotifications[i]._id,
                 type: "like",
                 threadContent: likeThreadContents[i],
-                threadUserName: likeThreadUserNames[i],
-                likeUserName: likeUserNames[i],
+                threadUserName: decoded.username,  
+                likeUserName: likeUsernames[i],
                 message: likeMessages[i],
                 isRead: likeIsRead[i],
                 createdAt: likeCreatedAt[i],
@@ -201,6 +219,7 @@ export const getNotificationsByUser = async (req, res) => {
         // Thêm thông báo "comment"
         for (let i = 0; i < commentNotifications.length; i++) {
             notificationsInfo.push({
+                id: commentNotifications[i]._id,
                 type: "comment",
                 threadContent:
                     parentThreadContents[i] || "Thread content not found",
@@ -211,7 +230,6 @@ export const getNotificationsByUser = async (req, res) => {
                 createdAt: commentCreatedAt[i],
             });
         }
-
         console.log("Notifications info:", notificationsInfo);
 
         res.status(200).render("notification", {
@@ -225,5 +243,62 @@ export const getNotificationsByUser = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+export const markAsRead = async (req, res) => {
+    try {
+        const { id } = req.params; // Lấy ID từ URL
+        const notification = await Notification.findById(id);
+        console.log("Received ID:", req.params.id);
+        if (!notification) {
+            return res.status(404).json({ message: "Notification not found" });
+        }
+
+        notification.isRead = true;
+        await notification.save();
+
+        console.log("Notification marked as read:", notification);
+
+        res.status(200).json({ message: "Notification marked as read." });
+    } catch (error) {
+        console.error("Error updating notification:", error.message);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+
+export const deleteNotification = async (req, res) => {
+    try {
+        const { id } = req.params; // Lấy ID từ URL
+        const notification = await Notification.findByIdAndDelete(id);
+
+        if (!notification) {
+            return res.status(404).json({ message: "Notification not found" });
+        }
+
+        res.status(200).json({ message: "Notification deleted successfully." });
+    } catch (error) {
+        console.error("Error deleting notification:", error.message);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+export const hasUnreadNotifications = async (req, res) => {
+    try {
+        const userId = req.user.id; // Lấy ID người dùng từ xác thực
+
+        // Kiểm tra nếu tồn tại thông báo chưa đọc
+        const hasUnread = await Notification.exists({
+            recipientId: userId,
+            isRead: false,
+        });
+
+        console.log("Has unread notifications:", hasUnread);
+
+        res.status(200).json({ hasUnread });
+    } catch (error) {
+        console.error("Error checking unread notifications:", error.message);
+        res.status(500).json({ message: "Internal Server Error" });
     }
 };

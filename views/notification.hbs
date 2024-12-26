@@ -1,223 +1,212 @@
 <div id="sidebar"></div>
 
-    <div class="main-container-noti d-flex flex-column flex-grow-1 justify-content-center align-items-center">
-      <header class="header-noti w-50 d-flex flex-column align-items-center justify-content-center position-fixed">
+<div class="main-container-noti d-flex flex-column flex-grow-1 justify-content-center align-items-center">
+    <header class="header-noti w-50 d-flex flex-column align-items-center justify-content-center position-fixed">
         <div class="post-title p-3 fs-3 fw-bold">Notification</div>
         <div class="tabs w-100 d-flex">
-          <button class="tab active w-50 shadow-none d-flex justify-content-center align-items-center" data-tab="all"><span>All</span></button>
-          <button class="tab w-50 shadow-none d-flex justify-content-center align-items-center" data-tab="unread"><span>Unread</span></button>
+            <button class="tab active w-50 shadow-none d-flex justify-content-center align-items-center"
+                data-tab="all"><span>All</span></button>
+            <button class="tab w-50 shadow-none d-flex justify-content-center align-items-center"
+                data-tab="unread"><span>Unread</span></button>
         </div>
-      </header>
+    </header>
 
-      <div class="container position-fixed w-50 overflow-auto">
-          
-            <div class="notifications all active">
-              {{#each notifications}}
+    <div class="container position-fixed w-50 overflow-auto">
 
-<div class="notification {{#unless isRead}}unread{{/unless}}" data-id="{{id}}">
-        {{#if isRead}}<span class="dot"></span>{{/if}}
-        <a class="avt-container d-flex align-items-center mx-2" href="">
-            <img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo">
-        </a>
-        <div class="notification-content">
-            {{#if (eq type "like")}}
-                <span><b>{{likeUserName}} </b> {{message}}</span> 
-            {{else if (eq type "comment")}}
-                <span><b>{{commentUserName}}</b> {{message}}</span>
-            {{/if}}
-            <span class="time" data-created-at="{{createdAt}}">{{createdAt}}</span>
-            <p class="small">{{threadContent}}</p>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-three-dots text-white"></i>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                <li>
-                    <button class="dropdown-item mark-as-read d-flex justify-content-center align-items-center">Mark as Read</button>
-                </li>
-                <li>
-                    <button class="dropdown-item delete-notification d-flex justify-content-center align-items-center">Delete</button>
-                </li>
-            </ul>
-        </div>
-    </div>
-{{/each}}
-          
-              {{!-- <div class="notification unread" data-id="2">
-                <span class="dot"></span>
-                <a class="avt-container d-flex align-items-center mx-2" href=""><img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo"></a>
+        <div class="notifications all active">
+            {{#each notifications}}
+            <div class="notification {{#unless isRead}}unread{{/unless}}" data-id="{{id}}">
+                {{#unless isRead}}<span class="dot"></span>{{/unless}}
+                <a class="avt-container d-flex align-items-center mx-2" href="">
+                    <img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo">
+                </a>
                 <div class="notification-content">
-                  <span><b>Bocchi@hihi</b> followed you</span> <span class="time">19m ago</span>
-                  <p class="small"> </p>
+                    {{#if (eq type "like")}}
+                    <span><b>{{likeUserName}}</b> {{message}}</span>
+                    {{else if (eq type "comment")}}
+                    <span><b>{{commentUserName}}</b> {{message}}</span>
+                    {{else if (eq type "follow")}}
+                    <span><b>{{followerName}}</b> {{message}}</span>
+                    {{/if}}
+                    <span class="time" data-created-at="{{createdAt}}">{{createdAt}}</span>
+                    <p class="small">{{threadContent}}</p>
                 </div>
-                
                 <div class="dropdown">
-                  <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-three-dots text-white"></i>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                    <li><button class="dropdown-item mark-as-read d-flex justify-content-center align-items-center">Mark as Read</button></li>
-                    <li><button class="dropdown-item delete-notification d-flex justify-content-center align-items-center">Delete</button></li>
-                  </ul>
+                    <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bi bi-three-dots text-white"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <button class="dropdown-item mark-as-read d-flex justify-content-center align-items-center">
+                                Mark as Read
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                class="dropdown-item delete-notification d-flex justify-content-center align-items-center">
+                                Delete
+                            </button>
+                        </li>
+                    </ul>
                 </div>
-              </div>
-          
-              <div class="notification" data-id="3">
-               
-                <a class="avt-container d-flex align-items-center mx-2" href=""><img class="avt-photo" src="/assets/img/avatar/ava2.png" alt="photo"></a>
-                <div class="notification-content">
-                  <span><b>Bocchi@hoho</b> liked your post</span> <span class="time">2h ago</span>
-                  <p class="small">slaydklkcjsjc</p>
-                </div>
-                
-                <div class="dropdown">
-                  <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-three-dots text-white"></i>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                    <li><button class="dropdown-item mark-as-read d-flex justify-content-center align-items-center">Mark as Read</button></li>
-                    <li><button class="dropdown-item delete-notification d-flex justify-content-center align-items-center">Delete</button></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="notification unread" data-id="4">
-                <span class="dot"></span>
-                <a class="avt-container d-flex align-items-center mx-2" href=""><img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo"></a>
-                <div class="notification-content">
-                  <span><b>Hitori@hihi</b> liked your post</span> <span class="time">4h ago</span>
-                  <p class="small">bla bla bla bla bla bla bla blanvsnvsnvnjnjsngnglskngnrlng lkrngknrgnrngsfjjfjfjfjf jfjfjioqbgeobge</p>
-                </div>
-                
-                <div class="dropdown">
-                  <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-three-dots text-white"></i>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                    <li><button class="dropdown-item mark-as-read d-flex justify-content-center align-items-center">Mark as Read</button></li>
-                    <li><button class="dropdown-item delete-notification d-flex justify-content-center align-items-center">Delete</button></li>
-                  </ul>
-                </div>
-              </div> --}}
-
-          </div>
-      
-      
-          <div class="notifications unread">
-            <div class="notification unread" data-id="2">
-              <span class="dot"></span>
-              <a class="avt-container d-flex align-items-center mx-2" href=""><img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo"></a>
-              <div class="notification-content">
-                <span><b>Bocchi@hihi</b> followed you</span> <span class="time">19m ago</span>
-                <p class="small"> </p>
-              </div>
-              
-              <div class="dropdown">
-                <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="bi bi-three-dots text-white"></i>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                  <li><button class="dropdown-item mark-as-read d-flex justify-content-center align-items-center">Mark as Read</button></li>
-                  <li><button class="dropdown-item delete-notification d-flex justify-content-center align-items-center">Delete</button></li>
-                </ul>
-              </div>
             </div>
+            {{/each}}
 
-            <div class="notification unread" data-id="4">
-              <span class="dot"></span>
-              <a class="avt-container d-flex align-items-center mx-2" href=""><img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo"></a>
-              <div class="notification-content">
-                <span><b>Hitori@hihi</b> liked your post</span> <span class="time">4h ago</span>
-                <p class="small">bla bla bla bla bla bla bla blanvsnvsnvnjnjsngnglskngnrlng lkrngknrgnrngsfjjfjfjfjf jfjfjioqbgeobge</p>
-              </div>
-              
-              <div class="dropdown">
-                <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="bi bi-three-dots text-white"></i>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                  <li><button class="dropdown-item mark-as-read d-flex justify-content-center align-items-center">Mark as Read</button></li>
-                  <li><button class="dropdown-item delete-notification d-flex justify-content-center align-items-center">Delete</button></li>
-                </ul>
-              </div>
+        </div>
+
+
+        <div class="notifications unread">
+            {{#each notifications}}
+            {{#unless isRead}}
+            <div class="notification unread" data-id="{{id}}">
+                <span class="dot"></span>
+                <a class="avt-container d-flex align-items-center mx-2" href="">
+                    <img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo">
+                </a>
+                <div class="notification-content">
+                    {{#if (eq type "like")}}
+                    <span><b>{{likeUserName}}</b> {{message}}</span>
+                    {{else if (eq type "comment")}}
+                    <span><b>{{commentUserName}}</b> {{message}}</span>
+                    {{else if (eq type "follow")}}
+                    <span><b>{{followerName}}</b> {{message}}</span>
+                    {{/if}}
+                    <span class="time" data-created-at="{{createdAt}}">{{createdAt}}</span>
+                    <p class="small">{{threadContent}}</p>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bi bi-three-dots text-white"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <button class="dropdown-item mark-as-read d-flex justify-content-center align-items-center">
+                                Mark as Read
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                class="dropdown-item delete-notification d-flex justify-content-center align-items-center">
+                                Delete
+                            </button>
+                        </li>
+                    </ul>
+                </div>
             </div>
-          </div>
+            {{/unless}}
+            {{/each}}
+        </div>
 
-              {{> posting}}
+
+        {{> posting}}
 
 
     </div>
-        <div id="floating-btn"></div>
-        <div id="posting" style="display: none"></div>
-    </div>
+    <div id="floating-btn"></div>
+    <div id="posting" style="display: none"></div>
+</div>
 
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabs = document.querySelectorAll('.tab');
-            const notificationContainers = document.querySelectorAll('.notifications');
-  
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    notificationContainers.forEach(container => container.classList.remove('active'));
-  
-                    tab.classList.add('active');
-                    const targetTab = tab.getAttribute('data-tab');
-                    document.querySelector(`.notifications.${targetTab}`).classList.add('active');
-                });
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Tab chuyển đổi (All, Unread)
+        const tabs = document.querySelectorAll(".tab");
+        const notificationContainers = document.querySelectorAll(".notifications");
+
+        tabs.forEach(tab => {
+            tab.addEventListener("click", () => {
+                tabs.forEach(t => t.classList.remove("active"));
+                notificationContainers.forEach(container => container.classList.remove("active"));
+
+                tab.classList.add("active");
+                const targetTab = tab.getAttribute("data-tab");
+                document.querySelector(`.notifications.${targetTab}`).classList.add("active");
             });
         });
 
-
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.mark-as-read').forEach(button => {
-                button.addEventListener('click', (e) => {
-      
-                    const notification = e.target.closest('.notification');
-                    const notificationId = notification.dataset.id;
-
-                    const allNotifications = document.querySelectorAll(`.notifications.all .notification[data-id="${notificationId}"]`);
-                    allNotifications.forEach(noti => {
-                        const dot = noti.querySelector('.dot');
-                        if (dot) dot.remove();
-
-                      noti.classList.remove('unread');
-                    });
-
-                    const unreadContainer = document.querySelector('.notifications.unread');
-                    const unreadNotification = unreadContainer.querySelector(`.notification[data-id="${notificationId}"]`);
-                    if (unreadNotification) unreadContainer.removeChild(unreadNotification);
-
-                    notification.classList.remove('unread');
-                });
+        // Hiển thị thời gian động
+        if (typeof moment !== "undefined") {
+            document.querySelectorAll(".time").forEach(el => {
+                const createdAt = el.getAttribute("data-created-at");
+                if (createdAt) {
+                    el.textContent = moment(new Date(createdAt)).fromNow();
+                }
             });
-        });
+        } else {
+            console.error("Moment.js is not loaded.");
+        }
 
-        document.querySelectorAll('.delete-notification').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const notification = e.target.closest('.notification');
-                const notificationId = notification.dataset.id;
+        // Xử lý Mark as Read
+        document.body.addEventListener("click", async (e) => {
+    if (e.target.closest(".mark-as-read")) {
+        const notification = e.target.closest(".notification");
+        const notificationId = notification.dataset.id;
 
-                const allNotifications = document.querySelectorAll(`.notifications.all .notification[data-id="${notificationId}"]`);
-                allNotifications.forEach(noti => noti.remove());
+        console.log("Notification ID:", notificationId); // Log ID để debug
 
-                const unreadNotifications = document.querySelectorAll(`.notifications.unread .notification[data-id="${notificationId}"]`);
-                unreadNotifications.forEach(noti => noti.remove());
+        try {
+            // Gửi yêu cầu đến API để cập nhật trạng thái đã đọc
+            const response = await fetch(`/notifications/${notificationId}/mark-as-read`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
             });
-        });
 
-    document.addEventListener('DOMContentLoaded', () => {
-    if (typeof moment !== 'undefined') {
-        document.querySelectorAll('.time').forEach(el => {
-            const createdAt = new Date(el.getAttribute('data-created-at'));
-            el.textContent = moment(createdAt).fromNow(); // Hiển thị thời gian động
-        });
-    } else {
-        console.error('Moment.js is not loaded.');
+            if (response.ok) {
+                // Cập nhật giao diện cho tab "All"
+                notification.classList.remove("unread");
+                const dot = notification.querySelector(".dot");
+                if (dot) dot.remove();
+
+                // Cập nhật tab "Unread"
+                const unreadContainer = document.querySelector(".notifications.unread");
+                const unreadNotification = unreadContainer.querySelector(
+                    `.notification[data-id="${notificationId}"]`
+                );
+                if (unreadNotification) {
+                    unreadNotification.remove(); // Xóa thông báo khỏi tab "Unread"
+                }
+
+                console.log("Notification marked as read.");
+            } else {
+                console.error("Failed to mark notification as read.");
+            }
+        } catch (error) {
+            console.error("Error marking notification as read:", error.message);
+        }
     }
 });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+        // Xử lý Delete Notification
+        document.body.addEventListener("click", async (e) => {
+            if (e.target.closest(".delete-notification")) {
+                const notification = e.target.closest(".notification");
+                const notificationId = notification.dataset.id;
+                try {
+                    const response = await fetch(`/notifications/${notificationId}`, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    });
+
+                    if (response.ok) {
+                        notification.remove();
+                        console.log("Notification deleted.");
+                    } else {
+                        console.error("Failed to delete notification.");
+                    }
+                } catch (error) {
+                    console.error("Error deleting notification:", error.message);
+                }
+            }
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>

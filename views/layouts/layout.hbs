@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
     <link rel="icon" type="image/jpg" href="/assets/vendor/icons/logo.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{css}}">
     <link rel="stylesheet" href="/css/sidebar.css" />
     <link rel="stylesheet" href="/css/floating-btn.css">
@@ -21,52 +23,71 @@
     <script src="/js/posting.js" defer></script>
     <script src="/js/detailPost.js" defer></script>
 </head>
+
 <body class="{{#if hasSidebar}}has-sidebar{{else}}no-sidebar{{/if}}">
     {{#if hasSidebar}}
-        <aside class="sidebar text-light d-flex flex-column align-items-center position-fixed top-0 start-0 sidebar-custom">
-            <div class="top-section d-flex flex-column align-items-center text-align-center">
-                <button class="btn btn-link logo p-0 mt-lg-2" onclick="location.href='/homepage'">
-                    <img src="/assets/vendor/icons/logo.svg" alt="Logo Icon" class="img-fluid" style="width: 50px;" />
-                </button>
-                <button class="btn btn-link user-photo-container" onclick="handleAvatarClick('{{user.id}}')"  style="cursor: pointer;">
-                    {{#if user.profilePicture}}
-                        <img src="{{user.profilePicture}}" alt="User Avatar" class="rounded-circle img-fluid" style="width: 40px; height: 40px;" />
-                    {{else}}
-                        <img src="/assets/img/avatar/profile.png" alt="User Avatar" class="rounded-circle img-fluid" style="width: 40px; height: 40px;" />
-                    {{/if}}
-                </button>
-            </div>
-            <nav class="bottom-section nav d-flex justify-content-around align-items-center gap-5 mt-auto w-100">
-                <button id="home-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white {{#if (eq activeIcon "home-icon")}}active{{else}}inactive{{/if}}" 
-                    onclick="setActiveIcon('home-icon'); location.href='/homepage'">
-                    <i class="bi bi-house-fill fs-4"></i>
-                </button>
-                <button id="add-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white {{#if (eq activeIcon "add-icon")}}active{{else}}inactive{{/if}}" 
-                    onclick="showPopup()">
-                    <i class="bi bi-plus-square-fill fs-4"></i>
-                </button>
-                <button id="noti-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white {{#if (eq activeIcon "noti-icon")}}active{{else}}inactive{{/if}}" 
-                    onclick="setActiveIcon('noti-icon'); location.href='/notification/{{userId}}'">
-                    <i class="bi bi-bell-fill fs-4"></i>
-                </button>
-            </nav>
-            <button class="btn btn-link footer-icon rounded-circle p-0 mt-auto mb-3 text-white" onclick="location.href='/logout'" title="Log out">
-                <i class="bi bi-box-arrow-left fs-3"></i>
+    <aside class="sidebar text-light d-flex flex-column align-items-center position-fixed top-0 start-0 sidebar-custom">
+        <div class="top-section d-flex flex-column align-items-center text-align-center">
+            <button class="btn btn-link logo p-0 mt-lg-2" onclick="location.href='/homepage'">
+                <img src="/assets/vendor/icons/logo.svg" alt="Logo Icon" class="img-fluid" style="width: 50px;" />
             </button>
-        </aside>
+            <button class="btn btn-link user-photo-container" onclick="handleAvatarClick('{{user.id}}')"
+                style="cursor: pointer;">
+                {{#if user.profilePicture}}
+                <img src="{{user.profilePicture}}" alt="User Avatar" class="rounded-circle img-fluid"
+                    style="width: 40px; height: 40px;" />
+                {{else}}
+                <img src="/assets/img/avatar/profile.png" alt="User Avatar" class="rounded-circle img-fluid"
+                    style="width: 40px; height: 40px;" />
+                {{/if}}
+            </button>
+        </div>
+        <nav class="bottom-section nav d-flex justify-content-around align-items-center gap-5 mt-auto w-100">
+            <button id="home-icon"
+                class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white {{#if (eq activeIcon "
+                home-icon")}}active{{else}}inactive{{/if}}"
+                onclick="setActiveIcon('home-icon'); location.href='/homepage'">
+                <i class="bi bi-house-fill fs-4"></i>
+            </button>
+            <button id="add-icon"
+                class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white {{#if (eq activeIcon "
+                add-icon")}}active{{else}}inactive{{/if}}" onclick="showPopup()">
+                <i class="bi bi-plus-square-fill fs-4"></i>
+            </button>
 
-        <div class="mobile-overlay">
-            <div class="setting-container">
-                <div class="post-header">
-                    {{#if user.profilePicture}}
-                        <img src="{{user.profilePicture}}" class="avatar" onclick="location.href='../profile/profile.html'" />
-                    {{else}}
-                        <img src="/assets/img/avatar/profile.png" class="avatar" onclick="location.href='../profile/profile.html'" />
-                    {{/if}}
-                    <p class="username">{{user.username}}</p>
-                    <p class="email">{{getDomain user.email}}</p>
-                </div>
-            
+
+            <button id="noti-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white 
+        {{#if hasUnread}}has-unread{{else}}no-unread{{/if}} 
+        {{#if (eq activeIcon " noti-icon")}}active{{else}}inactive{{/if}}"
+                onclick="setActiveIcon('noti-icon'); location.href='/notification/{{userId}}';">
+                {{#if hasUnread}}
+                <i class="bi bi-bell-fill fs-4 text-danger"></i> <!-- Bell màu đỏ nếu có thông báo chưa đọc -->
+                {{else}}
+                <i class="bi bi-bell fs-4 text-white"></i> <!-- Bell mặc định -->
+                {{/if}}
+            </button>
+
+
+        </nav>
+        <button class="btn btn-link footer-icon rounded-circle p-0 mt-auto mb-3 text-white"
+            onclick="location.href='/logout'" title="Log out">
+            <i class="bi bi-box-arrow-left fs-3"></i>
+        </button>
+    </aside>
+
+    <div class="mobile-overlay">
+        <div class="setting-container">
+            <div class="post-header">
+                {{#if user.profilePicture}}
+                <img src="{{user.profilePicture}}" class="avatar" onclick="location.href='../profile/profile.html'" />
+                {{else}}
+                <img src="/assets/img/avatar/profile.png" class="avatar"
+                    onclick="location.href='../profile/profile.html'" />
+                {{/if}}
+                <p class="username">{{user.username}}</p>
+                <p class="email">{{getDomain user.email}}</p>
+            </div>
+
             <div class="profile-container">
                 <img src="/assets/vendor/icons/user.svg" alt="Icon description" class="icon" id="profile" />
                 <button class="edit-profile" onclick="location.href='/edit-profile/{{user.id}}'">Edit Profile</button>
@@ -81,4 +102,29 @@
 
     {{{body}}}
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const response = await fetch("/notifications/has-unread");
+            if (response.ok) {
+                const data = await response.json();
+                const hasUnread = data.hasUnread;
+
+                const notificationIcon = document.getElementById("noti-icon");
+                if (hasUnread) {
+                    // Thêm chấm đỏ nếu có thông báo chưa đọc
+                    notificationIcon.classList.add("has-unread");
+                } else {
+                    // Xóa chấm đỏ nếu không có thông báo chưa đọc
+                    notificationIcon.classList.remove("has-unread");
+                }
+            } else {
+                console.error("Failed to fetch unread notifications.");
+            }
+        } catch (error) {
+            console.error("Error fetching unread notifications:", error.message);
+        }
+    });
+</script>
+
 </html>

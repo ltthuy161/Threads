@@ -9,6 +9,7 @@ import path from 'path';
 import Follow  from "../models/followModel.js";
 import Thread from '../models/threadModel.js';
 import Like from '../models/likeModel.js';
+import Notification from '../models/notiModel.js';
 
 dotenv.config();
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -480,6 +481,21 @@ export const followUser = async (req, res) => {
         });
         await newFollow.save();
 
+        // Create notification
+        const userId = loggedInUserId;
+        const recipientId = userIdToFollow;
+
+        const notification = new Notification({
+            userId,
+            recipientId,
+            type: "follow",
+            relatedId: newFollow._id,
+            message: " started following you.",
+        });
+        await notification.save();
+
+        console.log("Notification created successfully:", Notification);
+
         res.status(200).json({ message: "Followed successfully" });
         
     } catch (error) {
@@ -508,6 +524,9 @@ export const unfollowUser = async (req, res) => {
             followerId: loggedInUserId,
             followeeId: userIdToUnfollow,
         });
+
+        await Notification.deleteOne({ userId: loggedInUserId, recipientId: userIdToUnfollow, type: "follow", relatedId: existingFollow._id });
+        console.log("Notification deleted successfully");
 
         res.status(200).json({ message: "Unfollowed successfully" });
     } catch (error) {
