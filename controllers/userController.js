@@ -402,7 +402,7 @@ export const getUserProfile = async (req, res) => {
         const isFollowing = await checkIfFollowing(loggedInUserId, userIdToView);
 
         const threads = await Thread.find({ userId: userIdToView, parentThreadId: null })
-            .populate("userId", "_id username profilePicture")
+            .populate("userId", "_id username profilePicture email")
             .sort({ createdAt: -1 });
 
         // Thêm thông tin likeCount, isLiked, replyCount vào từng thread

@@ -74,13 +74,12 @@
         <div class="setting-container">
             <div class="post-header">
                 {{#if user.profilePicture}}
-                <img src="{{user.profilePicture}}" class="avatar" onclick="location.href='../profile/profile.html'" />
+                <img src="{{user.profilePicture}}" class="avatar" onclick="location.href=`/profile/{{user.id}}`" />
                 {{else}}
-                <img src="/assets/img/avatar/profile.png" class="avatar"
-                    onclick="location.href='../profile/profile.html'" />
+                <img src="/assets/img/avatar/profile.png" class="avatar" onclick="location.href=`/profile/{{user.id}}`"  />
                 {{/if}}
-                <p class="username">{{user.username}}</p>
-                <p class="email">{{getDomain user.email}}</p>
+                <p class="username" onclick="location.href=`/profile/{{user.id}}`" >{{user.username}}</p>
+                <p class="email" onclick="location.href=`/profile/{{user.id}}`" >{{getDomain user.email}}</p>
             </div>
 
             <div class="profile-container">
