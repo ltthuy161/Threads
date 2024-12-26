@@ -16,7 +16,6 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 export const createUser = async (req, res) => {
     try {
-        console.log("Request Body:", req.body);
 
         const { username, email, password, bio, profilePicture } = req.body;
 
@@ -145,7 +144,6 @@ export const saveUser = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
-    console.log("Login request received.");
     try {
 
         const { email, password } = req.body;
@@ -190,7 +188,6 @@ export const loginUser = async (req, res) => {
             secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
         });
-        console.log(email, password)
         return res.redirect("/homepage");
     } catch (error) {
         console.error("Error during login:", error);
@@ -212,7 +209,6 @@ export const requestPasswordReset = async (req, res) => {
         const user = await User.findOne({ email });
 
         if (!user) {
-            console.log("Email not found.");
             return res.status(200).render("forgot-pw", {
                 title: "Forgot Password",
                 css: "/css/forgot-pw.css",

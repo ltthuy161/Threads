@@ -16,7 +16,6 @@ export const protectRoute = (req, res, next) => {
 
         // Xác minh token
         const decoded = jwt.verify(token, SECRET_KEY);
-        console.log(SECRET_KEY)
         req.user = decoded; // Lưu thông tin người dùng vào req để sử dụng sau
 
         next(); // Cho phép tiếp tục xử lý route

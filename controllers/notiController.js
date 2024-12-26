@@ -47,7 +47,6 @@ export const getNotificationsByUser = async (req, res) => {
     const token = req.cookies.token;
     // get user id from token
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    console.log("decoded: ", decoded);
     try {
         const firstID = decoded.id;
 
@@ -82,18 +81,7 @@ export const getNotificationsByUser = async (req, res) => {
         const likeThreadIds = likes.map((like) => like.threadId);
         const likeThreads = await Thread.find({ _id: { $in: likeThreadIds } });
         const likeThreadContents = likeThreads.map((thread) => thread.content);
-        
-        //const likeThreadUserIds = likeThreads.map((thread) => thread.userId);
-        // const likeThreadUsers = await User.find({
-        //     _id: { $in: likeThreadUserIds },
-        // });
-        // const likeThreadUserNames = likeThreadUsers.map((user) => user.email);
-        // const likeUserIds = likeNotifications.map(
-        //     (notification) => notification.userId
-        // );
-        // const likeUsers = await User.find({ _id: { $in: likeUserIds } });
-        // const likeUserNames = likeUsers.map((user) => user.username);
-        // console.log("Like user names:", likeUserNames);
+      
         const likeMessages = likeNotifications.map(
             (notification) => notification.message
         );
@@ -115,9 +103,7 @@ export const getNotificationsByUser = async (req, res) => {
         ); // relatedId chính là threadId của comment
         // Tìm các comment (thread có parentThreadId không null)
         const comments = await Thread.find({ _id: { $in: commentThreadIds } });
-        if (!comments.length) {
-            console.log("No comments found");
-        }
+
         // Lấy thông tin thread gốc (parent thread)
         const parentThreadIds = comments.map(
             (comment) => comment.parentThreadId
@@ -250,15 +236,12 @@ export const markAsRead = async (req, res) => {
     try {
         const { id } = req.params; // Lấy ID từ URL
         const notification = await Notification.findById(id);
-        console.log("Received ID:", req.params.id);
         if (!notification) {
             return res.status(404).json({ message: "Notification not found" });
         }
 
         notification.isRead = true;
         await notification.save();
-
-        console.log("Notification marked as read:", notification);
 
         res.status(200).json({ message: "Notification marked as read." });
     } catch (error) {
@@ -293,8 +276,6 @@ export const hasUnreadNotifications = async (req, res) => {
             recipientId: userId,
             isRead: false,
         });
-
-        console.log("Has unread notifications:", hasUnread);
 
         res.status(200).json({ hasUnread });
     } catch (error) {
