@@ -82,11 +82,13 @@
             </div>
 
             <div class="profile-container">
-                <img src="/assets/vendor/icons/user.svg" alt="Icon description" class="icon" id="profile" />
+                <img src="/assets/vendor/icons/user.svg" alt="Icon description" class="icon" id="profile" 
+                    onclick="location.href='/edit-profile/{{user.id}}'"/>
                 <button class="edit-profile" onclick="location.href='/edit-profile/{{user.id}}'">Edit Profile</button>
             </div>
             <div class="log-out">
-                <img src="/assets/vendor/icons/log-out.svg" alt="Icon description" class="icon" id="logout" />
+                <img src="/assets/vendor/icons/log-out.svg" alt="Icon description" class="icon" id="logout"
+                    onclick="location.href='/logout'" />
                 <button class="log-out-button" onclick="location.href='/logout'">Log Out</button>
             </div>
         </div>

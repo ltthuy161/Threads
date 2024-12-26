@@ -156,9 +156,6 @@
   height: auto;
 }
 
-.posting-post-actions input {
-  display: none;
-}
 
 .posting-post-actions .posting-icon {
   width: clamp(20px, 2vw, 26px);
@@ -301,7 +298,7 @@
   }
 
   .posting-post-actions {
-    top: 130%;
+    top: 350%;
     left: 20%;
     grid-template-columns: repeat(5, auto);
   }

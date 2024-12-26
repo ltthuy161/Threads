@@ -181,7 +181,7 @@ input:focus, textarea:focus {
   }
 
   #name, #bio {
-    max-width: 12rem;
+    max-width: 14rem;
 }
 
   .avatar-edit {
@@ -198,6 +198,8 @@ input:focus, textarea:focus {
   form {
     margin-left: 30px;
   }
+
+
 
   .picture {
     margin-right: 30px;

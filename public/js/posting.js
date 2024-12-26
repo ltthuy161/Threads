@@ -62,3 +62,19 @@ const toBase64 = (file) => {
         reader.onerror = (error) => reject(error);
     });
 };
+
+function hidePopup() {
+    // Ẩn popup
+    const postingPopup = document.getElementById('posting');
+    postingPopup.style.display = 'none';
+
+    // Reset form và input file
+    const postingForm = document.getElementById('posting-form');
+    postingForm.reset(); // Xóa dữ liệu trên form
+
+    // Hoặc riêng lẻ reset input file (nếu không muốn reset toàn bộ form)
+    const addImageInput = document.getElementById('add-image');
+    if (addImageInput) {
+        addImageInput.value = ''; // Xóa giá trị file được chọn
+    }
+}

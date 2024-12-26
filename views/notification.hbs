@@ -18,7 +18,11 @@
             <div class="notification {{#unless isRead}}unread{{/unless}}" data-id="{{id}}">
                 {{#unless isRead}}<span class="dot"></span>{{/unless}}
                 <a class="avt-container d-flex align-items-center mx-2" href="">
-                    <img class="avt-photo" src="{{userAvt}}" alt="photo">
+                    {{#if userAvt}}
+                        <img class="avt-photo" src="{{userAvt}}" alt="photo">
+                    {{else}}
+                        <img class="avt-photo" src="/assets/img/avatar/profile.png" alt="photo">
+                    {{/if}}
                 </a>
                 <div class="notification-content">
                     {{#if (eq type "like")}}
@@ -64,8 +68,13 @@
             <div class="notification unread" data-id="{{id}}">
                 <span class="dot"></span>
                 <a class="avt-container d-flex align-items-center mx-2" href="">
-                    <img class="avt-photo" src="{{userAvt}}" alt="photo">
+                    {{#if userAvt}}
+                        <img class="avt-photo" src="{{userAvt}}" alt="photo">
+                    {{else}}
+                        <img class="avt-photo" src="/assets/img/avatar/profile.png" alt="photo">
+                    {{/if}}
                 </a>
+                    
                 <div class="notification-content">
                     {{#if (eq type "like")}}
                     <span><b>{{likeUserName}}</b> {{message}}</span>
