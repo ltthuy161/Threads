@@ -80,6 +80,25 @@
                     <p class="small">{{threadContent}}</p>
                 </div>
                 
+                <div class="dropdown">
+                    <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="bi bi-three-dots text-white"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <button class="dropdown-item mark-as-read d-flex justify-content-center align-items-center">
+                                Mark as Read
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                class="dropdown-item delete-notification d-flex justify-content-center align-items-center">
+                                Delete
+                            </button>
+                        </li>
+                    </ul>
+                </div>
             </div>
             {{/unless}}
             {{/each}}

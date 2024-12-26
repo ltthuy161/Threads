@@ -149,17 +149,16 @@ export const getNotificationsByUser = async (req, res) => {
         const followNotifications = notifications.filter(
             (notification) => notification.type === "follow"
         );
-
+        
+        
+        // Lấy thông tin từ userID trong thông báo
         const followUserIds = followNotifications.map(
-            (notification) => notification.relatedId // relatedId là followid
+            (notification) => notification.userId // relatedId là followid
         );
-
-        // Lấy các bản ghi Follow từ bảng Follow
-        const followRecords = await Follow.find({ _id: { $in: followUserIds } }).populate("followerId", "username");
-
+        const followUsers = await User.find({ _id: { $in: followUserIds } });
         // Lấy danh sách tên người dùng (username) từ bảng User
-        const followUserNames = followRecords.map((record) => record.followerId.username);
-
+        const followUserNames = followUsers.map((user) => user.username);
+        
         // Lấy các trường khác từ thông báo
         const followMessages = followNotifications.map(
             (notification) => notification.message
@@ -180,7 +179,7 @@ export const getNotificationsByUser = async (req, res) => {
                 id: followNotifications[i]._id,
                 type: "follow",
                 followerName: followUserNames[i] || "Unknown user",
-                userAvt: followRecords[i].followerId.profilePicture,
+                userAvt: followUsers[i].profilePicture,
                 message: followMessages[i],
                 isRead: followIsRead[i],
                 createdAt: followCreatedAt[i],
@@ -218,6 +217,9 @@ export const getNotificationsByUser = async (req, res) => {
             });
         }
 
+        // Sắp xếp thông báo theo thời gian tạo mới nhất
+        notificationsInfo.sort((a, b) => b.createdAt - a.createdAt);
+        
         res.status(200).render("notification", {
             title: "Notification",
             hasSidebar: true,

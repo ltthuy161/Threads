@@ -45,20 +45,19 @@
         <nav class="bottom-section nav d-flex justify-content-around align-items-center gap-5 mt-auto w-100">
             <!-- Home Icon -->
             <button id="home-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white 
-        {{#if (eq activeIcon " home-icon")}}active{{else}}inactive{{/if}}"
+        {{#if (eq activeIcon "home-icon")}}active{{else}}inactive{{/if}}"
                 onclick="setActiveIcon('home-icon'); location.href='/homepage';">
                 <i class="bi bi-house-fill fs-4"></i>
             </button>
 
             <!-- Add Icon -->
             <button id="add-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white 
-        {{#if (eq activeIcon " add-icon")}}active{{else}}inactive{{/if}}" onclick="showPopup();">
+        {{#if (eq activeIcon "add-icon")}}active{{else}}inactive{{/if}}" onclick="showPopup();">
                 <i class="bi bi-plus-square-fill fs-4"></i>
             </button>
 
             <button id="noti-icon"
-                class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white {{#if (eq activeIcon "
-                noti-icon")}}active{{else}}inactive{{/if}}"
+                class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white {{#if (eq activeIcon "noti-icon")}}active{{else}}inactive{{/if}}"
                 onclick="setActiveIcon('noti-icon'); location.href='/notification/{{userId}}'">
                 <i class="bi bi-bell-fill fs-4"></i>
             </button>

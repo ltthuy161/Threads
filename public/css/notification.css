@@ -6,16 +6,21 @@
 
 body {
   display: flex;
+  flex-direction: column; /* Ensure proper stacking layout */
   font-family: var(--font-family-heading), sans-serif;
   color: var(--primary-100);
   background-color: var(--primary-900);
+  height: 100vh; /* Ensure body takes full height */
+  overflow: hidden; /* Prevent body-level scrolling if unnecessary */
 }
 
 .main-container-noti {
+  display: flex;
   flex-direction: column;
   padding: 20px;
   padding-bottom: 0;
   background-color: var(--primary-900);
+  height: 100%; /* Ensure container takes full height */
 }
 
 .header-noti {
@@ -26,7 +31,7 @@ body {
 }
 
 .post-title {
-  line-height: 26px; 
+  line-height: 26px;
   color: var(--primary-150);
 }
 
@@ -67,12 +72,23 @@ body {
 }
 
 .container {
+  position: relative;
   top: 8rem;
-  height: 90vh;
+  height: calc(100vh - 8rem); /* Dynamically calculate height to allow scrolling */
   background-color: var(--primary-700);
   border-radius: 20px 20px 0 0;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  scrollbar-width: none;
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: thin; /* Style scrollbars for consistency */
+}
+
+.container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: var(--primary-500);
+  border-radius: 10px;
 }
 
 .avt-container {
@@ -85,12 +101,12 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin-left: 25px; 
+  margin-left: 25px;
 }
 
 .notifications {
   display: none;
-  padding-top: 1rem; 
+  padding-top: 1rem;
 }
 
 .notifications.active {
@@ -103,9 +119,9 @@ body {
   box-sizing: border-box;
   position: relative;
   display: flex;
-  align-items: flex-start; 
-  padding: 0.5rem 1rem 0 0; 
-  gap: 1rem; 
+  align-items: flex-start;
+  padding: 0.5rem 1rem 0 0;
+  gap: 1rem;
   min-height: 5rem;
 }
 
@@ -113,15 +129,13 @@ body {
   position: absolute;
   top: 1rem;
   left: 5.8rem;
-
 }
-
 
 .notification-content span,
 .notification-content p {
-    word-wrap: break-word; 
-    overflow-wrap: break-word; 
-    max-width: 90%; 
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 90%;
 }
 
 .notification.unread .dot {
@@ -162,9 +176,9 @@ body {
 }
 
 .dropdown-menu .dropdown-item {
-  font-size: 16px !important; 
-  color: white; 
-  padding: 10px 20px; 
+  font-size: 16px !important;
+  color: white;
+  padding: 10px 20px;
 }
 
 @media (max-width: 768px) {
@@ -172,7 +186,7 @@ body {
     width: 100% !important;
     top: 2.5rem !important;
   }
-  
+
   .notification img {
     width: 40px;
     height: 40px;
@@ -192,28 +206,29 @@ body {
   }
 
   .notifications {
-    padding-top: 2.4rem; 
+    padding-top: 2.4rem;
   }
 
   .container {
-    width: 100% !important; 
-    top: 5rem; 
-    border-radius: none; 
-    padding-top: 0; 
+    width: 100% !important;
+    top: 5rem;
+    height: calc(100vh - 5rem); /* Adjust height for scrolling */
+    overflow-y: auto;
+    border-radius: none;
+    padding-top: 0;
     margin-top: 0;
   }
 
   .notification .time {
-    font-size: 12px; 
+    font-size: 12px;
   }
 
   .dropdown-menu {
-    width: 100px; 
+    width: 100px;
   }
 
   .dropdown-menu .dropdown-item {
     font-size: 14px;
-    padding: 8px 15px; 
+    padding: 8px 15px;
   }
-
 }
