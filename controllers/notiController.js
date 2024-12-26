@@ -32,7 +32,6 @@ export const createNotification = async ({
 
         // Lưu notification vào database
         const savedNotification = await notification.save();
-        console.log("Notification created successfully:", savedNotification);
 
         // Trả về notification đã lưu
         return savedNotification;
@@ -61,7 +60,6 @@ export const getNotificationsByUser = async (req, res) => {
         const notifications = await Notification.find({
             recipientId: firstID,
         }).sort({ createdAt: -1 });
-        console.log("Notifications:", notifications);
 
         // *** Xử lý thông báo loại "like" ***
         const likeNotifications = notifications.filter(
@@ -196,6 +194,7 @@ export const getNotificationsByUser = async (req, res) => {
                 id: followNotifications[i]._id,
                 type: "follow",
                 followerName: followUserNames[i] || "Unknown user",
+                userAvt: followRecords[i].followerId.profilePicture,
                 message: followMessages[i],
                 isRead: followIsRead[i],
                 createdAt: followCreatedAt[i],
@@ -209,6 +208,7 @@ export const getNotificationsByUser = async (req, res) => {
                 type: "like",
                 threadContent: likeThreadContents[i],
                 threadUserName: decoded.username,  
+                userAvt: likeUsers[i].profilePicture,
                 likeUserName: likeUsernames[i],
                 message: likeMessages[i],
                 isRead: likeIsRead[i],
@@ -225,12 +225,12 @@ export const getNotificationsByUser = async (req, res) => {
                     parentThreadContents[i] || "Thread content not found",
                 threadUserName: parentThreadUserNames[i] || "Unknown user",
                 commentUserName: commentUserNames[i] || "Unknown user",
+                userAvt: commentUsers[i].profilePicture,
                 message: commentMessages[i],
                 isRead: commentIsRead[i],
                 createdAt: commentCreatedAt[i],
             });
         }
-        console.log("Notifications info:", notificationsInfo);
 
         res.status(200).render("notification", {
             title: "Notification",

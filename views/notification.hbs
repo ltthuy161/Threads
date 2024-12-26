@@ -18,7 +18,7 @@
             <div class="notification {{#unless isRead}}unread{{/unless}}" data-id="{{id}}">
                 {{#unless isRead}}<span class="dot"></span>{{/unless}}
                 <a class="avt-container d-flex align-items-center mx-2" href="">
-                    <img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo">
+                    <img class="avt-photo" src="{{userAvt}}" alt="photo">
                 </a>
                 <div class="notification-content">
                     {{#if (eq type "like")}}
@@ -28,7 +28,9 @@
                     {{else if (eq type "follow")}}
                     <span><b>{{followerName}}</b> {{message}}</span>
                     {{/if}}
-                    <span class="time" data-created-at="{{createdAt}}">{{createdAt}}</span>
+                    <div class="time-container">
+                        <span class="time" data-created-at="{{createdAt}}">{{createdAt}}</span>
+                    </div>
                     <p class="small">{{threadContent}}</p>
                 </div>
                 <div class="dropdown">
@@ -62,7 +64,7 @@
             <div class="notification unread" data-id="{{id}}">
                 <span class="dot"></span>
                 <a class="avt-container d-flex align-items-center mx-2" href="">
-                    <img class="avt-photo" src="/assets/img/avatar/ava7.png" alt="photo">
+                    <img class="avt-photo" src="{{userAvt}}" alt="photo">
                 </a>
                 <div class="notification-content">
                     {{#if (eq type "like")}}
@@ -72,28 +74,12 @@
                     {{else if (eq type "follow")}}
                     <span><b>{{followerName}}</b> {{message}}</span>
                     {{/if}}
-                    <span class="time" data-created-at="{{createdAt}}">{{createdAt}}</span>
+                    <div class="time-container">
+                        <span class="time" data-created-at="{{createdAt}}">{{createdAt}}</span>
+                    </div>
                     <p class="small">{{threadContent}}</p>
                 </div>
-                <div class="dropdown">
-                    <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="bi bi-three-dots text-white"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                        <li>
-                            <button class="dropdown-item mark-as-read d-flex justify-content-center align-items-center">
-                                Mark as Read
-                            </button>
-                        </li>
-                        <li>
-                            <button
-                                class="dropdown-item delete-notification d-flex justify-content-center align-items-center">
-                                Delete
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+                
             </div>
             {{/unless}}
             {{/each}}

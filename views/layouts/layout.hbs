@@ -43,30 +43,25 @@
             </button>
         </div>
         <nav class="bottom-section nav d-flex justify-content-around align-items-center gap-5 mt-auto w-100">
-            <button id="home-icon"
-                class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white {{#if (eq activeIcon "
-                home-icon")}}active{{else}}inactive{{/if}}"
-                onclick="setActiveIcon('home-icon'); location.href='/homepage'">
+            <!-- Home Icon -->
+            <button id="home-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white 
+        {{#if (eq activeIcon " home-icon")}}active{{else}}inactive{{/if}}"
+                onclick="setActiveIcon('home-icon'); location.href='/homepage';">
                 <i class="bi bi-house-fill fs-4"></i>
             </button>
-            <button id="add-icon"
-                class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white {{#if (eq activeIcon "
-                add-icon")}}active{{else}}inactive{{/if}}" onclick="showPopup()">
+
+            <!-- Add Icon -->
+            <button id="add-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white 
+        {{#if (eq activeIcon " add-icon")}}active{{else}}inactive{{/if}}" onclick="showPopup();">
                 <i class="bi bi-plus-square-fill fs-4"></i>
             </button>
 
-
-            <button id="noti-icon" class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white 
-        {{#if hasUnread}}has-unread{{else}}no-unread{{/if}} 
-        {{#if (eq activeIcon " noti-icon")}}active{{else}}inactive{{/if}}"
-                onclick="setActiveIcon('noti-icon'); location.href='/notification/{{userId}}';">
-                {{#if hasUnread}}
-                <i class="bi bi-bell-fill fs-4 text-danger"></i> <!-- Bell màu đỏ nếu có thông báo chưa đọc -->
-                {{else}}
-                <i class="bi bi-bell fs-4 text-white"></i> <!-- Bell mặc định -->
-                {{/if}}
+            <button id="noti-icon"
+                class="btn btn-link navigation-button d-inline-block p-0 rounded-circle text-white {{#if (eq activeIcon "
+                noti-icon")}}active{{else}}inactive{{/if}}"
+                onclick="setActiveIcon('noti-icon'); location.href='/notification/{{userId}}'">
+                <i class="bi bi-bell-fill fs-4"></i>
             </button>
-
 
         </nav>
         <button class="btn btn-link footer-icon rounded-circle p-0 mt-auto mb-3 text-white"

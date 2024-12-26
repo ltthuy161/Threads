@@ -147,7 +147,6 @@ export const saveUser = async (req, res) => {
 export const loginUser = async (req, res) => {
     console.log("Login request received.");
     try {
-        console.log("Request Body:", req.body);
 
         const { email, password } = req.body;
 
@@ -182,11 +181,9 @@ export const loginUser = async (req, res) => {
             SECRET_KEY,
             { expiresIn: "1h" } // Token expiration time
         );
-        console.log("Generated Token:", token);
         
         // set user in session
         res.user = existingUser;
-        console.log("User:", req.params.user);
         // Set token in cookie
         res.cookie("token", token, {
             httpOnly: true,
@@ -211,7 +208,6 @@ export const requestPasswordReset = async (req, res) => {
         const { email } = req.body;
         const { password }  = req.body;
 
-        console.log("Request Body:", req.body);
         // Tìm user theo email
         const user = await User.findOne({ email });
 
@@ -273,8 +269,6 @@ export const resetPassword = async (req, res) => {
         // Xác minh token
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
-        console.log(decoded.email);
-        console.log(decoded.password);  
         // Kiểm tra payload token
         if (!decoded.email) {
             return res.status(400).json({ error: "Invalid token payload." });
@@ -291,7 +285,6 @@ export const resetPassword = async (req, res) => {
         // Lưu mật khẩu mới
         user.password = bcrypt.hashSync(decoded.password, 10); // Băm mật khẩu mới
         await user.save();
-        console.log("Password reset successfully.");
         res.render("reset-password", 
             { title: "Reset Password", css: "/css/reset-password.css", token });
         // res.redirect("/signin");
@@ -496,8 +489,6 @@ export const followUser = async (req, res) => {
         });
         await notification.save();
 
-        console.log("Notification created successfully:", Notification);
-
         res.status(200).json({ message: "Followed successfully" });
         
     } catch (error) {
@@ -528,7 +519,6 @@ export const unfollowUser = async (req, res) => {
         });
 
         await Notification.deleteOne({ userId: loggedInUserId, recipientId: userIdToUnfollow, type: "follow", relatedId: existingFollow._id });
-        console.log("Notification deleted successfully");
 
         res.status(200).json({ message: "Unfollowed successfully" });
     } catch (error) {
