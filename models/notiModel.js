@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 const notificationSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    recipientId: { type: Schema.Types.ObjectId, ref: 'User', required: true }, // Thêm trường này
+    recipientId: { type: Schema.Types.ObjectId, ref: 'User', required: true }, 
     type: { 
         type: String, 
         required: true, 

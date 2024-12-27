@@ -40,11 +40,18 @@
     // Lắng nghe sự kiện submit của form
     document.querySelector("form").addEventListener("submit", function (event) {
         const password = document.querySelector("#password").value;
+        const username = document.querySelector("#username").value;
 
         // Kiểm tra độ dài mật khẩu
         if (password.length < 8) {
-            event.preventDefault(); // Ngăn không gửi form
+            event.preventDefault(); 
             alert("Password must be at least 8 characters long");
         }
+
+        if (/\s/.test(username)) {
+            event.preventDefault(); 
+            alert("Username must not contain any spaces");
+        }
     });
+
 </script>

@@ -100,9 +100,6 @@ export const verifyEmail = async (req, res) => {
     try {
         const { token } = req.params;
 
-        // Giải mã token
-        const decoded = jwt.verify(token, SECRET_KEY);
-
         // Render trang xác minh thành công với token
         res.render("email-authentication", {
             title: "Email Verification",

@@ -7,7 +7,6 @@ const userSchema = new Schema({
     bio: { type: String, default: null },
     profilePicture: { type: String, default: null },
     createdAt: { type: Date, default: Date.now },
-    isVerified: { type: Boolean, default: false },
 });
 
 const User = model("User", userSchema);
