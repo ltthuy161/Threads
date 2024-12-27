@@ -90,7 +90,7 @@ controller.createThread = async (req, res) => {
 
         if (parentThreadId) {
             const parentThread = await Thread.findById(parentThreadId);
-            if (parentThread) {
+            if (parentThread && parentThread.userId.toString() !== userId) {
                 await createNotification({
                     userId,
                     recipientId: parentThread.userId,
