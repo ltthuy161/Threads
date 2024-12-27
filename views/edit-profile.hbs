@@ -14,13 +14,12 @@
             <form id="profileForm" method="POST" action="/edit-profile/{{user.id}}" enctype="multipart/form-data">
                 <div class="tutuvovo">
                     <label for="name">Username</label>
-                    <input type="text" id="name" name="name" placeholder="{{user.username}}"/>
+                    <input type="text" id="name" name="name" placeholder="{{user.username}}" value="{{user.username}}"/>
 
                     <label for="bio">Bio</label>
-                    <textarea id="bio" name="bio" rows="3" placeholder="{{user.bio}}"></textarea>
+                    <textarea id="bio" name="bio" rows="3" placeholder="{{user.bio}}">{{user.bio}}</textarea>
                 </div>
-                
-            
+
                 <div class="avatar-edit">
                     <img class="picture" id="profilePictureImg" src="{{#if user.profilePicture}}{{user.profilePicture}}{{else}}/assets/img/avatar/profile.png{{/if}}" alt="photo">
                     <label for="profilePicture" class="edit-label">Edit</label>
@@ -28,55 +27,98 @@
                 </div>
             </form>
         </div>
+        {{!-- Alert Container --}}
+        <div id="alertContainer" style="display: none;">
+            {{#if message}}
+                <div class="alert alert-error">
+                    <p>{{message}}</p>
+                </div>
+            {{/if}}
+        </div>
     </div>
 </div>
 
 <script>
-    document.querySelector('#profileForm').addEventListener('submit', async (event) => {
-    event.preventDefault(); 
-
-    const form = event.target;
-    const name = form.querySelector('input[name="name"]').value;
-    const bio = form.querySelector('textarea[name="bio"]').value;
-    const avatarInput = form.querySelector('input[name="profilePicture"]');
-    let base64Avatar = null;
-
-    if (avatarInput && avatarInput.files.length > 0) {
-        const file = avatarInput.files[0];
-        if (file.size > 50 * 1024 * 1024) {
-            alert('File size exceeds 10MB. Please upload a smaller file.');
-            return;
-        }
-        base64Avatar = await toBase64(file);
-    }
-
-    const data = {
-        name,
-        bio,
-        profilePicture: base64Avatar,
-    };
-
-    try {
-        const userId = form.getAttribute('action').split('/').pop(); 
-        const response = await fetch(`/edit-profile/${userId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
+    // Helper function to convert file to base64
+    const toBase64 = (file) =>
+        new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
         });
 
-        if (!response.ok) {
-            alert(`Failed to update profile: ${response.status} ${response.statusText}`);
-            return;
+    document.querySelector('#profileForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const form = event.target;
+        const name = form.querySelector('input[name="name"]').value;
+        const bio = form.querySelector('textarea[name="bio"]').value;
+        const avatarInput = form.querySelector('input[name="profilePicture"]');
+        let base64Avatar = null;
+
+        if (avatarInput && avatarInput.files.length > 0) {
+            const file = avatarInput.files[0];
+            if (file.size > 50 * 1024 * 1024) {
+                showAlert('File size exceeds 50MB. Please upload a smaller file.', 'error');
+                return;
+            }
+            base64Avatar = await toBase64(file);
         }
 
-        window.location.href = `/profile/${userId}`;
-    } catch (error) {
-        console.error('Error updating profile:', error);
-        alert('An error occurred while updating the profile');
+        const data = {
+            name,
+            bio,
+            profilePicture: base64Avatar,
+        };
+
+        try {
+            const userId = form.getAttribute('action').split('/').pop();
+            const response = await fetch(`/edit-profile/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                // Get the response data (it should be JSON)
+                const responseData = await response.json();
+
+                // Check if the response contains an error message
+                if (responseData.message) {
+                    showAlert(responseData.message, 'error');
+                } else {
+                    showAlert(`Failed to update profile: ${response.status} ${response.statusText}`, 'error');
+                }
+                return;
+            }
+
+            // Redirect to the profile page on success
+            window.location.href = `/profile/${userId}`;
+
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            showAlert('An error occurred while updating the profile', 'error');
+        }
+    });
+
+    // Function to display alerts dynamically
+    function showAlert(message, type) {
+        const alertContainer = document.getElementById('alertContainer');
+        alertContainer.innerHTML = ''; // Clear previous alerts
+
+        const alertDiv = document.createElement('div');
+        alertDiv.classList.add('alert', `alert-${type}`);
+        alertDiv.textContent = message;
+
+        alertContainer.appendChild(alertDiv);
+        alertContainer.style.display = 'block';
+
+        // Optional: Automatically hide the alert after a few seconds
+        setTimeout(() => {
+            alertContainer.style.display = 'none';
+        }, 5000);
     }
-});
-
-
 </script>

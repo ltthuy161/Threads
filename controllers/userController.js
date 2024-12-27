@@ -328,19 +328,19 @@ export const getProfile = async (req, res) => {
 export const editProfile = async (req, res) => {
     try {
         const userId = req.user.id;
-    
+
         const user = await User.findById(userId);
-    
+
         if (!user) {
             return res.status(404).render("error", { message: "User not found" });
         }
-    
+
         res.render("edit-profile", {
             title: "Edit Profile",
             css: "/css/edit-profile.css",
-            hasSidebar: true,
+            hasSidebar: false,
             user: user, // Pass the current user data to populate the form
-            isCurrentUser: true, 
+            isCurrentUser: true,
         });
     } catch (error) {
         console.error("Error fetching user data for edit:", error);
@@ -358,21 +358,37 @@ export const updateProfile = async (req, res) => {
         if (bio) updateObject.bio = bio;
         if (profilePicture) updateObject.profilePicture = profilePicture;
 
+        // Check for existing username *before* updating
+        if (name) {
+            const existingUsername = await User.findOne({ username: name });
+            if (existingUsername && existingUsername._id.toString() !== userId) {
+                // Found a user with the same username who is NOT the current user
+                return res.status(400).json({ message: "This username is already taken. Please choose a different username." });
+            }
+        }
+
         const updatedUser = await User.findByIdAndUpdate(
             userId,
-            updateObject, // Pass the dynamic update object
-            { new: true } // Return the updated document
+            updateObject,
+            { new: true, runValidators: true }
         );
 
         if (!updatedUser) {
-        return res.status(404).render("error", { message: "User not found" });
+            return res.status(404).json({ message: "User not found" });
         }
 
         // Redirect to the profile page after successful update
         res.redirect(`/profile/${userId}`);
+
     } catch (error) {
         console.error("Error updating user profile:", error);
-        res.status(500).render("error", { message: "Internal Server Error" });
+
+        // Handle unique constraint violation (duplicate username) - still needed in case of race conditions
+        if (error.code === 11000 && error.keyPattern && error.keyPattern.username) {
+            return res.status(400).json({ message: "Username already exists" });
+        }
+
+        res.status(500).json({ message: "Internal Server Error" });
     }
 };
 
