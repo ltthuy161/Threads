@@ -10,10 +10,17 @@ document.querySelectorAll('#posting-form, #reply-form').forEach((form) => {
         if (imageInput && imageInput.files.length > 0) {
             const file = imageInput.files[0];
             if (file.size > 50 * 1024 * 1024) {
-                alert('File size exceeds 10MB. Please upload a smaller file.');
+                alert('File size exceeds 50MB. Please upload a smaller file.');
                 return;
             }
             base64Image = await toBase64(file);
+        }
+
+        const errorMessageElement = document.querySelector('#error-message');
+        if (!content && !base64Image) {
+            errorMessageElement.textContent = 'Please provide either content or an image.';
+            errorMessageElement.style.display = 'block';
+            return;
         }
 
         const data = {
